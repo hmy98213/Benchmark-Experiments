@@ -1,0 +1,7 @@
+ARG BASE_IMAGE=registry.dev.huawei.com/flash_stor/vllm-ascend:v0.18.0rc1-openeuler
+FROM ${BASE_IMAGE}
+
+ARG ARCTIC_INFERENCE_VERSION=0.1.2
+RUN python3 -c "import importlib.util; raise SystemExit(0 if importlib.util.find_spec('arctic_inference') else 1)" \
+    || (python3 -m pip install --no-cache-dir cmake grpcio-tools \
+        && python3 -m pip install --no-build-isolation --no-cache-dir -i https://pypi.org/simple "arctic-inference==${ARCTIC_INFERENCE_VERSION}")

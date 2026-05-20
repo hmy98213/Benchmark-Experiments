@@ -1,0 +1,38 @@
+{
+  "name": "a2_qwen3_235b_random_suffix",
+  "platform": "ascend",
+  "image": "suffix-vllm-ascend:latest",
+  "container_name": "suffixbench_a2_suffix",
+  "model": "/data/Qwen3-235B-A22B-Instruct-2507-w8a8-QuaRot",
+  "served_model_name": "qwen3-235b",
+  "port": 18181,
+  "npu_devices": [0, 1, 2, 3, 4, 5, 6, 7],
+  "mounts": [
+    "/data:/data",
+    "/home/huangmy/.cache:/root/.cache"
+  ],
+  "speculative_config": {
+    "method": "suffix",
+    "num_speculative_tokens": 3
+  },
+  "server_args": {
+    "trust_remote_code": true,
+    "distributed_executor_backend": "mp",
+    "tensor_parallel_size": 8,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 32768,
+    "gpu_memory_utilization": 0.9,
+    "disable_log_requests": true
+  },
+  "bench": {
+    "dataset_name": "random",
+    "num_prompts": 32,
+    "request_rate": "inf",
+    "max_concurrency": 4,
+    "random_input_len": 1024,
+    "random_output_len": 256,
+    "random_range_ratio": 0.1,
+    "ignore_eos": true,
+    "temperature": 0
+  }
+}

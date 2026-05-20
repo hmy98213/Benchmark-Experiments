@@ -1,0 +1,10 @@
+{
+  "name": "h100_smoke",
+  "stop_on_failure": true,
+  "cases": [
+    "../cases/h100_qwen3_8b_random_baseline.json",
+    "../cases/h100_qwen3_8b_random_suffix.json",
+    "../cases/h100_qwen3_8b_prefixrep_baseline.json",
+    "../cases/h100_qwen3_8b_prefixrep_suffix.json"
+  ]
+}

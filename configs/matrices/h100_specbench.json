@@ -1,0 +1,8 @@
+{
+  "name": "h100_specbench",
+  "stop_on_failure": true,
+  "cases": [
+    "../cases/h100_qwen3_8b_specbench_baseline.json",
+    "../cases/h100_qwen3_8b_specbench_suffix.json"
+  ]
+}

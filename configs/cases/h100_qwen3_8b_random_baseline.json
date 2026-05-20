@@ -1,0 +1,29 @@
+{
+  "name": "h100_qwen3_8b_random_baseline",
+  "platform": "cuda",
+  "image": "suffix-vllm-cuda:latest",
+  "container_name": "suffixbench_h100_baseline",
+  "model": "Qwen/Qwen3-8B",
+  "served_model_name": "qwen3-8b",
+  "port": 18080,
+  "gpus": "device=0",
+  "server_args": {
+    "trust_remote_code": true,
+    "tensor_parallel_size": 1,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 8192,
+    "gpu_memory_utilization": 0.9,
+    "disable_log_requests": true
+  },
+  "bench": {
+    "dataset_name": "random",
+    "num_prompts": 64,
+    "request_rate": "inf",
+    "max_concurrency": 8,
+    "random_input_len": 1024,
+    "random_output_len": 256,
+    "random_range_ratio": 0.1,
+    "ignore_eos": true,
+    "temperature": 0
+  }
+}

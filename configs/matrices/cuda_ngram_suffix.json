@@ -1,0 +1,9 @@
+{
+  "name": "cuda_ngram_suffix",
+  "stop_on_failure": true,
+  "cases": [
+    "../cases/h100_qwen3_8b_random_baseline.json",
+    "../cases/h100_qwen3_8b_random_ngram.json",
+    "../cases/h100_qwen3_8b_random_suffix.json"
+  ]
+}

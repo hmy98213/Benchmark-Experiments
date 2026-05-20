@@ -1,0 +1,10 @@
+{
+  "name": "a2_smoke",
+  "stop_on_failure": true,
+  "cases": [
+    "../cases/a2_qwen3_235b_random_baseline.json",
+    "../cases/a2_qwen3_235b_random_suffix.json",
+    "../cases/a2_qwen3_235b_prefixrep_baseline.json",
+    "../cases/a2_qwen3_235b_prefixrep_suffix.json"
+  ]
+}
