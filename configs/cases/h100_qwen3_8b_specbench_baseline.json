@@ -17,6 +17,7 @@
   },
   "bench": {
     "dataset_name": "spec_bench",
+    "dataset_path": "/workspace/suffix-bench/data/spec_bench/question.jsonl",
     "num_prompts": 200,
     "request_rate": "inf",
     "max_concurrency": 8,

@@ -41,6 +41,16 @@ Priority 1 is platform characterization:
 - `prefix_repetition`: synthetic high-repetition case; this should favor suffix decoding more than random prompts.
 - ShareGPT / HumanEval / GSM8K / ARC / BoolQ / AGIEval: good follow-up set for A2, matching the public vLLM Ascend suffix tutorial.
 
+`random` and `prefix_repetition` are generated inside vLLM from tokenizer vocab IDs. They do not represent a real benchmark file and do not check answer correctness.
+
+`spec_bench` is file-backed. Download it before running the Spec-Bench matrix:
+
+```bash
+bash scripts/download_bench_data.sh
+```
+
+The H100 Spec-Bench cases point to `/workspace/suffix-bench/data/spec_bench/question.jsonl`, which is the path inside the benchmark container after this repository is mounted at `/workspace/suffix-bench`.
+
 ## Methods
 
 Each benchmark should compare:
