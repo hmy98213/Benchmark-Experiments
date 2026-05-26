@@ -29,11 +29,16 @@ Both images install `arctic-inference==0.1.2`, because vLLM suffix decoding impo
 
 ## Benchmarks
 
+Current implementation status:
+
+- Implemented in this repo: `random`, `prefix_repetition`, and `spec_bench` through `vllm bench serve`.
+- Not implemented yet: SWE-Bench / SWE-Bench Verified agent traces, and AgenticSQL-style multi-stage traces.
+
 Priority 0 follows the Suffix Decoding paper as closely as possible:
 
-- Spec-Bench: use `vllm bench serve --dataset-name spec_bench`.
-- SWE-Bench / SWE-Bench Verified traces: run later as trace-style OpenAI API calls after the serving harness is stable.
-- AgenticSQL equivalent: use an open Text-to-SQL multi-stage pipeline if the original proprietary AgenticSQL trace is unavailable.
+- Spec-Bench: use `vllm bench serve --dataset-name spec_bench`. This is implemented.
+- SWE-Bench / SWE-Bench Verified traces: run later as trace-style OpenAI API calls after the serving harness is stable. This is not implemented in the current repo.
+- AgenticSQL equivalent: use an open Text-to-SQL multi-stage pipeline if the original proprietary AgenticSQL trace is unavailable. This is not implemented in the current repo.
 
 Priority 1 is platform characterization:
 
