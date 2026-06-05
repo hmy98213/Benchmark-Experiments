@@ -110,7 +110,7 @@ method_catalog:
 dataset_catalog:
   datastores384:
     dataset_name: custom
-    dataset_path: /workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl
+    dataset_path: data/datastores/datastores_mixed_custom.jsonl
     num_prompts: 384
     custom_output_len: 256
     disable_shuffle: true
@@ -134,6 +134,6 @@ dataset_catalog:
 
   specbench100:
     dataset_name: spec_bench
-    dataset_path: /workspace/suffix-bench/data/spec_bench/question.jsonl
+    dataset_path: data/spec_bench/question.jsonl
     num_prompts: 100
     spec_bench_output_len: 512

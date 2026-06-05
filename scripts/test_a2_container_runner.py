@@ -106,6 +106,10 @@ else:
 
 def write_config(tmp: Path, vllm_bin: Path, output_dir: Path) -> Path:
     config = tmp / "config.yaml"
+    fake_model_a = tmp / "fake-model-a"
+    fake_model_b = tmp / "fake-model-b"
+    fake_model_a.mkdir()
+    fake_model_b.mkdir()
     config.write_text(
         f"""\
 VLLM_BIN: "{vllm_bin.as_posix()}"
@@ -125,10 +129,10 @@ COMMON_SERVER_ARGS: {{}}
 COMMON_BENCH_ARGS: {{}}
 model_catalog:
   fake_model_a:
-    path: fake-model-a
+    path: "{fake_model_a.as_posix()}"
     served_model_name: fake-model-a
   fake_model_b:
-    path: fake-model-b
+    path: "{fake_model_b.as_posix()}"
     served_model_name: fake-model-b
 dataset_catalog:
   random_tiny:

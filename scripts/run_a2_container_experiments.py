@@ -409,11 +409,9 @@ def check_path(label: str, value: Any, errors: list[str], warnings: list[str]) -
     if value is None:
         return
     path = Path(str(value))
-    if path.is_absolute():
-        if not path.exists():
-            errors.append(f"{label} does not exist: {path}")
-    else:
-        warnings.append(f"{label} is not an absolute path; preflight cannot verify it locally: {value}")
+    resolved = path if path.is_absolute() else Path.cwd() / path
+    if not resolved.exists():
+        errors.append(f"{label} does not exist: {resolved}")
 
 
 def add_preflight_issue(

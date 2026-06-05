@@ -1,5 +1,14 @@
 results/
-data/
+data/*
+!data/datastores/
+!data/spec_bench/
+data/datastores/*
+data/spec_bench/*
+!data/datastores/datastores_mixed_custom.jsonl
+!data/datastores/datastores_mixed_custom.summary.json
+!data/spec_bench/question.jsonl
+/datastores/
+/datastores.rar
 __pycache__/
 *.pyc
 .pytest_cache/
