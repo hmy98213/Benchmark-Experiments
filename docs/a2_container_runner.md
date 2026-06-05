@@ -22,6 +22,13 @@ bash run.sh --dry-run
 bash run.sh
 ```
 
+You can also pass a config file directly:
+
+```bash
+bash run.sh configs/a2_container_experiments.yaml --dry-run
+bash run.sh configs/a2_container_experiments.yaml
+```
+
 Results are written under:
 
 ```bash
@@ -37,6 +44,11 @@ results/a2_container/summary.csv
 ## Main Config Fields
 
 Edit `configs/a2_container_experiments.yaml`:
+
+The exact layout is not strict.  The runner only needs three selected lists
+(`models`, `datasets`, `methods`) plus catalog entries for the names in those
+lists.  The catalog style below is recommended because it lets each model keep
+its own path and topology while the top of the file stays easy to edit.
 
 ```yaml
 models:
