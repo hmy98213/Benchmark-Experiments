@@ -1,0 +1,92 @@
+# A2 Container Runner
+
+Use this path when you are already inside a vLLM Ascend container.
+
+It does not call `docker run`, `docker exec`, or `docker cp`.  It directly runs:
+
+```bash
+vllm serve ...
+vllm bench serve ...
+```
+
+For every model x dataset x method combination, the runner starts a fresh vLLM
+server, runs one benchmark, stops that server, then moves to the next
+combination.
+
+## Quick Start
+
+```bash
+cd /workspace/suffix-bench
+vi configs/a2_container_experiments.yaml
+bash run.sh --dry-run
+bash run.sh
+```
+
+Results are written under:
+
+```bash
+results/a2_container/
+```
+
+The combined CSV summary is:
+
+```bash
+results/a2_container/summary.csv
+```
+
+## Main Config Fields
+
+Edit `configs/a2_container_experiments.yaml`:
+
+```yaml
+models:
+  - qwen35_9b
+datasets:
+  - random64
+methods:
+  - baseline
+  - mtp
+  - ngram
+  - suffix
+  - mtp_ngram_concat
+  - mtp_suffix_concat
+
+TP: 1
+DP: 1
+NPU_DEVICES: "0"
+```
+
+Add model entries under `model_catalog`:
+
+```yaml
+model_catalog:
+  your_model:
+    path: /home/huangmy/models/YourModel
+    served_model_name: your-model
+    tp: 1
+    dp: 1
+    npu_devices: "0"
+```
+
+For TP8:
+
+```yaml
+models:
+  - qwen3_32b
+
+model_catalog:
+  qwen3_32b:
+    path: /home/huangmy/models/Qwen3-32B
+    served_model_name: qwen3-32b
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+```
+
+## Notes
+
+- `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
+- The default config assumes the benchmark repo is at `/workspace/suffix-bench`.
+- `datastores384` expects `/workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl`.
+- `specbench100` expects `/workspace/suffix-bench/data/spec_bench/question.jsonl`.
+- If `PyYAML` is unavailable, the runner uses a built-in parser for this config's YAML subset.
