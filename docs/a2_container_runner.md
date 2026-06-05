@@ -18,6 +18,7 @@ combination.
 ```bash
 cd /workspace/suffix-bench
 vi configs/a2_container_experiments.yaml
+python3 scripts/test_a2_container_runner.py
 bash run.sh --preflight
 bash run.sh --dry-run
 bash run.sh
@@ -118,6 +119,7 @@ model_catalog:
 ## Notes
 
 - `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
+- `python3 scripts/test_a2_container_runner.py` tests the runner control flow with a fake vLLM binary.
 - If `vllm` is not on `PATH`, set `VLLM_BIN` in the YAML config.
 - `--preflight` checks selected model paths, dataset paths, methods, vLLM, and ports.
 - `--resume` only skips cases with an existing successful result JSON.
