@@ -37,6 +37,8 @@ STOP_ON_FAILURE: true
 # If true, completed cases with an existing successful result JSON are skipped.
 # You can also enable this per run with: bash run.sh --resume
 SKIP_COMPLETED: false
+# Ascend device check mode for --preflight: off, warn, or error.
+ASCEND_DEVICE_CHECK: warn
 # Optional. Override if vLLM is not on PATH, for example:
 # VLLM_BIN: /usr/local/bin/vllm
 

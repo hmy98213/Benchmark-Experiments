@@ -228,6 +228,14 @@ def selected_list(config: dict[str, Any], key: str) -> list[str]:
     return [str(item) for item in value]
 
 
+def split_device_ids(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(item).strip() for item in value if str(item).strip()]
+    return [item.strip() for item in str(value).split(",") if item.strip()]
+
+
 def build_env(config: dict[str, Any], model: dict[str, Any]) -> dict[str, str]:
     env = os.environ.copy()
     env.update({str(k): str(v) for k, v in cfg(config, "ENV", {}).items()})
@@ -386,6 +394,66 @@ def check_path(label: str, value: Any, errors: list[str], warnings: list[str]) -
         warnings.append(f"{label} is not an absolute path; preflight cannot verify it locally: {value}")
 
 
+def add_preflight_issue(
+    message: str,
+    *,
+    mode: str,
+    errors: list[str],
+    warnings: list[str],
+) -> None:
+    if mode == "error":
+        errors.append(message)
+    elif mode != "off":
+        warnings.append(message)
+
+
+def check_ascend_devices(
+    model_key: str,
+    model: dict[str, Any],
+    *,
+    mode: str,
+    errors: list[str],
+    warnings: list[str],
+) -> None:
+    if mode == "off":
+        return
+
+    devices = split_device_ids(model.get("npu_devices"))
+    if not devices:
+        return
+
+    dev_root = Path("/dev")
+    if not dev_root.exists():
+        add_preflight_issue(
+            f"model {model_key!r} requested NPU devices {devices}, but /dev is not available for Ascend checks",
+            mode=mode,
+            errors=errors,
+            warnings=warnings,
+        )
+        return
+
+    missing: list[str] = []
+    for device in devices:
+        if device.isdigit() and not (dev_root / f"davinci{device}").exists():
+            missing.append(device)
+
+    if missing:
+        add_preflight_issue(
+            f"model {model_key!r} requested NPU devices {','.join(missing)}, but /dev/davinci* entries are missing",
+            mode=mode,
+            errors=errors,
+            warnings=warnings,
+        )
+
+    if not list(dev_root.glob("davinci*")):
+        add_preflight_issue(
+            "no /dev/davinci* devices are visible; make sure the Ascend container was started with NPU devices",
+            mode=mode,
+            errors=errors,
+            warnings=warnings,
+        )
+
+
 def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -399,6 +467,11 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
 
     if not vllm_bin_exists(config):
         errors.append(f"vLLM executable not found: {cfg(config, 'VLLM_BIN', 'vllm')}")
+
+    ascend_check_mode = str(cfg(config, "ASCEND_DEVICE_CHECK", "warn")).lower()
+    if ascend_check_mode not in {"off", "warn", "error"}:
+        errors.append("ASCEND_DEVICE_CHECK must be one of: off, warn, error")
+        ascend_check_mode = "warn"
 
     case_count = len(models) * len(datasets) * len(methods)
     port_base = int(cfg(config, "PORT_BASE", 19000))
@@ -420,6 +493,13 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
             errors.append(str(exc))
             continue
         check_path(f"model {model_key!r} path", model.get("path"), errors, warnings)
+        check_ascend_devices(
+            model_key,
+            model,
+            mode=ascend_check_mode,
+            errors=errors,
+            warnings=warnings,
+        )
         print(
             f"  model {model_key}: path={model.get('path')} tp={model.get('tp')} "
             f"dp={model.get('dp')} npu_devices={model.get('npu_devices')}",

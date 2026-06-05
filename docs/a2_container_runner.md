@@ -136,7 +136,8 @@ model_catalog:
 - `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
 - `python3 scripts/test_a2_container_runner.py` tests multi-model/multi-method runner control flow with a fake vLLM binary.
 - If `vllm` is not on `PATH`, set `VLLM_BIN` in the YAML config.
-- `--preflight` checks selected model paths, dataset paths, methods, vLLM, and ports.
+- `--preflight` checks selected model paths, dataset paths, methods, vLLM, ports, and visible Ascend devices.
+- `ASCEND_DEVICE_CHECK` can be `off`, `warn`, or `error`; the default is `warn`.
 - `--resume` only skips cases with an existing successful result JSON.
 - The default config assumes the benchmark repo is at `/workspace/suffix-bench`.
 - `datastores384` expects `/workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl`.
