@@ -354,6 +354,45 @@ def write_summary(rows: list[dict[str, Any]], output_dir: Path) -> Path:
     return path
 
 
+def case_name_for(model_key: str, dataset_key: str, method_key: str) -> str:
+    return f"a2_{model_key}_{dataset_key}_{method_key}"
+
+
+def row_from_result(
+    *,
+    model_key: str,
+    dataset_key: str,
+    method_key: str,
+    result_path: Path,
+    data: dict[str, Any],
+) -> dict[str, Any]:
+    row = {
+        "model": model_key,
+        "dataset": dataset_key,
+        "method": method_key,
+        "result_file": str(result_path),
+    }
+    for field in SUMMARY_FIELDS:
+        if field not in row:
+            row[field] = data.get(field, "")
+    return row
+
+
+def find_completed_result(output_dir: Path, case_name: str) -> tuple[Path, dict[str, Any]] | None:
+    case_dir = output_dir / case_name
+    if not case_dir.exists():
+        return None
+    for run_dir in sorted((path for path in case_dir.iterdir() if path.is_dir()), reverse=True):
+        result_path = run_dir / f"{case_name}.json"
+        if not result_path.exists():
+            continue
+        try:
+            return result_path, validate_result(result_path)
+        except Exception:
+            continue
+    return None
+
+
 def run_case(
     *,
     config: dict[str, Any],
@@ -366,9 +405,23 @@ def run_case(
     output_dir: Path,
     port: int,
     dry_run: bool,
+    skip_completed: bool,
 ) -> dict[str, Any]:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    case_name = f"a2_{model_key}_{dataset_key}_{method_key}"
+    case_name = case_name_for(model_key, dataset_key, method_key)
+    if skip_completed and not dry_run:
+        completed = find_completed_result(output_dir, case_name)
+        if completed is not None:
+            result_path, data = completed
+            print(f"Skipping completed case: {case_name} -> {result_path}", flush=True)
+            return row_from_result(
+                model_key=model_key,
+                dataset_key=dataset_key,
+                method_key=method_key,
+                result_path=result_path,
+                data=data,
+            )
+
     result_dir = output_dir / case_name / timestamp
     result_dir.mkdir(parents=True, exist_ok=True)
     result_filename = f"{case_name}.json"
@@ -436,16 +489,13 @@ def run_case(
                 else:
                     stop_process(server_process)
 
-    row = {
-        "model": model_key,
-        "dataset": dataset_key,
-        "method": method_key,
-        "result_file": str(result_path),
-    }
-    for field in SUMMARY_FIELDS:
-        if field not in row:
-            row[field] = data.get(field, "")
-    return row
+    return row_from_result(
+        model_key=model_key,
+        dataset_key=dataset_key,
+        method_key=method_key,
+        result_path=result_path,
+        data=data,
+    )
 
 
 def main() -> int:
@@ -453,6 +503,7 @@ def main() -> int:
     parser.add_argument("--config", type=Path, default=REPO_ROOT / "configs" / "a2_container_experiments.yaml")
     parser.add_argument("--output-dir", type=Path, help="Override OUTPUT_DIR in the config.")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--resume", action="store_true", help="Skip cases that already have a successful result JSON.")
     args = parser.parse_args()
 
     config = load_config(args.config.resolve())
@@ -465,6 +516,7 @@ def main() -> int:
     failures: list[str] = []
     port = int(cfg(config, "PORT_BASE", 19000))
     stop_on_failure = bool(cfg(config, "STOP_ON_FAILURE", True))
+    skip_completed = bool(cfg(config, "SKIP_COMPLETED", False)) or args.resume
 
     for model_key in config["models"]:
         model = model_entry(config, model_key)
@@ -485,6 +537,7 @@ def main() -> int:
                             output_dir=output_dir,
                             port=port,
                             dry_run=args.dry_run,
+                            skip_completed=skip_completed,
                         )
                     )
                 except Exception as exc:

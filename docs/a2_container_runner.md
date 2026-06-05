@@ -29,6 +29,12 @@ bash run.sh configs/a2_container_experiments.yaml --dry-run
 bash run.sh configs/a2_container_experiments.yaml
 ```
 
+If a long run stops halfway through, resume without rerunning completed cases:
+
+```bash
+bash run.sh configs/a2_container_experiments.yaml --resume
+```
+
 Results are written under:
 
 ```bash
@@ -106,6 +112,7 @@ model_catalog:
 
 - `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
 - If `vllm` is not on `PATH`, set `VLLM_BIN` in the YAML config.
+- `--resume` only skips cases with an existing successful result JSON.
 - The default config assumes the benchmark repo is at `/workspace/suffix-bench`.
 - `datastores384` expects `/workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl`.
 - `specbench100` expects `/workspace/suffix-bench/data/spec_bench/question.jsonl`.
