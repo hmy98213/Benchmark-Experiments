@@ -18,6 +18,7 @@ combination.
 ```bash
 cd /workspace/suffix-bench
 vi configs/a2_container_experiments.yaml
+bash run.sh --preflight
 bash run.sh --dry-run
 bash run.sh
 ```
@@ -27,6 +28,12 @@ You can also pass a config file directly:
 ```bash
 bash run.sh configs/a2_container_experiments.yaml --dry-run
 bash run.sh configs/a2_container_experiments.yaml
+```
+
+`--preflight` checks the selected config without starting vLLM:
+
+```bash
+bash run.sh configs/a2_container_experiments.yaml --preflight
 ```
 
 If a long run stops halfway through, resume without rerunning completed cases:
@@ -112,6 +119,7 @@ model_catalog:
 
 - `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
 - If `vllm` is not on `PATH`, set `VLLM_BIN` in the YAML config.
+- `--preflight` checks selected model paths, dataset paths, methods, vLLM, and ports.
 - `--resume` only skips cases with an existing successful result JSON.
 - The default config assumes the benchmark repo is at `/workspace/suffix-bench`.
 - `datastores384` expects `/workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl`.

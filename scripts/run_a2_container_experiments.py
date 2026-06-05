@@ -10,6 +10,7 @@ import os
 import shlex
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import time
@@ -183,6 +184,13 @@ def vllm_bin(config: dict[str, Any]) -> str:
     return shutil.which(candidate) or candidate
 
 
+def vllm_bin_exists(config: dict[str, Any]) -> bool:
+    candidate = str(cfg(config, "VLLM_BIN", "vllm"))
+    if Path(candidate).is_absolute() or os.sep in candidate:
+        return Path(candidate).exists()
+    return shutil.which(candidate) is not None
+
+
 def model_entry(config: dict[str, Any], key: str) -> dict[str, Any]:
     catalog = config["model_catalog"]
     if key not in catalog:
@@ -211,6 +219,13 @@ def method_entry(config: dict[str, Any], key: str) -> dict[str, Any] | None:
         raise KeyError(f"Unknown method {key!r}. Add it to method_catalog.")
     spec = catalog[key]
     return None if spec is None else dict(spec)
+
+
+def selected_list(config: dict[str, Any], key: str) -> list[str]:
+    value = config.get(key)
+    if not isinstance(value, list) or not value:
+        raise RuntimeError(f"Config field {key!r} must be a non-empty list.")
+    return [str(item) for item in value]
 
 
 def build_env(config: dict[str, Any], model: dict[str, Any]) -> dict[str, str]:
@@ -352,6 +367,96 @@ def write_summary(rows: list[dict[str, Any]], output_dir: Path) -> Path:
         writer.writeheader()
         writer.writerows(rows)
     return path
+
+
+def port_is_free(port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(0.5)
+        return sock.connect_ex(("127.0.0.1", port)) != 0
+
+
+def check_path(label: str, value: Any, errors: list[str], warnings: list[str]) -> None:
+    if value is None:
+        return
+    path = Path(str(value))
+    if path.is_absolute():
+        if not path.exists():
+            errors.append(f"{label} does not exist: {path}")
+    else:
+        warnings.append(f"{label} is not an absolute path; preflight cannot verify it locally: {value}")
+
+
+def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        models = selected_list(config, "models")
+        datasets = selected_list(config, "datasets")
+        methods = selected_list(config, "methods")
+    except Exception as exc:
+        print(f"Preflight failed: {exc}", file=sys.stderr, flush=True)
+        return 1
+
+    if not vllm_bin_exists(config):
+        errors.append(f"vLLM executable not found: {cfg(config, 'VLLM_BIN', 'vllm')}")
+
+    case_count = len(models) * len(datasets) * len(methods)
+    port_base = int(cfg(config, "PORT_BASE", 19000))
+    print("Preflight", flush=True)
+    print(f"  vllm: {vllm_bin(config)}", flush=True)
+    print(f"  output_dir: {output_dir}", flush=True)
+    print(f"  cases: {case_count}", flush=True)
+    print(f"  ports: {port_base}..{port_base + case_count - 1}", flush=True)
+
+    for i in range(case_count):
+        port = port_base + i
+        if not port_is_free(port):
+            errors.append(f"port is already in use: {port}")
+
+    for model_key in models:
+        try:
+            model = model_entry(config, model_key)
+        except Exception as exc:
+            errors.append(str(exc))
+            continue
+        check_path(f"model {model_key!r} path", model.get("path"), errors, warnings)
+        print(
+            f"  model {model_key}: path={model.get('path')} tp={model.get('tp')} "
+            f"dp={model.get('dp')} npu_devices={model.get('npu_devices')}",
+            flush=True,
+        )
+
+    for dataset_key in datasets:
+        try:
+            dataset = dataset_entry(config, dataset_key)
+        except Exception as exc:
+            errors.append(str(exc))
+            continue
+        if dataset.get("dataset_path") is not None:
+            check_path(f"dataset {dataset_key!r} path", dataset.get("dataset_path"), errors, warnings)
+        print(f"  dataset {dataset_key}: dataset_name={dataset.get('dataset_name')}", flush=True)
+
+    for method_key in methods:
+        try:
+            method_entry(config, method_key)
+        except Exception as exc:
+            errors.append(str(exc))
+            continue
+        print(f"  method {method_key}: ok", flush=True)
+
+    if warnings:
+        print("\nWarnings:", flush=True)
+        for warning in warnings:
+            print(f"  {warning}", flush=True)
+
+    if errors:
+        print("\nErrors:", file=sys.stderr, flush=True)
+        for error in errors:
+            print(f"  {error}", file=sys.stderr, flush=True)
+        return 1
+
+    print("\nPreflight ok", flush=True)
+    return 0
 
 
 def case_name_for(model_key: str, dataset_key: str, method_key: str) -> str:
@@ -503,6 +608,7 @@ def main() -> int:
     parser.add_argument("--config", type=Path, default=REPO_ROOT / "configs" / "a2_container_experiments.yaml")
     parser.add_argument("--output-dir", type=Path, help="Override OUTPUT_DIR in the config.")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--preflight", action="store_true", help="Check vLLM, model paths, dataset paths, methods, and ports without running benchmarks.")
     parser.add_argument("--resume", action="store_true", help="Skip cases that already have a successful result JSON.")
     args = parser.parse_args()
 
@@ -510,6 +616,8 @@ def main() -> int:
     output_dir = args.output_dir or Path(cfg(config, "OUTPUT_DIR", "results/a2_container"))
     if not output_dir.is_absolute():
         output_dir = REPO_ROOT / output_dir
+    if args.preflight:
+        return run_preflight(config, output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     rows: list[dict[str, Any]] = []
@@ -518,11 +626,11 @@ def main() -> int:
     stop_on_failure = bool(cfg(config, "STOP_ON_FAILURE", True))
     skip_completed = bool(cfg(config, "SKIP_COMPLETED", False)) or args.resume
 
-    for model_key in config["models"]:
+    for model_key in selected_list(config, "models"):
         model = model_entry(config, model_key)
-        for dataset_key in config["datasets"]:
+        for dataset_key in selected_list(config, "datasets"):
             dataset = dataset_entry(config, dataset_key)
-            for method_key in config["methods"]:
+            for method_key in selected_list(config, "methods"):
                 method_spec = method_entry(config, method_key)
                 try:
                     rows.append(
