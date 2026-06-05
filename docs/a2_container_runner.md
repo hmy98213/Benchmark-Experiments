@@ -93,6 +93,7 @@ model_catalog:
 ## Notes
 
 - `NPU_DEVICES` uses container-visible device IDs, not necessarily host IDs.
+- If `vllm` is not on `PATH`, set `VLLM_BIN` in the YAML config.
 - The default config assumes the benchmark repo is at `/workspace/suffix-bench`.
 - `datastores384` expects `/workspace/suffix-bench/data/datastores/datastores_mixed_custom.jsonl`.
 - `specbench100` expects `/workspace/suffix-bench/data/spec_bench/question.jsonl`.

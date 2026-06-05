@@ -8,6 +8,7 @@ import csv
 import json
 import os
 import shlex
+import shutil
 import signal
 import subprocess
 import sys
@@ -43,6 +44,8 @@ def parse_scalar(value: str) -> Any:
     value = value.strip()
     if value in {"", "null", "None", "~"}:
         return None
+    if value == "{}":
+        return {}
     if value in {"true", "True"}:
         return True
     if value in {"false", "False"}:
@@ -113,7 +116,7 @@ def simple_yaml_load(text: str) -> dict[str, Any]:
 
 
 def load_config(path: Path) -> dict[str, Any]:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")
     try:
         import yaml  # type: ignore
 
@@ -175,6 +178,11 @@ def cfg(config: dict[str, Any], key: str, default: Any = None) -> Any:
     return config.get(key, default)
 
 
+def vllm_bin(config: dict[str, Any]) -> str:
+    candidate = str(cfg(config, "VLLM_BIN", "vllm"))
+    return shutil.which(candidate) or candidate
+
+
 def model_entry(config: dict[str, Any], key: str) -> dict[str, Any]:
     catalog = config["model_catalog"]
     if key not in catalog:
@@ -230,7 +238,7 @@ def build_server_cmd(
         server_args["data_parallel_size"] = dp
 
     cmd = [
-        "vllm",
+        vllm_bin(config),
         "serve",
         str(model["path"]),
         "--host",
@@ -264,7 +272,7 @@ def build_bench_cmd(
         bench_args["tokenizer"] = str(model["path"])
 
     cmd = [
-        "vllm",
+        vllm_bin(config),
         "bench",
         "serve",
         "--backend",
