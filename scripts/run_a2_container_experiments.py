@@ -51,6 +51,11 @@ def parse_scalar(value: str) -> Any:
         return value[1:-1]
     if value.startswith("'") and value.endswith("'"):
         return value[1:-1]
+    if value.startswith("[") and value.endswith("]"):
+        inner = value[1:-1].strip()
+        if not inner:
+            return []
+        return [parse_scalar(item.strip()) for item in inner.split(",")]
     try:
         return int(value)
     except ValueError:

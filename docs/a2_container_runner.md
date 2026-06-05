@@ -56,6 +56,13 @@ DP: 1
 NPU_DEVICES: "0"
 ```
 
+Inline YAML lists also work:
+
+```yaml
+models: [qwen35_9b, qwen3_32b]
+methods: [baseline, mtp, suffix, mtp_suffix_concat]
+```
+
 Add model entries under `model_catalog`:
 
 ```yaml
@@ -63,10 +70,10 @@ model_catalog:
   your_model:
     path: /home/huangmy/models/YourModel
     served_model_name: your-model
-    tp: 1
-    dp: 1
-    npu_devices: "0"
 ```
+
+Top-level `TP`, `DP`, and `NPU_DEVICES` are the defaults.  A model entry can
+override them when that model needs a different topology.
 
 For TP8:
 

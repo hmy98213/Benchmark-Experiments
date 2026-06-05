@@ -59,9 +59,6 @@ model_catalog:
   qwen35_9b:
     path: /home/huangmy/models/Qwen3.5-9B
     served_model_name: qwen3.5-9b
-    tp: 1
-    dp: 1
-    npu_devices: "0"
     server_args:
       language_model_only: true
 
