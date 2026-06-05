@@ -9,26 +9,28 @@
 # fresh vLLM server, runs vLLM bench, saves artifacts, and stops the server.
 
 models:
-  - qwen35_9b
+  - deepseek_r1_0528_gptq_int4_int8mix_compact
+  - qwen3_235b_a22b_instruct_2507_w8a8_quarot
+  - glm_47_awq
 
 datasets:
   - random64
 
 methods:
+  # These paths are generic quantized models, so the default selection uses
+  # methods that do not require model-native MTP heads. Add mtp or hybrid
+  # methods here only after confirming the model supports them.
   - baseline
-  - mtp
   - ngram
   - suffix
-  - mtp_ngram_concat
-  - mtp_suffix_concat
 
-TP: 1
+TP: 8
 DP: 1
 
 # Use container-visible device IDs. If the container was started with one NPU,
 # this is usually "0". If all 8 NPUs are visible and you want TP=8, use
 # "0,1,2,3,4,5,6,7".
-NPU_DEVICES: "0"
+NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
 OUTPUT_DIR: results/a2_container
 PORT_BASE: 19000
@@ -63,6 +65,27 @@ COMMON_BENCH_ARGS:
   ignore_eos: true
 
 model_catalog:
+  deepseek_r1_0528_gptq_int4_int8mix_compact:
+    path: /models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact
+    served_model_name: deepseek-r1-0528-gptq-int4-int8mix-compact
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
+  qwen3_235b_a22b_instruct_2507_w8a8_quarot:
+    path: /models/Qwen3-235B-A22B-Instruct-2507-w8a8-QuaRot
+    served_model_name: qwen3-235b-a22b-instruct-2507-w8a8-quarot
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
+  glm_47_awq:
+    path: /models/GLM-4.7-AWQ
+    served_model_name: glm-4.7-awq
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
   qwen35_9b:
     path: /home/huangmy/models/Qwen3.5-9B
     served_model_name: qwen3.5-9b
