@@ -109,7 +109,7 @@ def write_config(tmp: Path, vllm_bin: Path, output_dir: Path) -> Path:
     config.write_text(
         f"""\
 VLLM_BIN: "{vllm_bin.as_posix()}"
-models: [fake_model]
+models: [fake_model_a, fake_model_b]
 datasets: [random_tiny]
 methods: [baseline, suffix]
 TP: 1
@@ -123,9 +123,12 @@ ENV: {{}}
 COMMON_SERVER_ARGS: {{}}
 COMMON_BENCH_ARGS: {{}}
 model_catalog:
-  fake_model:
-    path: fake-model
-    served_model_name: fake-model
+  fake_model_a:
+    path: fake-model-a
+    served_model_name: fake-model-a
+  fake_model_b:
+    path: fake-model-b
+    served_model_name: fake-model-b
 dataset_catalog:
   random_tiny:
     dataset_name: random
@@ -149,8 +152,10 @@ def assert_summary(output_dir: Path) -> None:
         rows = list(csv.DictReader(f))
     keys = {(row["model"], row["dataset"], row["method"]) for row in rows}
     expected = {
-        ("fake_model", "random_tiny", "baseline"),
-        ("fake_model", "random_tiny", "suffix"),
+        ("fake_model_a", "random_tiny", "baseline"),
+        ("fake_model_a", "random_tiny", "suffix"),
+        ("fake_model_b", "random_tiny", "baseline"),
+        ("fake_model_b", "random_tiny", "suffix"),
     }
     if keys != expected:
         raise AssertionError(f"Unexpected summary rows: {keys}")
@@ -167,10 +172,11 @@ def main() -> int:
         run_cmd([sys.executable, str(RUNNER), "--config", str(config)])
         assert_summary(output_dir)
         resume_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--resume"])
-        if "Skipping completed case: a2_fake_model_random_tiny_baseline" not in resume_output:
-            raise AssertionError("baseline case was not skipped during resume")
-        if "Skipping completed case: a2_fake_model_random_tiny_suffix" not in resume_output:
-            raise AssertionError("suffix case was not skipped during resume")
+        for model in ("fake_model_a", "fake_model_b"):
+            for method in ("baseline", "suffix"):
+                case = f"a2_{model}_random_tiny_{method}"
+                if f"Skipping completed case: {case}" not in resume_output:
+                    raise AssertionError(f"{case} was not skipped during resume")
 
     print("A2 runner self-test ok")
     return 0
