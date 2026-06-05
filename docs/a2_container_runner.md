@@ -15,6 +15,21 @@ combination.
 
 ## Quick Start
 
+Clone this branch inside the internal container, not plain `main`:
+
+```bash
+git clone -b codex/a2-container-runner https://github.com/hmy98213/Benchmark-Experiments.git /workspace/suffix-bench
+```
+
+If the repository already exists:
+
+```bash
+cd /workspace/suffix-bench
+git fetch origin codex/a2-container-runner
+git checkout codex/a2-container-runner
+git pull --ff-only
+```
+
 ```bash
 cd /workspace/suffix-bench
 vi configs/a2_container_experiments.yaml
