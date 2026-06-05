@@ -179,6 +179,28 @@ def cfg(config: dict[str, Any], key: str, default: Any = None) -> Any:
     return config.get(key, default)
 
 
+def normalize_check_mode(value: Any, default: str = "warn") -> str:
+    if value is None:
+        return default
+    if isinstance(value, bool):
+        return "error" if value else "off"
+    if isinstance(value, int):
+        return "error" if value else "off"
+
+    mode = str(value).strip().lower()
+    aliases = {
+        "0": "off",
+        "false": "off",
+        "no": "off",
+        "none": "off",
+        "1": "error",
+        "true": "error",
+        "yes": "error",
+        "on": "error",
+    }
+    return aliases.get(mode, mode)
+
+
 def vllm_bin(config: dict[str, Any]) -> str:
     candidate = str(cfg(config, "VLLM_BIN", "vllm"))
     return shutil.which(candidate) or candidate
@@ -468,7 +490,7 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
     if not vllm_bin_exists(config):
         errors.append(f"vLLM executable not found: {cfg(config, 'VLLM_BIN', 'vllm')}")
 
-    ascend_check_mode = str(cfg(config, "ASCEND_DEVICE_CHECK", "warn")).lower()
+    ascend_check_mode = normalize_check_mode(cfg(config, "ASCEND_DEVICE_CHECK", "warn"))
     if ascend_check_mode not in {"off", "warn", "error"}:
         errors.append("ASCEND_DEVICE_CHECK must be one of: off, warn, error")
         ascend_check_mode = "warn"
