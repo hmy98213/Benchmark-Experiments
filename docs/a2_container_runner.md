@@ -68,8 +68,9 @@ The three most important fields are at the top. The current smoke config is:
 
 ```yaml
 models:
-  - qwen3_235b_a22b_w8a8
-  - deepseek_r1_distill_qwen_32b
+  - qwen35_27b_w8a8_mtp
+  - qwen36_35b_a3b
+  - qwen3_next_80b_a3b_instruct
 
 datasets:
   - random3
@@ -78,6 +79,9 @@ methods:
   - baseline
   - ngram
   - suffix
+  - mtp
+  - mtp_ngram_concat
+  - mtp_suffix_concat
 ```
 
 The runner executes the selected models and datasets. Methods come from the
@@ -87,21 +91,24 @@ top-level `methods` list unless a model entry has its own `methods` list:
 each selected model x each selected dataset x that model's selected methods
 ```
 
-The current smoke config runs 2 models and `random3`. Both selected models run
-model-free methods only, because these paths do not look like native MTP
-checkpoints. `suffix` runs two bench passes against the same server process:
+The current smoke config runs 3 models and `random3`.
+`Qwen3.5-27B-w8a8-mtp` runs the full A2-supported method set. The other two
+models start with model-free methods only until their MTP support is confirmed.
+`suffix` and `mtp_suffix_concat` run two bench passes against the same server
+process:
 
 ```yaml
-models: [qwen3_235b_a22b_w8a8, deepseek_r1_distill_qwen_32b]
+models: [qwen35_27b_w8a8_mtp, qwen36_35b_a3b, qwen3_next_80b_a3b_instruct]
 datasets: [random3]
-methods: [baseline, ngram, suffix]
+methods: [baseline, ngram, suffix, mtp, mtp_ngram_concat, mtp_suffix_concat]
 ```
 
 DFlash is not included in this A2 smoke matrix because the current vLLM Ascend
 stack does not support `method=dflash`.
 
-The suffix warm-start rows are named `suffix_cold` and `suffix_warm` in
-`summary.csv`.
+The warm-start rows are named `suffix_cold`, `suffix_warm`,
+`mtp_suffix_concat_cold`, and `mtp_suffix_concat_warm` in `summary.csv`, when
+those methods are selected for a model.
 
 ## Step 4. Set Model Paths And TP/DP
 
@@ -116,17 +123,21 @@ DP: 1
 NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
 model_catalog:
-  qwen3_235b_a22b_w8a8:
-    path: /models/Qwen3-235B-A22B-W8A8
-    served_model_name: qwen3-235b-a22b-w8a8
+  qwen35_27b_w8a8_mtp:
+    path: /models/Qwen3.5-27B-w8a8-mtp
+    served_model_name: qwen3.5-27b-w8a8-mtp
+
+  qwen36_35b_a3b:
+    path: /models/Qwen3.6-35B-A3B
+    served_model_name: qwen3.6-35b-a3b
     methods:
       - baseline
       - ngram
       - suffix
 
-  deepseek_r1_distill_qwen_32b:
-    path: /models/DeepSeek-R1-Distill-Qwen-32B
-    served_model_name: deepseek-r1-distill-qwen-32b
+  qwen3_next_80b_a3b_instruct:
+    path: /models/Qwen3-Next-80B-A3B-Instruct
+    served_model_name: qwen3-next-80b-a3b-instruct
     methods:
       - baseline
       - ngram
@@ -184,8 +195,9 @@ methods:
 ```
 
 These are the full smoke-test methods supported by the current hybrid vLLM
-patch. The current two-model smoke config selects only `baseline`, `ngram`, and
-`suffix`. For a model without native MTP support, remove `mtp`,
+patch. The current smoke config lets the MTP model use the full list and gives
+non-MTP models a model-level override for `baseline`, `ngram`, and `suffix`.
+For a model without native MTP support, remove `mtp`,
 `mtp_ngram_concat`, and `mtp_suffix_concat`, or add a model-level override:
 
 `dflash` is intentionally omitted for A2 because earlier attempts failed during
