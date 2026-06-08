@@ -279,8 +279,14 @@ bash run.sh configs/my_experiment.yaml --dry-run
 For the current random3 smoke test, you can also use the dedicated wrapper:
 
 ```bash
+bash run_a2_random3_smoke.sh --help
 bash run_a2_random3_smoke.sh --dry-run
 ```
+
+The wrapper uses `configs/a2_random3_smoke.yaml`, which only selects
+`random3`. It is separate from the generic `run.sh` entrypoint so future full
+experiment configs cannot accidentally make the smoke command run
+datastores/specbench.
 
 ## Step 8. Run The Experiment
 
