@@ -1,0 +1,108 @@
+INFO 06-08 16:20:56 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:20:56 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:20:56 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:20:56 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:21:05 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:21:05 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297] 
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/DeepSeek-V3.2-w8a8
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:297] 
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:233] non-default args: {'model_tag': '/models/DeepSeek-V3.2-w8a8', 'host': '0.0.0.0', 'port': 19005, 'disable_uvicorn_access_log': True, 'model': '/models/DeepSeek-V3.2-w8a8', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['deepseek-v3.2-w8a8'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768, 'speculative_config': {'method': 'mtp_suffix_concat', 'num_speculative_tokens': 4, 'hybrid_mtp_tokens': 1}}
+(APIServer pid=51516) WARNING 06-08 16:21:06 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1
+(APIServer pid=51516) [transformers] The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+(APIServer pid=51516) [transformers] You are using a model of type `deepseek_v32` to instantiate a model of type `deepseek_v3`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+(APIServer pid=51516) INFO 06-08 16:21:06 [model.py:533] Resolved architecture: DeepseekV32ForCausalLM
+(APIServer pid=51516) INFO 06-08 16:21:06 [model.py:547] Defaulting to tokenizer_mode='deepseek_v32' for DeepseekV32ForCausalLM
+(APIServer pid=51516) INFO 06-08 16:21:06 [model.py:1582] Using max model len 4096
+(APIServer pid=51516) [transformers] The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+(APIServer pid=51516) [transformers] You are using a model of type `deepseek_v32` to instantiate a model of type `deepseek_v3`. This may be expected if you are loading a checkpoint that shares a subset of the architecture (e.g., loading a `sam2_video` checkpoint into `Sam2Model`), but is otherwise not supported and can yield errors. Please verify that the checkpoint is compatible with the model you are instantiating.
+(APIServer pid=51516) INFO 06-08 16:21:06 [model.py:533] Resolved architecture: DeepSeekMTPModel
+(APIServer pid=51516) INFO 06-08 16:21:06 [model.py:1582] Using max model len 163840
+(APIServer pid=51516) INFO 06-08 16:21:06 [scheduler.py:231] Chunked prefill is enabled with max_num_batched_tokens=32768.
+(APIServer pid=51516) WARNING 06-08 16:21:06 [vllm.py:725] Async scheduling not supported with mtp_suffix_concat-based speculative decoding and will be disabled.
+(APIServer pid=51516) INFO 06-08 16:21:06 [vllm.py:754] Asynchronous scheduling is disabled.
+(APIServer pid=51516) WARNING 06-08 16:21:06 [vllm.py:788] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=51516) WARNING 06-08 16:21:06 [vllm.py:799] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=51516) INFO 06-08 16:21:06 [vllm.py:964] Cudagraph is disabled under eager mode
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:185] Auto-detected quantization method 'ascend' from model files for '/models/DeepSeek-V3.2-w8a8'. To override, pass '--quantization <method>' explicitly.
+(APIServer pid=51516) WARNING 06-08 16:21:06 [platform.py:749] Parameter '--disable-cascade-attn' is a GPU-specific feature. Resetting to False for Ascend.
+(APIServer pid=51516) WARNING 06-08 16:21:06 [platform.py:838] Ignored parameter 'disable_flashinfer_prefill'. This is a GPU-specific feature not supported on Ascend. Resetting to False.
+(APIServer pid=51516) INFO 06-08 16:21:06 [ascend_config.py:425] Dynamic EPLB is False
+(APIServer pid=51516) INFO 06-08 16:21:06 [ascend_config.py:426] The number of redundant experts is 0
+(APIServer pid=51516) INFO 06-08 16:21:06 [platform.py:297] Compilation disabled, using eager mode by default
+(APIServer pid=51516) INFO 06-08 16:21:06 [utils.py:1114] Block size is set to 128 if prefix cache or chunked prefill is enabled.
+(APIServer pid=51516) INFO 06-08 16:21:06 [platform.py:502] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+(APIServer pid=51516) INFO 06-08 16:21:06 [compilation.py:289] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=51516) Traceback (most recent call last):
+(APIServer pid=51516)   File "/usr/local/python3.11.14/bin/vllm", line 6, in <module>
+(APIServer pid=51516)     sys.exit(main())
+(APIServer pid=51516)              ^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/main.py", line 75, in main
+(APIServer pid=51516)     args.dispatch_function(args)
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/serve.py", line 118, in cmd
+(APIServer pid=51516)     uvloop.run(run_server(args))
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 92, in run
+(APIServer pid=51516)     return runner.run(wrapper())
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/asyncio/runners.py", line 118, in run
+(APIServer pid=51516)     return self._loop.run_until_complete(task)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "uvloop/loop.pyx", line 1512, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=51516)   File "uvloop/loop.pyx", line 1505, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=51516)   File "uvloop/loop.pyx", line 1379, in uvloop.loop.Loop.run_forever
+(APIServer pid=51516)   File "uvloop/loop.pyx", line 557, in uvloop.loop.Loop._run
+(APIServer pid=51516)   File "uvloop/loop.pyx", line 476, in uvloop.loop.Loop._on_idle
+(APIServer pid=51516)   File "uvloop/cbhandles.pyx", line 83, in uvloop.loop.Handle._run
+(APIServer pid=51516)   File "uvloop/cbhandles.pyx", line 61, in uvloop.loop.Handle._run
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=51516)     return await main
+(APIServer pid=51516)            ^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 656, in run_server
+(APIServer pid=51516)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 670, in run_server_worker
+(APIServer pid=51516)     async with build_async_engine_client(
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=51516)     return await anext(self.gen)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 103, in build_async_engine_client
+(APIServer pid=51516)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=51516)     return await anext(self.gen)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 144, in build_async_engine_client_from_engine_args
+(APIServer pid=51516)     async_llm = AsyncLLM.from_vllm_config(
+(APIServer pid=51516)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/v1/engine/async_llm.py", line 225, in from_vllm_config
+(APIServer pid=51516)     return cls(
+(APIServer pid=51516)            ^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/v1/engine/async_llm.py", line 154, in __init__
+(APIServer pid=51516)     self.engine_core = EngineCoreClient.make_async_mp_client(
+(APIServer pid=51516)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=51516)     return func(*args, **kwargs)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 128, in make_async_mp_client
+(APIServer pid=51516)     return AsyncMPClient(*client_args)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=51516)     return func(*args, **kwargs)
+(APIServer pid=51516)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 924, in __init__
+(APIServer pid=51516)     super().__init__(
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 579, in __init__
+(APIServer pid=51516)     self.resources.output_socket = make_zmq_socket(
+(APIServer pid=51516)                                    ^^^^^^^^^^^^^^^^
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/utils/network_utils.py", line 338, in make_zmq_socket
+(APIServer pid=51516)     socket.bind(path)
+(APIServer pid=51516)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/zmq/sugar/socket.py", line 320, in bind
+(APIServer pid=51516)     super().bind(addr)
+(APIServer pid=51516)   File "zmq/backend/cython/_zmq.py", line 1009, in zmq.backend.cython._zmq.Socket.bind
+(APIServer pid=51516)   File "zmq/backend/cython/_zmq.py", line 179, in zmq.backend.cython._zmq._check_rc
+(APIServer pid=51516)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 544, in signal_handler
+(APIServer pid=51516)     raise KeyboardInterrupt("terminated")
+(APIServer pid=51516) KeyboardInterrupt: terminated
+(APIServer pid=51516) [ERROR] 2026-06-08-16:21:07 (PID:51516, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(APIServer pid=51516) sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

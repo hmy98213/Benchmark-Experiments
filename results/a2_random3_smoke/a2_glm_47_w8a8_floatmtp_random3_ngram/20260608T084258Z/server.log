@@ -1,0 +1,129 @@
+INFO 06-08 16:43:05 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:43:05 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:43:05 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:43:05 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:43:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:43:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297] 
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/GLM-4.7-W8A8-floatmtp
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:297] 
+(APIServer pid=64030) INFO 06-08 16:43:14 [utils.py:233] non-default args: {'model_tag': '/models/GLM-4.7-W8A8-floatmtp', 'host': '0.0.0.0', 'port': 19002, 'disable_uvicorn_access_log': True, 'model': '/models/GLM-4.7-W8A8-floatmtp', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['glm-4.7-w8a8-floatmtp'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768, 'speculative_config': {'method': 'ngram', 'num_speculative_tokens': 4, 'prompt_lookup_min': 2, 'prompt_lookup_max': 5}}
+(APIServer pid=64030) WARNING 06-08 16:43:14 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1
+(APIServer pid=64030) INFO 06-08 16:43:15 [model.py:533] Resolved architecture: Glm4MoeForCausalLM
+(APIServer pid=64030) INFO 06-08 16:43:15 [model.py:1582] Using max model len 4096
+(APIServer pid=64030) INFO 06-08 16:43:16 [scheduler.py:231] Chunked prefill is enabled with max_num_batched_tokens=32768.
+(APIServer pid=64030) WARNING 06-08 16:43:18 [vllm.py:725] Async scheduling not supported with ngram-based speculative decoding and will be disabled.
+(APIServer pid=64030) INFO 06-08 16:43:18 [vllm.py:754] Asynchronous scheduling is disabled.
+(APIServer pid=64030) WARNING 06-08 16:43:18 [vllm.py:788] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=64030) WARNING 06-08 16:43:18 [vllm.py:799] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=64030) INFO 06-08 16:43:18 [vllm.py:964] Cudagraph is disabled under eager mode
+(APIServer pid=64030) WARNING 06-08 16:43:18 [platform.py:749] Parameter '--disable-cascade-attn' is a GPU-specific feature. Resetting to False for Ascend.
+(APIServer pid=64030) WARNING 06-08 16:43:18 [platform.py:838] Ignored parameter 'disable_flashinfer_prefill'. This is a GPU-specific feature not supported on Ascend. Resetting to False.
+(APIServer pid=64030) INFO 06-08 16:43:18 [ascend_config.py:425] Dynamic EPLB is False
+(APIServer pid=64030) INFO 06-08 16:43:18 [ascend_config.py:426] The number of redundant experts is 0
+(APIServer pid=64030) INFO 06-08 16:43:18 [platform.py:297] Compilation disabled, using eager mode by default
+(APIServer pid=64030) INFO 06-08 16:43:18 [utils.py:1114] Block size is set to 128 if prefix cache or chunked prefill is enabled.
+(APIServer pid=64030) INFO 06-08 16:43:18 [platform.py:502] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+(APIServer pid=64030) INFO 06-08 16:43:18 [compilation.py:289] Enabled custom fusions: norm_quant, act_quant
+INFO 06-08 16:43:28 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:43:28 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:43:28 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:43:28 [__init__.py:239] Platform plugin ascend is activated
+(EngineCore pid=64137) INFO 06-08 16:43:37 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(EngineCore pid=64137) INFO 06-08 16:43:37 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(EngineCore pid=64137) INFO 06-08 16:43:37 [core.py:103] Initializing a V1 LLM engine (v0.18.0) with config: model='/models/GLM-4.7-W8A8-floatmtp', speculative_config=SpeculativeConfig(method='ngram', model=None, num_spec_tokens=4), tokenizer='/models/GLM-4.7-W8A8-floatmtp', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=ascend, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=npu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=glm-4.7-w8a8-floatmtp, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_endpoints': [32768], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}
+(EngineCore pid=64137) WARNING 06-08 16:43:37 [network_utils.py:36] The environment variable HOST_IP is deprecated and ignored, as it is often used by Docker and other software to interact with the container's network stack. Please use VLLM_HOST_IP instead to set the IP address for vLLM processes to communicate with each other.
+(EngineCore pid=64137) INFO 06-08 16:43:37 [multiproc_executor.py:134] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=100.102.249.22 (local), world_size=8, local_world_size=8
+INFO 06-08 16:43:44 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:43:44 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:43:44 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:43:44 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:43:53 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:43:53 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-08 16:43:56 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 16:43:56 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852] WorkerProc failed to start.
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852] Traceback (most recent call last):
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 821, in worker_main
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     worker = WorkerProc(*args, **kwargs)
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     return func(*args, **kwargs)
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 614, in __init__
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     self.worker.init_device()
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/worker/worker_base.py", line 312, in init_device
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     self.worker.init_device()  # type: ignore
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py", line 313, in init_device
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     self.device = self._init_device()
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]                   ^^^^^^^^^^^^^^^^^^^
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py", line 270, in _init_device
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852]     raise ValueError(
+(Worker pid=64187) ERROR 06-08 16:43:59 [multiproc_executor.py:852] ValueError: Free memory on device (32.47/60.95 GiB) on startup is less than desired GPU memory utilization (0.9, 54.85 GiB). Decrease GPU memory utilization or reduce GPU memory used by other processes.
+INFO 06-08 16:44:00 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:44:00 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:44:00 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:44:00 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:44:08 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:44:08 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-08 16:44:12 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 16:44:12 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852] WorkerProc failed to start.
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852] Traceback (most recent call last):
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 821, in worker_main
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     worker = WorkerProc(*args, **kwargs)
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     return func(*args, **kwargs)
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 614, in __init__
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     self.worker.init_device()
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm/vllm/v1/worker/worker_base.py", line 312, in init_device
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     self.worker.init_device()  # type: ignore
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     ^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py", line 313, in init_device
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     self.device = self._init_device()
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]                   ^^^^^^^^^^^^^^^^^^^
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py", line 270, in _init_device
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852]     raise ValueError(
+(Worker pid=64236) ERROR 06-08 16:44:14 [multiproc_executor.py:852] ValueError: Free memory on device (32.47/60.95 GiB) on startup is less than desired GPU memory utilization (0.9, 54.85 GiB). Decrease GPU memory utilization or reduce GPU memory used by other processes.
+INFO 06-08 16:44:15 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:44:15 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:44:15 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:44:15 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:44:24 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:44:24 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-08 16:44:27 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 16:44:27 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=64326) INFO 06-08 16:44:30 [parallel_state.py:1395] world_size=8 rank=2 local_rank=2 distributed_init_method=tcp://127.0.0.1:59491 backend=hccl
+INFO 06-08 16:44:31 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:44:31 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:44:31 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:44:31 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:44:40 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:44:40 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-08 16:44:43 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 16:44:43 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=64422) INFO 06-08 16:44:46 [parallel_state.py:1395] world_size=8 rank=3 local_rank=3 distributed_init_method=tcp://127.0.0.1:59491 backend=hccl
+INFO 06-08 16:44:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:44:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:44:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:44:47 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:44:56 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:44:56 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+INFO 06-08 16:45:00 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 16:45:00 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=64513) INFO 06-08 16:45:03 [parallel_state.py:1395] world_size=8 rank=4 local_rank=4 distributed_init_method=tcp://127.0.0.1:59491 backend=hccl
+INFO 06-08 16:45:03 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:45:03 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:45:03 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:45:03 [__init__.py:239] Platform plugin ascend is activated

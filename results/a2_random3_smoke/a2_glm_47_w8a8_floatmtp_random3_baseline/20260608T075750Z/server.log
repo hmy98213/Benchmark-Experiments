@@ -261,3 +261,62 @@ INFO 06-08 16:00:56 [ascend_config.py:426] The number of redundant experts is 0
 (Worker_TP0 pid=40780) 
 (Worker_TP2 pid=40931) WARNING 06-08 16:01:57 [multiproc_executor.py:866] WorkerProc was terminated
 (Worker_TP1 pid=40835) WARNING 06-08 16:01:57 [multiproc_executor.py:866] WorkerProc was terminated
+(APIServer pid=40526) Traceback (most recent call last):
+(APIServer pid=40526)   File "/usr/local/python3.11.14/bin/vllm", line 6, in <module>
+(APIServer pid=40526)     sys.exit(main())
+(APIServer pid=40526)              ^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/main.py", line 75, in main
+(APIServer pid=40526)     args.dispatch_function(args)
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/serve.py", line 118, in cmd
+(APIServer pid=40526)     uvloop.run(run_server(args))
+(APIServer pid=40526)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 92, in run
+(APIServer pid=40526)     return runner.run(wrapper())
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/usr/local/python3.11.14/lib/python3.11/asyncio/runners.py", line 118, in run
+(APIServer pid=40526)     return self._loop.run_until_complete(task)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=40526)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=40526)     return await main
+(APIServer pid=40526)            ^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 656, in run_server
+(APIServer pid=40526)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 670, in run_server_worker
+(APIServer pid=40526)     async with build_async_engine_client(
+(APIServer pid=40526)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=40526)     return await anext(self.gen)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 103, in build_async_engine_client
+(APIServer pid=40526)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=40526)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=40526)     return await anext(self.gen)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 144, in build_async_engine_client_from_engine_args
+(APIServer pid=40526)     async_llm = AsyncLLM.from_vllm_config(
+(APIServer pid=40526)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/v1/engine/async_llm.py", line 225, in from_vllm_config
+(APIServer pid=40526)     return cls(
+(APIServer pid=40526)            ^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/v1/engine/async_llm.py", line 154, in __init__
+(APIServer pid=40526)     self.engine_core = EngineCoreClient.make_async_mp_client(
+(APIServer pid=40526)                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=40526)     return func(*args, **kwargs)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 128, in make_async_mp_client
+(APIServer pid=40526)     return AsyncMPClient(*client_args)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/tracing/otel.py", line 178, in sync_wrapper
+(APIServer pid=40526)     return func(*args, **kwargs)
+(APIServer pid=40526)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 924, in __init__
+(APIServer pid=40526)     super().__init__(
+(APIServer pid=40526)   File "/vllm-workspace/vllm/vllm/v1/engine/core_client.py", line 621, in __init__
+(APIServer pid=40526)     raise TimeoutError(
+(APIServer pid=40526) TimeoutError: Timed out waiting for engine core processes to start. This is often caused by slow weight loading for large models. Waited 600s (configured by VLLM_ENGINE_READY_TIMEOUT_S). To increase the timeout, set the environment variable: VLLM_ENGINE_READY_TIMEOUT_S=<seconds>
+(APIServer pid=40526) [ERROR] 2026-06-08-16:11:57 (PID:40526, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(APIServer pid=40526) sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+/usr/local/python3.11.14/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/usr/local/python3.11.14/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 2 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
