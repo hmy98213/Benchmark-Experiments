@@ -1,0 +1,149 @@
+# A2 datastore384 open-model speculative decoding matrix.
+#
+# Run inside the suffix vLLM Ascend container on A2:
+#
+#   python3 scripts/run_a2_container_experiments.py \
+#     --config configs/a2_datastores384_open_models.yaml \
+#     --preflight
+#   python3 scripts/run_a2_container_experiments.py \
+#     --config configs/a2_datastores384_open_models.yaml \
+#     --dry-run
+#   python3 scripts/run_a2_container_experiments.py \
+#     --config configs/a2_datastores384_open_models.yaml
+#
+# NPU 7 is intentionally excluded. The default TP=4 uses cards 0,1,2,3.
+
+models:
+  - qwen36_35b_a3b_w8a8
+  - glm_45_air_fp8
+  - deepseek_r1_distill_llama_70b
+
+datasets:
+  - datastores384
+
+methods:
+  # Main draft=2 comparison group.
+  - baseline
+  - mtp_2
+  - ngram_2
+  - suffix_2
+  - mtp_ngram_concat_1p1
+  - mtp_suffix_concat_1p1
+  # Extra hybrid depth probe requested by the experiment.
+  - mtp_ngram_concat_2p2
+  - mtp_suffix_concat_2p2
+
+TP: 4
+DP: 1
+NPU_DEVICES: "0,1,2,3"
+
+OUTPUT_DIR: /workspace/results/a2_datastores384_open_models
+PORT_BASE: 19100
+READY_TIMEOUT_S: 7200
+SERVER_CLEANUP_TIMEOUT_S: 45
+POST_SERVER_CLEANUP_SLEEP_S: 30
+STOP_ON_FAILURE: false
+SKIP_COMPLETED: false
+ASCEND_DEVICE_CHECK: warn
+
+ENV:
+  TASK_QUEUE_ENABLE: "1"
+  HCCL_OP_EXPANSION_MODE: AIV
+  VLLM_ASCEND_ENABLE_FLASHCOMM1: "0"
+
+COMMON_SERVER_ARGS:
+  trust_remote_code: true
+  distributed_executor_backend: mp
+  max_model_len: 4096
+  max_num_batched_tokens: 32768
+  gpu_memory_utilization: 0.9
+  disable_uvicorn_access_log: true
+  enforce_eager: true
+
+COMMON_BENCH_ARGS:
+  request_rate: inf
+  max_concurrency: 1
+  temperature: 0
+  ignore_eos: true
+
+model_catalog:
+  qwen36_35b_a3b_w8a8:
+    path: /models/Qwen3.6-35B-A3B-w8a8
+    served_model_name: qwen3.6-35b-a3b-w8a8
+    tp: 4
+    dp: 1
+    npu_devices: "0,1,2,3"
+
+  glm_45_air_fp8:
+    path: /models/GLM-4.5-Air-FP8
+    served_model_name: glm-4.5-air-fp8
+    tp: 4
+    dp: 1
+    npu_devices: "0,1,2,3"
+
+  deepseek_r1_distill_llama_70b:
+    path: /models/DeepSeek-R1-Distill-Llama-70B
+    served_model_name: deepseek-r1-distill-llama-70b
+    tp: 4
+    dp: 1
+    npu_devices: "0,1,2,3"
+
+method_catalog:
+  baseline: null
+
+  mtp_2:
+    method: mtp
+    num_speculative_tokens: 2
+
+  ngram_2:
+    method: ngram
+    num_speculative_tokens: 2
+    prompt_lookup_min: 2
+    prompt_lookup_max: 5
+
+  suffix_2:
+    method: suffix
+    num_speculative_tokens: 2
+    bench_passes:
+      - cold
+      - warm
+
+  mtp_ngram_concat_1p1:
+    method: mtp_ngram_concat
+    num_speculative_tokens: 2
+    hybrid_mtp_tokens: 1
+    prompt_lookup_min: 2
+    prompt_lookup_max: 5
+
+  mtp_suffix_concat_1p1:
+    method: mtp_suffix_concat
+    num_speculative_tokens: 2
+    hybrid_mtp_tokens: 1
+    bench_passes:
+      - cold
+      - warm
+
+  mtp_ngram_concat_2p2:
+    method: mtp_ngram_concat
+    num_speculative_tokens: 4
+    hybrid_mtp_tokens: 2
+    prompt_lookup_min: 2
+    prompt_lookup_max: 5
+
+  mtp_suffix_concat_2p2:
+    method: mtp_suffix_concat
+    num_speculative_tokens: 4
+    hybrid_mtp_tokens: 2
+    bench_passes:
+      - cold
+      - warm
+
+dataset_catalog:
+  datastores384:
+    dataset_name: custom
+    dataset_path: data/datastores/datastores_mixed_custom.jsonl
+    num_prompts: 384
+    custom_output_len: 256
+    disable_shuffle: true
+    no_oversample: true
+    seed: 0

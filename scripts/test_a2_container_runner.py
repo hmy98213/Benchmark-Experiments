@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import csv
 import os
+import socket
 import stat
 import subprocess
 import sys
@@ -106,7 +107,24 @@ else:
     return wrapper
 
 
-def write_config(tmp: Path, vllm_bin: Path, output_dir: Path) -> Path:
+def find_free_port_block(count: int) -> int:
+    for port in range(19000, 25000):
+        sockets = []
+        try:
+            for offset in range(count):
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.bind(("127.0.0.1", port + offset))
+                sockets.append(sock)
+            return port
+        except OSError:
+            pass
+        finally:
+            for sock in sockets:
+                sock.close()
+    raise RuntimeError(f"Could not find {count} consecutive free ports")
+
+
+def write_config(tmp: Path, vllm_bin: Path, output_dir: Path, port_base: int) -> Path:
     config = tmp / "config.yaml"
     fake_model_a = tmp / "fake-model-a"
     fake_model_b = tmp / "fake-model-b"
@@ -122,7 +140,7 @@ TP: 1
 DP: 1
 NPU_DEVICES: "0"
 OUTPUT_DIR: "{output_dir.as_posix()}"
-PORT_BASE: 19400
+PORT_BASE: {port_base}
 READY_TIMEOUT_S: 30
 STOP_ON_FAILURE: true
 ASCEND_DEVICE_CHECK: off
@@ -178,7 +196,7 @@ def main() -> int:
         tmp = Path(raw_tmp)
         output_dir = tmp / "out"
         vllm_bin = write_fake_vllm(tmp)
-        config = write_config(tmp, vllm_bin, output_dir)
+        config = write_config(tmp, vllm_bin, output_dir, find_free_port_block(3))
 
         run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--preflight"])
         dry_run_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--dry-run"])
