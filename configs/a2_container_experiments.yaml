@@ -14,12 +14,11 @@ models:
   - glm_45_air_fp8
 
 datasets:
-  - random64
+  - datastores384
 
 methods:
-  # This mixed model set may not all expose model-native MTP heads, so the
-  # default selection uses methods that do not require MTP support. Add mtp or
-  # hybrid methods here only after confirming every selected model supports them.
+  # Default methods for models without a model-specific override. These do not
+  # require model-native MTP heads, so DeepSeek/GLM can run safely.
   - baseline
   - ngram
   - suffix
@@ -71,6 +70,13 @@ model_catalog:
     tp: 8
     dp: 1
     npu_devices: "0,1,2,3,4,5,6,7"
+    methods:
+      - baseline
+      - mtp
+      - ngram
+      - suffix
+      - mtp_ngram_concat
+      - mtp_suffix_concat
 
   deepseek_r1_distill_qwen_32b:
     path: /models/DeepSeek-R1-Distill-Qwen-32B

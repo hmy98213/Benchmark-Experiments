@@ -250,6 +250,19 @@ def selected_list(config: dict[str, Any], key: str) -> list[str]:
     return [str(item) for item in value]
 
 
+def selected_methods_for_model(
+    config: dict[str, Any],
+    model_key: str,
+    model: dict[str, Any],
+) -> list[str]:
+    value = model.get("methods")
+    if value is None:
+        return selected_list(config, "methods")
+    if not isinstance(value, list) or not value:
+        raise RuntimeError(f"Config field model_catalog.{model_key}.methods must be a non-empty list.")
+    return [str(item) for item in value]
+
+
 def split_device_ids(value: Any) -> list[str]:
     if value is None:
         return []
@@ -493,7 +506,17 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
         errors.append("ASCEND_DEVICE_CHECK must be one of: off, warn, error")
         ascend_check_mode = "warn"
 
-    case_count = len(models) * len(datasets) * len(methods)
+    model_methods: dict[str, list[str]] = {}
+    case_count = 0
+    for model_key in models:
+        try:
+            model = model_entry(config, model_key)
+            model_method_keys = selected_methods_for_model(config, model_key, model)
+            model_methods[model_key] = model_method_keys
+            case_count += len(datasets) * len(model_method_keys)
+        except Exception as exc:
+            errors.append(str(exc))
+
     port_base = int(cfg(config, "PORT_BASE", 19000))
     print("Preflight", flush=True)
     print(f"  vllm: {vllm_bin(config)}", flush=True)
@@ -512,6 +535,13 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
         except Exception as exc:
             errors.append(str(exc))
             continue
+        method_keys = model_methods.get(model_key)
+        if method_keys is None:
+            try:
+                method_keys = selected_methods_for_model(config, model_key, model)
+            except Exception as exc:
+                errors.append(str(exc))
+                continue
         check_path(f"model {model_key!r} path", model.get("path"), errors, warnings)
         check_ascend_devices(
             model_key,
@@ -522,7 +552,7 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
         )
         print(
             f"  model {model_key}: path={model.get('path')} tp={model.get('tp')} "
-            f"dp={model.get('dp')} npu_devices={model.get('npu_devices')}",
+            f"dp={model.get('dp')} npu_devices={model.get('npu_devices')} methods={','.join(method_keys)}",
             flush=True,
         )
 
@@ -536,7 +566,10 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
             check_path(f"dataset {dataset_key!r} path", dataset.get("dataset_path"), errors, warnings)
         print(f"  dataset {dataset_key}: dataset_name={dataset.get('dataset_name')}", flush=True)
 
-    for method_key in methods:
+    used_methods = sorted({method for method_keys in model_methods.values() for method in method_keys})
+    if not used_methods:
+        used_methods = methods
+    for method_key in used_methods:
         try:
             method_entry(config, method_key)
         except Exception as exc:
@@ -628,7 +661,6 @@ def run_case(
             )
 
     result_dir = output_dir / case_name / timestamp
-    result_dir.mkdir(parents=True, exist_ok=True)
     result_filename = f"{case_name}.json"
     server_log = result_dir / "server.log"
     bench_stdout = result_dir / "bench_stdout.log"
@@ -649,7 +681,6 @@ def run_case(
         "bench_cmd": bench_cmd,
         "result_dir": str(result_dir),
     }
-    (result_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
 
     if dry_run:
         print(json.dumps(metadata, indent=2, ensure_ascii=False), flush=True)
@@ -659,6 +690,9 @@ def run_case(
             "method": method_key,
             "result_file": str(result_path),
         }
+
+    result_dir.mkdir(parents=True, exist_ok=True)
+    (result_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
 
     print(f"\n==> {case_name}", flush=True)
     server_process: subprocess.Popen[Any] | None = None
@@ -718,7 +752,8 @@ def main() -> int:
         output_dir = REPO_ROOT / output_dir
     if args.preflight:
         return run_preflight(config, output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    if not args.dry_run:
+        output_dir.mkdir(parents=True, exist_ok=True)
 
     rows: list[dict[str, Any]] = []
     failures: list[str] = []
@@ -728,9 +763,10 @@ def main() -> int:
 
     for model_key in selected_list(config, "models"):
         model = model_entry(config, model_key)
+        model_methods = selected_methods_for_model(config, model_key, model)
         for dataset_key in selected_list(config, "datasets"):
             dataset = dataset_entry(config, dataset_key)
-            for method_key in selected_list(config, "methods"):
+            for method_key in model_methods:
                 method_spec = method_entry(config, method_key)
                 try:
                     rows.append(
@@ -752,11 +788,16 @@ def main() -> int:
                     failures.append(f"{model_key}/{dataset_key}/{method_key}: {exc}")
                     print(f"FAILED: {failures[-1]}", file=sys.stderr, flush=True)
                     if stop_on_failure:
-                        summary_path = write_summary(rows, output_dir)
-                        print(f"Partial summary: {summary_path}", flush=True)
+                        if not args.dry_run:
+                            summary_path = write_summary(rows, output_dir)
+                            print(f"Partial summary: {summary_path}", flush=True)
                         return 1
                 finally:
                     port += 1
+
+    if args.dry_run:
+        print(f"Dry-run complete: {len(rows)} cases", flush=True)
+        return 1 if failures else 0
 
     summary_path = write_summary(rows, output_dir)
     print(f"Summary: {summary_path}", flush=True)

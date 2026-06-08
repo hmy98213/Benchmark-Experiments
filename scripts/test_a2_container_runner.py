@@ -134,6 +134,7 @@ model_catalog:
   fake_model_b:
     path: "{fake_model_b.as_posix()}"
     served_model_name: fake-model-b
+    methods: [baseline]
 dataset_catalog:
   random_tiny:
     dataset_name: random
@@ -160,7 +161,6 @@ def assert_summary(output_dir: Path) -> None:
         ("fake_model_a", "random_tiny", "baseline"),
         ("fake_model_a", "random_tiny", "suffix"),
         ("fake_model_b", "random_tiny", "baseline"),
-        ("fake_model_b", "random_tiny", "suffix"),
     }
     if keys != expected:
         raise AssertionError(f"Unexpected summary rows: {keys}")
@@ -174,14 +174,24 @@ def main() -> int:
         config = write_config(tmp, vllm_bin, output_dir)
 
         run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--preflight"])
+        dry_run_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--dry-run"])
+        if "Dry-run complete: 3 cases" not in dry_run_output:
+            raise AssertionError("dry-run did not use model-level method selection")
+        if output_dir.exists():
+            raise AssertionError(f"dry-run unexpectedly created output directory: {output_dir}")
         run_cmd([sys.executable, str(RUNNER), "--config", str(config)])
         assert_summary(output_dir)
         resume_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--resume"])
-        for model in ("fake_model_a", "fake_model_b"):
-            for method in ("baseline", "suffix"):
+        for model, methods in {
+            "fake_model_a": ("baseline", "suffix"),
+            "fake_model_b": ("baseline",),
+        }.items():
+            for method in methods:
                 case = f"a2_{model}_random_tiny_{method}"
                 if f"Skipping completed case: {case}" not in resume_output:
                     raise AssertionError(f"{case} was not skipped during resume")
+        if "a2_fake_model_b_random_tiny_suffix" in resume_output:
+            raise AssertionError("model-level method override was not honored during resume")
 
     print("A2 runner self-test ok")
     return 0
