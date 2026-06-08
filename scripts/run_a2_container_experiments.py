@@ -184,6 +184,43 @@ def cfg(config: dict[str, Any], key: str, default: Any = None) -> Any:
     return config.get(key, default)
 
 
+def apply_runtime_overrides(
+    config: dict[str, Any],
+    *,
+    tp: int | None = None,
+    dp: int | None = None,
+    npu_devices: str | None = None,
+) -> None:
+    """Apply CLI overrides to the selected models in a config."""
+
+    overrides = {
+        "tp": tp,
+        "dp": dp,
+        "npu_devices": npu_devices,
+    }
+    if all(value is None for value in overrides.values()):
+        return
+
+    if tp is not None:
+        config["TP"] = tp
+    if dp is not None:
+        config["DP"] = dp
+    if npu_devices is not None:
+        config["NPU_DEVICES"] = npu_devices
+
+    catalog = config.get("model_catalog")
+    if not isinstance(catalog, dict):
+        return
+
+    for model_key in selected_list(config, "models"):
+        entry = catalog.get(model_key)
+        if not isinstance(entry, dict):
+            continue
+        for key, value in overrides.items():
+            if value is not None:
+                entry[key] = value
+
+
 def normalize_check_mode(value: Any, default: str = "warn") -> str:
     if value is None:
         return default
@@ -943,9 +980,18 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--preflight", action="store_true", help="Check vLLM, model paths, dataset paths, methods, and ports without running benchmarks.")
     parser.add_argument("--resume", action="store_true", help="Skip cases that already have a successful result JSON.")
+    parser.add_argument("--tp", type=int, help="Override tensor parallel size for all selected models.")
+    parser.add_argument("--dp", type=int, help="Override data parallel size for all selected models.")
+    parser.add_argument("--npu-devices", help="Override ASCEND_RT_VISIBLE_DEVICES for all selected models, e.g. 2,3,4,5,6,7.")
     args = parser.parse_args()
 
     config = load_config(args.config.resolve())
+    apply_runtime_overrides(
+        config,
+        tp=args.tp,
+        dp=args.dp,
+        npu_devices=args.npu_devices,
+    )
     output_dir = args.output_dir or Path(cfg(config, "OUTPUT_DIR", "results/a2_container"))
     if not output_dir.is_absolute():
         output_dir = REPO_ROOT / output_dir

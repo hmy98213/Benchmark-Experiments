@@ -14,6 +14,7 @@ Usage:
 Examples:
   bash run_a2_random3_smoke.sh --dry-run
   bash run_a2_random3_smoke.sh
+  bash run_a2_random3_smoke.sh --tp 6 --npu-devices 2,3,4,5,6,7
   bash run_a2_random3_smoke.sh --resume
   bash run_a2_random3_smoke.sh --skip-preflight --dry-run
 
@@ -35,7 +36,8 @@ else
   echo "[a2-smoke] preflight"
   python3 scripts/run_a2_container_experiments.py \
     --config "${config}" \
-    --preflight
+    --preflight \
+    "$@"
 fi
 
 echo "[a2-smoke] run"

@@ -281,6 +281,7 @@ For the current random3 smoke test, you can also use the dedicated wrapper:
 ```bash
 bash run_a2_random3_smoke.sh --help
 bash run_a2_random3_smoke.sh --dry-run
+bash run_a2_random3_smoke.sh --tp 6 --npu-devices 2,3,4,5,6,7 --dry-run
 ```
 
 The wrapper uses `configs/a2_random3_smoke.yaml`, which only selects
@@ -293,6 +294,18 @@ This keeps model-free smoke data from being blocked if a large MTP model hits
 an Ascend startup OOM. It also waits briefly after each server cleanup so NPU
 memory from the previous vLLM process can be released before the next method
 starts.
+
+If some cards are temporarily occupied, use runtime overrides instead of
+editing YAML:
+
+```bash
+bash run_a2_random3_smoke.sh --tp 6 --npu-devices 2,3,4,5,6,7
+```
+
+TP does not have to be a power of two in the runner, but vLLM/model internals
+may still reject a TP size if model dimensions cannot be split by that value.
+In that case the server log should fail early with a divisibility or tensor
+parallel configuration error.
 
 ## Step 8. Run The Experiment
 
