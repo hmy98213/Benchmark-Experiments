@@ -1,4 +1,4 @@
-# A2 in-container experiment configuration.
+# A2 in-container random smoke-test configuration.
 #
 # Edit this file inside the vLLM Ascend container, then run:
 #
@@ -9,19 +9,22 @@
 # fresh vLLM server, runs vLLM bench, saves artifacts, and stops the server.
 
 models:
-  - qwen35_27b_w8a8_mtp
-  - deepseek_r1_distill_qwen_32b
-  - glm_45_air_fp8
+  - deepseek_v4_flash_w8a8_mtp
+  - glm_47_w8a8_floatmtp
+  - qwen35_397b_a17b_w4a8_mtp
 
 datasets:
-  - datastores384
+  - random3
 
 methods:
-  # Default methods for models without a model-specific override. These do not
-  # require model-native MTP heads, so DeepSeek/GLM can run safely.
+  # A2-supported smoke set. DFlash is intentionally omitted because the current
+  # vLLM Ascend stack does not support method=dflash.
   - baseline
+  - mtp
   - ngram
   - suffix
+  - mtp_ngram_concat
+  - mtp_suffix_concat
 
 TP: 8
 DP: 1
@@ -31,10 +34,10 @@ DP: 1
 # "0,1,2,3,4,5,6,7".
 NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
-OUTPUT_DIR: results/a2_container
+OUTPUT_DIR: results/a2_random3_smoke
 PORT_BASE: 19000
-READY_TIMEOUT_S: 1800
-STOP_ON_FAILURE: true
+READY_TIMEOUT_S: 3600
+STOP_ON_FAILURE: false
 # If true, completed cases with an existing successful result JSON are skipped.
 # You can also enable this per run with: bash run.sh --resume
 SKIP_COMPLETED: false
@@ -59,50 +62,28 @@ COMMON_SERVER_ARGS:
 
 COMMON_BENCH_ARGS:
   request_rate: inf
-  max_concurrency: 4
+  max_concurrency: 1
   temperature: 0
   ignore_eos: true
 
 model_catalog:
-  qwen35_27b_w8a8_mtp:
-    path: /models/Qwen3.5-27B-w8a8-mtp
-    served_model_name: qwen3.5-27b-w8a8-mtp
-    tp: 8
-    dp: 1
-    npu_devices: "0,1,2,3,4,5,6,7"
-    methods:
-      - baseline
-      - mtp
-      - ngram
-      - suffix
-      - mtp_ngram_concat
-      - mtp_suffix_concat
-
-  deepseek_r1_distill_qwen_32b:
-    path: /models/DeepSeek-R1-Distill-Qwen-32B
-    served_model_name: deepseek-r1-distill-qwen-32b
+  deepseek_v4_flash_w8a8_mtp:
+    path: /models/DeepSeek-V4-Flash-w8a8-mtp
+    served_model_name: deepseek-v4-flash-w8a8-mtp
     tp: 8
     dp: 1
     npu_devices: "0,1,2,3,4,5,6,7"
 
-  glm_45_air_fp8:
-    path: /models/GLM-4.5-Air-FP8
-    served_model_name: glm-4.5-air-fp8
+  glm_47_w8a8_floatmtp:
+    path: /models/GLM-4.7-W8A8-floatmtp
+    served_model_name: glm-4.7-w8a8-floatmtp
     tp: 8
     dp: 1
     npu_devices: "0,1,2,3,4,5,6,7"
 
-  qwen35_9b:
-    path: /home/huangmy/models/Qwen3.5-9B
-    served_model_name: qwen3.5-9b
-    server_args:
-      language_model_only: true
-
-  # Example for an 8-NPU model. Add qwen3_32b to `models` after the model
-  # exists and the container can see all listed devices.
-  qwen3_32b:
-    path: /home/huangmy/models/Qwen3-32B
-    served_model_name: qwen3-32b
+  qwen35_397b_a17b_w4a8_mtp:
+    path: /models/Qwen3.5-397B-A17B-w4a8-mtp
+    served_model_name: qwen3.5-397b-a17b-w4a8-mtp
     tp: 8
     dp: 1
     npu_devices: "0,1,2,3,4,5,6,7"
@@ -137,6 +118,13 @@ method_catalog:
     hybrid_mtp_tokens: 1
 
 dataset_catalog:
+  random3:
+    dataset_name: random
+    num_prompts: 3
+    random_input_len: 256
+    random_output_len: 32
+    random_range_ratio: 0.1
+
   datastores384:
     dataset_name: custom
     dataset_path: data/datastores/datastores_mixed_custom.jsonl
