@@ -314,6 +314,15 @@ def selected_list(config: dict[str, Any], key: str) -> list[str]:
     return [str(item) for item in value]
 
 
+def apply_selection_override(config: dict[str, Any], key: str, value: str | None) -> None:
+    if value is None:
+        return
+    items = [item.strip() for item in value.split(",") if item.strip()]
+    if not items:
+        raise RuntimeError(f"--{key} must contain at least one comma-separated value.")
+    config[key] = items
+
+
 def selected_methods_for_model(
     config: dict[str, Any],
     model_key: str,
@@ -983,9 +992,15 @@ def main() -> int:
     parser.add_argument("--tp", type=int, help="Override tensor parallel size for all selected models.")
     parser.add_argument("--dp", type=int, help="Override data parallel size for all selected models.")
     parser.add_argument("--npu-devices", help="Override ASCEND_RT_VISIBLE_DEVICES for all selected models, e.g. 2,3,4,5,6,7.")
+    parser.add_argument("--models", help="Comma-separated model keys to run, overriding config.models.")
+    parser.add_argument("--datasets", help="Comma-separated dataset keys to run, overriding config.datasets.")
+    parser.add_argument("--methods", help="Comma-separated method keys to run, overriding config.methods.")
     args = parser.parse_args()
 
     config = load_config(args.config.resolve())
+    apply_selection_override(config, "models", args.models)
+    apply_selection_override(config, "datasets", args.datasets)
+    apply_selection_override(config, "methods", args.methods)
     apply_runtime_overrides(
         config,
         tp=args.tp,
