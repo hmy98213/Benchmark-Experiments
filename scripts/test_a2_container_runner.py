@@ -37,6 +37,7 @@ def write_fake_vllm(tmp: Path) -> Path:
         """\
 import json
 import os
+import signal
 import sys
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -60,23 +61,24 @@ if args and args[0] == "serve":
             pass
 
     server = HTTPServer(("127.0.0.1", port), Handler)
-    server.timeout = 30
-    server.handle_request()
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
+    server.serve_forever()
 elif len(args) >= 2 and args[0] == "bench" and args[1] == "serve":
     result_dir = args[args.index("--result-dir") + 1]
     result_filename = args[args.index("--result-filename") + 1]
     os.makedirs(result_dir, exist_ok=True)
+    is_warm = "_warm" in result_filename
     result = {
         "completed": 2,
         "failed": 0,
         "request_throughput": 1.0,
-        "output_throughput": 2.0,
+        "output_throughput": 2.5 if is_warm else 2.0,
         "total_token_throughput": 3.0,
         "mean_ttft_ms": 4.0,
-        "mean_tpot_ms": 5.0,
+        "mean_tpot_ms": 4.5 if is_warm else 5.0,
         "mean_itl_ms": 6.0,
-        "spec_decode_acceptance_rate": 0.5,
-        "spec_decode_acceptance_length": 1.5,
+        "spec_decode_acceptance_rate": 0.7 if is_warm else 0.5,
+        "spec_decode_acceptance_length": 1.8 if is_warm else 1.5,
     }
     with open(os.path.join(result_dir, result_filename), "w", encoding="utf-8") as f:
         json.dump(result, f)
@@ -144,6 +146,7 @@ method_catalog:
   suffix:
     method: suffix
     num_speculative_tokens: 4
+    bench_passes: [cold, warm]
 """,
         encoding="utf-8",
     )
@@ -159,15 +162,19 @@ def assert_summary(output_dir: Path) -> None:
     keys = {(row["model"], row["dataset"], row["method"]) for row in rows}
     expected = {
         ("fake_model_a", "random_tiny", "baseline"),
-        ("fake_model_a", "random_tiny", "suffix"),
+        ("fake_model_a", "random_tiny", "suffix_cold"),
+        ("fake_model_a", "random_tiny", "suffix_warm"),
         ("fake_model_b", "random_tiny", "baseline"),
     }
     if keys != expected:
         raise AssertionError(f"Unexpected summary rows: {keys}")
+    warm_rows = [row for row in rows if row["method"] == "suffix_warm"]
+    if not warm_rows or warm_rows[0]["phase"] != "warm" or warm_rows[0]["base_method"] != "suffix":
+        raise AssertionError(f"Warm suffix row missing phase/base_method: {warm_rows}")
 
 
 def main() -> int:
-    with tempfile.TemporaryDirectory(prefix="a2-runner-self-test-") as raw_tmp:
+    with tempfile.TemporaryDirectory(prefix="a2-runner-self-test-", ignore_cleanup_errors=True) as raw_tmp:
         tmp = Path(raw_tmp)
         output_dir = tmp / "out"
         vllm_bin = write_fake_vllm(tmp)
@@ -175,7 +182,7 @@ def main() -> int:
 
         run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--preflight"])
         dry_run_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--dry-run"])
-        if "Dry-run complete: 3 cases" not in dry_run_output:
+        if "Dry-run complete: 4 cases" not in dry_run_output:
             raise AssertionError("dry-run did not use model-level method selection")
         if output_dir.exists():
             raise AssertionError(f"dry-run unexpectedly created output directory: {output_dir}")
@@ -183,7 +190,7 @@ def main() -> int:
         assert_summary(output_dir)
         resume_output = run_cmd([sys.executable, str(RUNNER), "--config", str(config), "--resume"])
         for model, methods in {
-            "fake_model_a": ("baseline", "suffix"),
+            "fake_model_a": ("baseline", "suffix_cold", "suffix_warm"),
             "fake_model_b": ("baseline",),
         }.items():
             for method in methods:

@@ -104,6 +104,11 @@ method_catalog:
   suffix:
     method: suffix
     num_speculative_tokens: 4
+    # The same vLLM server stays alive for both passes. The first pass measures
+    # cold suffix-cache behavior; the second pass measures warm-cache behavior.
+    bench_passes:
+      - cold
+      - warm
 
   mtp_ngram_concat:
     method: mtp_ngram_concat
@@ -116,6 +121,11 @@ method_catalog:
     method: mtp_suffix_concat
     num_speculative_tokens: 4
     hybrid_mtp_tokens: 1
+    # The same server stays alive for both passes so the suffix tree can reuse
+    # outputs recorded by the cold pass.
+    bench_passes:
+      - cold
+      - warm
 
 dataset_catalog:
   random3:

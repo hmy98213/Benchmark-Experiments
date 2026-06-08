@@ -27,6 +27,8 @@ SUMMARY_FIELDS = [
     "model",
     "dataset",
     "method",
+    "base_method",
+    "phase",
     "completed",
     "failed",
     "request_throughput",
@@ -37,8 +39,11 @@ SUMMARY_FIELDS = [
     "mean_itl_ms",
     "spec_decode_acceptance_rate",
     "spec_decode_acceptance_length",
+    "server_log",
     "result_file",
 ]
+
+METHOD_CONTROL_KEYS = {"bench_passes"}
 
 
 def parse_scalar(value: str) -> Any:
@@ -243,6 +248,28 @@ def method_entry(config: dict[str, Any], key: str) -> dict[str, Any] | None:
     return None if spec is None else dict(spec)
 
 
+def speculative_config_for_server(method_spec: dict[str, Any] | None) -> dict[str, Any] | None:
+    if method_spec is None:
+        return None
+    return {k: v for k, v in method_spec.items() if k not in METHOD_CONTROL_KEYS}
+
+
+def bench_pass_names(method_spec: dict[str, Any] | None) -> list[str | None]:
+    if method_spec is None or "bench_passes" not in method_spec:
+        return [None]
+    value = method_spec["bench_passes"]
+    if isinstance(value, str):
+        names = [value]
+    elif isinstance(value, list):
+        names = [str(item) for item in value]
+    else:
+        raise RuntimeError("method_catalog.*.bench_passes must be a non-empty string or list.")
+    names = [name.strip() for name in names if name.strip()]
+    if not names:
+        raise RuntimeError("method_catalog.*.bench_passes must be non-empty.")
+    return names
+
+
 def selected_list(config: dict[str, Any], key: str) -> list[str]:
     value = config.get(key)
     if not isinstance(value, list) or not value:
@@ -307,8 +334,9 @@ def build_server_cmd(
         str(model["served_model_name"]),
     ]
     add_key_values(cmd, server_args)
-    if method_spec:
-        cmd.extend(["--speculative-config", json.dumps(method_spec, separators=(",", ":"))])
+    speculative_config = speculative_config_for_server(method_spec)
+    if speculative_config:
+        cmd.extend(["--speculative-config", json.dumps(speculative_config, separators=(",", ":"))])
     return cmd
 
 
@@ -507,13 +535,16 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
         ascend_check_mode = "warn"
 
     model_methods: dict[str, list[str]] = {}
-    case_count = 0
+    result_count = 0
+    server_run_count = 0
     for model_key in models:
         try:
             model = model_entry(config, model_key)
             model_method_keys = selected_methods_for_model(config, model_key, model)
             model_methods[model_key] = model_method_keys
-            case_count += len(datasets) * len(model_method_keys)
+            server_run_count += len(datasets) * len(model_method_keys)
+            for method_key in model_method_keys:
+                result_count += len(datasets) * len(bench_pass_names(method_entry(config, method_key)))
         except Exception as exc:
             errors.append(str(exc))
 
@@ -521,10 +552,11 @@ def run_preflight(config: dict[str, Any], output_dir: Path) -> int:
     print("Preflight", flush=True)
     print(f"  vllm: {vllm_bin(config)}", flush=True)
     print(f"  output_dir: {output_dir}", flush=True)
-    print(f"  cases: {case_count}", flush=True)
-    print(f"  ports: {port_base}..{port_base + case_count - 1}", flush=True)
+    print(f"  cases: {result_count}", flush=True)
+    print(f"  server_runs: {server_run_count}", flush=True)
+    print(f"  ports: {port_base}..{port_base + server_run_count - 1}", flush=True)
 
-    for i in range(case_count):
+    for i in range(server_run_count):
         port = port_base + i
         if not port_is_free(port):
             errors.append(f"port is already in use: {port}")
@@ -596,11 +628,18 @@ def case_name_for(model_key: str, dataset_key: str, method_key: str) -> str:
     return f"a2_{model_key}_{dataset_key}_{method_key}"
 
 
+def result_method_key(method_key: str, pass_name: str | None) -> str:
+    return method_key if pass_name is None else f"{method_key}_{pass_name}"
+
+
 def row_from_result(
     *,
     model_key: str,
     dataset_key: str,
     method_key: str,
+    base_method_key: str | None = None,
+    phase: str | None = None,
+    server_log: Path | None = None,
     result_path: Path,
     data: dict[str, Any],
 ) -> dict[str, Any]:
@@ -608,6 +647,9 @@ def row_from_result(
         "model": model_key,
         "dataset": dataset_key,
         "method": method_key,
+        "base_method": base_method_key or method_key,
+        "phase": phase or "",
+        "server_log": str(server_log) if server_log is not None else "",
         "result_file": str(result_path),
     }
     for field in SUMMARY_FIELDS:
@@ -644,58 +686,129 @@ def run_case(
     port: int,
     dry_run: bool,
     skip_completed: bool,
-) -> dict[str, Any]:
+) -> list[dict[str, Any]]:
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    case_name = case_name_for(model_key, dataset_key, method_key)
-    if skip_completed and not dry_run:
-        completed = find_completed_result(output_dir, case_name)
-        if completed is not None:
-            result_path, data = completed
-            print(f"Skipping completed case: {case_name} -> {result_path}", flush=True)
-            return row_from_result(
-                model_key=model_key,
-                dataset_key=dataset_key,
-                method_key=method_key,
-                result_path=result_path,
-                data=data,
-            )
+    base_case_name = case_name_for(model_key, dataset_key, method_key)
+    pass_names = bench_pass_names(method_spec)
 
-    result_dir = output_dir / case_name / timestamp
-    result_filename = f"{case_name}.json"
-    server_log = result_dir / "server.log"
-    bench_stdout = result_dir / "bench_stdout.log"
-    result_path = result_dir / result_filename
+    if skip_completed and not dry_run:
+        completed_rows: list[dict[str, Any]] = []
+        for pass_name in pass_names:
+            pass_method_key = result_method_key(method_key, pass_name)
+            completed = find_completed_result(output_dir, case_name_for(model_key, dataset_key, pass_method_key))
+            if completed is None:
+                completed_rows = []
+                break
+            result_path, data = completed
+            print(f"Skipping completed case: {case_name_for(model_key, dataset_key, pass_method_key)} -> {result_path}", flush=True)
+            completed_rows.append(
+                row_from_result(
+                    model_key=model_key,
+                    dataset_key=dataset_key,
+                    method_key=pass_method_key,
+                    base_method_key=method_key,
+                    phase=pass_name,
+                    result_path=result_path,
+                    data=data,
+                )
+            )
+        if completed_rows:
+            return completed_rows
 
     env = build_env(config, model)
     server_cmd = build_server_cmd(config, model, method_spec, port)
-    bench_cmd = build_bench_cmd(config, model, dataset, port, result_dir, result_filename)
-    metadata = {
-        "case_name": case_name,
-        "model": model_key,
-        "dataset": dataset_key,
-        "method": method_key,
-        "started_at_utc": timestamp,
-        "port": port,
-        "env_overrides": {k: env[k] for k in sorted(set(cfg(config, "ENV", {})) | {"ASCEND_RT_VISIBLE_DEVICES"}) if k in env},
-        "server_cmd": server_cmd,
-        "bench_cmd": bench_cmd,
-        "result_dir": str(result_dir),
-    }
+    pass_plans: list[dict[str, Any]] = []
+    for pass_index, pass_name in enumerate(pass_names, start=1):
+        pass_method_key = result_method_key(method_key, pass_name)
+        case_name = case_name_for(model_key, dataset_key, pass_method_key)
+        result_dir = output_dir / case_name / timestamp
+        result_filename = f"{case_name}.json"
+        result_path = result_dir / result_filename
+        bench_cmd = build_bench_cmd(config, model, dataset, port, result_dir, result_filename)
+        pass_plans.append(
+            {
+                "pass_index": pass_index,
+                "pass_name": pass_name,
+                "method_key": pass_method_key,
+                "case_name": case_name,
+                "result_dir": result_dir,
+                "result_filename": result_filename,
+                "result_path": result_path,
+                "bench_cmd": bench_cmd,
+            }
+        )
+
+    server_run_dir = pass_plans[0]["result_dir"] if len(pass_plans) == 1 else output_dir / "_server_runs" / base_case_name / timestamp
+    server_log = server_run_dir / "server.log"
+    env_overrides = {k: env[k] for k in sorted(set(cfg(config, "ENV", {})) | {"ASCEND_RT_VISIBLE_DEVICES"}) if k in env}
 
     if dry_run:
-        print(json.dumps(metadata, indent=2, ensure_ascii=False), flush=True)
-        return {
-            "model": model_key,
-            "dataset": dataset_key,
-            "method": method_key,
-            "result_file": str(result_path),
-        }
+        rows: list[dict[str, Any]] = []
+        for plan in pass_plans:
+            metadata = {
+                "case_name": plan["case_name"],
+                "server_run": base_case_name,
+                "model": model_key,
+                "dataset": dataset_key,
+                "method": plan["method_key"],
+                "base_method": method_key,
+                "phase": plan["pass_name"] or "",
+                "bench_pass_index": plan["pass_index"],
+                "bench_pass_count": len(pass_plans),
+                "started_at_utc": timestamp,
+                "port": port,
+                "env_overrides": env_overrides,
+                "server_cmd": server_cmd,
+                "server_log": str(server_log),
+                "bench_cmd": plan["bench_cmd"],
+                "result_dir": str(plan["result_dir"]),
+            }
+            print(json.dumps(metadata, indent=2, ensure_ascii=False), flush=True)
+            rows.append(
+                {
+                    "model": model_key,
+                    "dataset": dataset_key,
+                    "method": plan["method_key"],
+                    "base_method": method_key,
+                    "phase": plan["pass_name"] or "",
+                    "server_log": str(server_log),
+                    "result_file": str(plan["result_path"]),
+                }
+            )
+        return rows
 
-    result_dir.mkdir(parents=True, exist_ok=True)
-    (result_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
+    server_run_dir.mkdir(parents=True, exist_ok=True)
+    (server_run_dir / "server_metadata.json").write_text(
+        json.dumps(
+            {
+                "server_run": base_case_name,
+                "model": model_key,
+                "dataset": dataset_key,
+                "base_method": method_key,
+                "started_at_utc": timestamp,
+                "port": port,
+                "env_overrides": env_overrides,
+                "server_cmd": server_cmd,
+                "bench_passes": [
+                    {
+                        "case_name": plan["case_name"],
+                        "method": plan["method_key"],
+                        "phase": plan["pass_name"] or "",
+                        "result_dir": str(plan["result_dir"]),
+                    }
+                    for plan in pass_plans
+                ],
+            },
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
 
-    print(f"\n==> {case_name}", flush=True)
+    print(f"\n==> {base_case_name}", flush=True)
     server_process: subprocess.Popen[Any] | None = None
+    rows: list[dict[str, Any]] = []
+    pass_results: list[tuple[str | None, dict[str, Any]]] = []
     with server_log.open("w", encoding="utf-8") as log:
         try:
             print("+", " ".join(shlex.quote(part) for part in server_cmd), flush=True)
@@ -714,9 +827,45 @@ def run_case(
                 server_process,
                 server_log,
             )
-            with bench_stdout.open("w", encoding="utf-8") as bench_log:
-                run(bench_cmd, env=env, stdout=bench_log)
-            data = validate_result(result_path)
+            for plan in pass_plans:
+                result_dir = plan["result_dir"]
+                result_dir.mkdir(parents=True, exist_ok=True)
+                bench_stdout = result_dir / "bench_stdout.log"
+                metadata = {
+                    "case_name": plan["case_name"],
+                    "server_run": base_case_name,
+                    "model": model_key,
+                    "dataset": dataset_key,
+                    "method": plan["method_key"],
+                    "base_method": method_key,
+                    "phase": plan["pass_name"] or "",
+                    "bench_pass_index": plan["pass_index"],
+                    "bench_pass_count": len(pass_plans),
+                    "started_at_utc": timestamp,
+                    "port": port,
+                    "env_overrides": env_overrides,
+                    "server_cmd": server_cmd,
+                    "server_log": str(server_log),
+                    "bench_cmd": plan["bench_cmd"],
+                    "result_dir": str(result_dir),
+                }
+                (result_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
+                with bench_stdout.open("w", encoding="utf-8") as bench_log:
+                    run(plan["bench_cmd"], env=env, stdout=bench_log)
+                data = validate_result(plan["result_path"])
+                pass_results.append((plan["pass_name"], data))
+                rows.append(
+                    row_from_result(
+                        model_key=model_key,
+                        dataset_key=dataset_key,
+                        method_key=plan["method_key"],
+                        base_method_key=method_key,
+                        phase=plan["pass_name"],
+                        server_log=server_log,
+                        result_path=plan["result_path"],
+                        data=data,
+                    )
+                )
         finally:
             if server_process is not None:
                 if hasattr(os, "killpg") and server_process.poll() is None:
@@ -728,13 +877,23 @@ def run_case(
                 else:
                     stop_process(server_process)
 
-    return row_from_result(
-        model_key=model_key,
-        dataset_key=dataset_key,
-        method_key=method_key,
-        result_path=result_path,
-        data=data,
-    )
+    if len(pass_results) >= 2:
+        first_name, first = pass_results[0]
+        second_name, second = pass_results[1]
+        compare_fields = (
+            "output_throughput",
+            "mean_tpot_ms",
+            "spec_decode_acceptance_rate",
+            "spec_decode_acceptance_length",
+        )
+        if all(first.get(field) == second.get(field) for field in compare_fields):
+            print(
+                f"WARNING: {base_case_name} {first_name}->{second_name} metrics are identical; "
+                "check whether the suffix cache was actually warmed within the same server process.",
+                flush=True,
+            )
+
+    return rows
 
 
 def main() -> int:
@@ -769,7 +928,7 @@ def main() -> int:
             for method_key in model_methods:
                 method_spec = method_entry(config, method_key)
                 try:
-                    rows.append(
+                    rows.extend(
                         run_case(
                             config=config,
                             model_key=model_key,

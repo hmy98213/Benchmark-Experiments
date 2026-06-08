@@ -9,9 +9,10 @@ vllm serve ...
 vllm bench serve ...
 ```
 
-For every selected `model x dataset x method` combination, the runner starts a
+For most selected `model x dataset x method` combinations, the runner starts a
 fresh vLLM server, runs one benchmark, stops that server, then starts the next
-case.
+case. Methods can optionally define multiple `bench_passes`; those passes run
+back-to-back against the same server process.
 
 ## Step 1. Enter The Ascend Container
 
@@ -91,7 +92,9 @@ each selected model x each selected dataset x that model's selected methods
 ```
 
 The current default config runs a short smoke test: 3 models, `random3`, and 6
-methods, so it runs 18 cases:
+A2-supported methods. `suffix` and `mtp_suffix_concat` each run two bench passes
+against the same server process, so it produces 24 result rows from 18 server
+runs:
 
 ```yaml
 models: [deepseek_v4_flash_w8a8_mtp, glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp]
@@ -101,6 +104,9 @@ methods: [baseline, mtp, ngram, suffix, mtp_ngram_concat, mtp_suffix_concat]
 
 DFlash is not included in this A2 smoke matrix because the current vLLM Ascend
 stack does not support `method=dflash`.
+
+The suffix warm-start rows are named `suffix_cold`, `suffix_warm`,
+`mtp_suffix_concat_cold`, and `mtp_suffix_concat_warm` in `summary.csv`.
 
 ## Step 4. Set Model Paths And TP/DP
 
@@ -207,16 +213,26 @@ method_catalog:
   suffix:
     method: suffix
     num_speculative_tokens: 4
+    bench_passes: [cold, warm]
 
   mtp_suffix_concat:
     method: mtp_suffix_concat
     num_speculative_tokens: 4
     hybrid_mtp_tokens: 1
+    bench_passes: [cold, warm]
 ```
 
 To change draft length, edit `num_speculative_tokens`. For hybrid methods,
 `hybrid_mtp_tokens` controls how many draft tokens come from MTP before
 ngram/suffix continues the draft.
+
+`bench_passes: [cold, warm]` means the runner starts vLLM once, runs `vllm bench`
+once for the cold row, then runs `vllm bench` again for the warm row without
+restarting vLLM. The suffix tree is expected to persist only within that server
+process. If cold and warm metrics are exactly identical, inspect the shared
+`server_log` path in `summary.csv`; identical metrics usually mean the warm pass
+did not benefit from retained suffix history or the model/software stack reset
+that state internally.
 
 ## Step 7. Run Checks Before The Real Experiment
 
@@ -287,29 +303,39 @@ bash run.sh configs/my_experiment.yaml --resume
 The default output directory is:
 
 ```bash
-results/a2_container/
+results/a2_random3_smoke/
 ```
 
 The combined CSV summary is:
 
 ```bash
-results/a2_container/summary.csv
+results/a2_random3_smoke/summary.csv
 ```
 
 Each case also has its own directory:
 
 ```text
-results/a2_container/<case_name>/<timestamp>/
+results/a2_random3_smoke/<case_name>/<timestamp>/
 ```
 
 Important files in each case directory:
 
 ```text
 metadata.json       exact commands, env, port, model, dataset, method
-server.log          vLLM serve log
 bench_stdout.log    vLLM bench stdout/stderr
 <case_name>.json    vLLM bench result JSON
 ```
+
+For single-pass methods, `server.log` is in the same case directory. For
+cold/warm suffix methods, both result rows share one server process and one
+server log under:
+
+```text
+results/a2_random3_smoke/_server_runs/<base_case_name>/<timestamp>/server.log
+```
+
+The `summary.csv` columns `base_method`, `phase`, and `server_log` make this
+relationship explicit.
 
 ## Step 10. Common Changes
 
