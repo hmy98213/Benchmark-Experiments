@@ -412,6 +412,40 @@ def stop_process(process: subprocess.Popen[Any], timeout_s: int = 30) -> None:
         process.wait(timeout=10)
 
 
+def signal_process_group(pgid: int, sig: int) -> bool:
+    try:
+        os.killpg(pgid, sig)
+        return True
+    except ProcessLookupError:
+        return False
+
+
+def wait_process_group_gone(pgid: int, timeout_s: float) -> bool:
+    deadline = time.monotonic() + timeout_s
+    while time.monotonic() < deadline:
+        if not signal_process_group(pgid, 0):
+            return True
+        time.sleep(0.5)
+    return not signal_process_group(pgid, 0)
+
+
+def stop_server_process(process: subprocess.Popen[Any], pgid: int | None, timeout_s: int = 30) -> None:
+    if pgid is None or not hasattr(os, "killpg"):
+        stop_process(process, timeout_s=timeout_s)
+        return
+
+    signal_process_group(pgid, signal.SIGTERM)
+    try:
+        process.wait(timeout=timeout_s)
+    except subprocess.TimeoutExpired:
+        signal_process_group(pgid, signal.SIGKILL)
+        process.wait(timeout=10)
+
+    if not wait_process_group_gone(pgid, 5):
+        signal_process_group(pgid, signal.SIGKILL)
+        wait_process_group_gone(pgid, 5)
+
+
 def load_result(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as f:
         data = json.load(f)
@@ -807,6 +841,7 @@ def run_case(
 
     print(f"\n==> {base_case_name}", flush=True)
     server_process: subprocess.Popen[Any] | None = None
+    server_pgid: int | None = None
     rows: list[dict[str, Any]] = []
     pass_results: list[tuple[str | None, dict[str, Any]]] = []
     with server_log.open("w", encoding="utf-8") as log:
@@ -821,6 +856,11 @@ def run_case(
                 cwd=REPO_ROOT,
                 preexec_fn=os.setsid if hasattr(os, "setsid") else None,
             )
+            if hasattr(os, "getpgid"):
+                try:
+                    server_pgid = os.getpgid(server_process.pid)
+                except ProcessLookupError:
+                    server_pgid = None
             wait_ready(
                 port,
                 int(cfg(config, "READY_TIMEOUT_S", 1800)),
@@ -868,14 +908,14 @@ def run_case(
                 )
         finally:
             if server_process is not None:
-                if hasattr(os, "killpg") and server_process.poll() is None:
-                    try:
-                        os.killpg(os.getpgid(server_process.pid), signal.SIGTERM)
-                        server_process.wait(timeout=30)
-                    except Exception:
-                        stop_process(server_process)
-                else:
-                    stop_process(server_process)
+                stop_server_process(
+                    server_process,
+                    server_pgid,
+                    timeout_s=int(cfg(config, "SERVER_CLEANUP_TIMEOUT_S", 30)),
+                )
+                post_cleanup_sleep_s = float(cfg(config, "POST_SERVER_CLEANUP_SLEEP_S", 0))
+                if post_cleanup_sleep_s > 0:
+                    time.sleep(post_cleanup_sleep_s)
 
     if len(pass_results) >= 2:
         first_name, first = pass_results[0]

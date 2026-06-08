@@ -288,6 +288,12 @@ The wrapper uses `configs/a2_random3_smoke.yaml`, which only selects
 experiment configs cannot accidentally make the smoke command run
 datastores/specbench.
 
+The smoke config runs `baseline`, `ngram`, and `suffix` before MTP methods.
+This keeps model-free smoke data from being blocked if a large MTP model hits
+an Ascend startup OOM. It also waits briefly after each server cleanup so NPU
+memory from the previous vLLM process can be released before the next method
+starts.
+
 ## Step 8. Run The Experiment
 
 Run the default config:
