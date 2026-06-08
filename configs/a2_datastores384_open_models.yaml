@@ -62,7 +62,10 @@ COMMON_SERVER_ARGS:
 
 COMMON_BENCH_ARGS:
   request_rate: inf
-  max_concurrency: 1
+  # Full 384-prompt runs at single concurrency take several hours per method
+  # on A2 for these larger open models, so this matrix uses the same moderate
+  # concurrency for every method and compares relative deltas within the table.
+  max_concurrency: 16
   temperature: 0
   ignore_eos: true
 
