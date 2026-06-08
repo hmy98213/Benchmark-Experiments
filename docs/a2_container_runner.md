@@ -68,9 +68,9 @@ The three most important fields are at the top:
 
 ```yaml
 models:
-  - deepseek_v32_w8a8
   - glm_47_w8a8_floatmtp
   - qwen35_397b_a17b_w4a8_mtp
+  - deepseek_v32_w8a8
 
 datasets:
   - random3
@@ -94,10 +94,12 @@ each selected model x each selected dataset x that model's selected methods
 The current default config runs a short smoke test: 3 models, `random3`, and 6
 A2-supported methods. `suffix` and `mtp_suffix_concat` each run two bench passes
 against the same server process, so it produces 24 result rows from 18 server
-runs:
+runs. `DeepSeek-V3.2-w8a8` is kept last because the latest A2 TP8 log reaches
+`DeepseekV32ForCausalLM` but OOMs while allocating MoE weights during model
+load:
 
 ```yaml
-models: [deepseek_v32_w8a8, glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp]
+models: [glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp, deepseek_v32_w8a8]
 datasets: [random3]
 methods: [baseline, mtp, ngram, suffix, mtp_ngram_concat, mtp_suffix_concat]
 ```
@@ -121,10 +123,6 @@ DP: 1
 NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
 model_catalog:
-  deepseek_v32_w8a8:
-    path: /models/DeepSeek-V3.2-w8a8
-    served_model_name: deepseek-v3.2-w8a8
-
   glm_47_w8a8_floatmtp:
     path: /models/GLM-4.7-W8A8-floatmtp
     served_model_name: glm-4.7-w8a8-floatmtp
@@ -132,6 +130,10 @@ model_catalog:
   qwen35_397b_a17b_w4a8_mtp:
     path: /models/Qwen3.5-397B-A17B-w4a8-mtp
     served_model_name: qwen3.5-397b-a17b-w4a8-mtp
+
+  deepseek_v32_w8a8:
+    path: /models/DeepSeek-V3.2-w8a8
+    served_model_name: deepseek-v3.2-w8a8
 ```
 
 Top-level `TP`, `DP`, and `NPU_DEVICES` are defaults. A model entry can override
