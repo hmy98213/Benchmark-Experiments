@@ -68,7 +68,7 @@ The three most important fields are at the top:
 
 ```yaml
 models:
-  - deepseek_v4_flash_w8a8_mtp
+  - deepseek_v32_w8a8
   - glm_47_w8a8_floatmtp
   - qwen35_397b_a17b_w4a8_mtp
 
@@ -97,7 +97,7 @@ against the same server process, so it produces 24 result rows from 18 server
 runs:
 
 ```yaml
-models: [deepseek_v4_flash_w8a8_mtp, glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp]
+models: [deepseek_v32_w8a8, glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp]
 datasets: [random3]
 methods: [baseline, mtp, ngram, suffix, mtp_ngram_concat, mtp_suffix_concat]
 ```
@@ -121,9 +121,9 @@ DP: 1
 NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
 model_catalog:
-  deepseek_v4_flash_w8a8_mtp:
-    path: /models/DeepSeek-V4-Flash-w8a8-mtp
-    served_model_name: deepseek-v4-flash-w8a8-mtp
+  deepseek_v32_w8a8:
+    path: /models/DeepSeek-V3.2-w8a8
+    served_model_name: deepseek-v3.2-w8a8
 
   glm_47_w8a8_floatmtp:
     path: /models/GLM-4.7-W8A8-floatmtp
