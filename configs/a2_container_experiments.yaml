@@ -1,0 +1,180 @@
+# A2 in-container random smoke-test configuration.
+#
+# Edit this file inside the vLLM Ascend container, then run:
+#
+#   bash run.sh
+#
+# The runner executes directly in the current container. It does not call
+# docker run/docker exec. Each model x dataset x method combination starts a
+# fresh vLLM server, runs vLLM bench, saves artifacts, and stops the server.
+
+models:
+  - glm_47_w8a8_floatmtp
+  - qwen35_397b_a17b_w4a8_mtp
+  # DeepSeek V3.2 hit NPU OOM during MoE weight allocation on A2 TP8.
+  # Use the much smaller V3.1 QuaRot build for DeepSeek model-free smoke.
+  - deepseek_v31_w8a8c8_quarot
+
+datasets:
+  - random3
+
+methods:
+  # A2-supported smoke set. DFlash is intentionally omitted because the current
+  # vLLM Ascend stack does not support method=dflash.
+  - baseline
+  - mtp
+  - ngram
+  - suffix
+  - mtp_ngram_concat
+  - mtp_suffix_concat
+
+TP: 8
+DP: 1
+
+# Use container-visible device IDs. If the container was started with one NPU,
+# this is usually "0". If all 8 NPUs are visible and you want TP=8, use
+# "0,1,2,3,4,5,6,7".
+NPU_DEVICES: "0,1,2,3,4,5,6,7"
+
+OUTPUT_DIR: results/a2_random3_smoke
+PORT_BASE: 19000
+READY_TIMEOUT_S: 3600
+STOP_ON_FAILURE: false
+# If true, completed cases with an existing successful result JSON are skipped.
+# You can also enable this per run with: bash run.sh --resume
+SKIP_COMPLETED: false
+# Ascend device check mode for --preflight: off, warn, or error.
+ASCEND_DEVICE_CHECK: warn
+# Optional. Override if vLLM is not on PATH, for example:
+# VLLM_BIN: /usr/local/bin/vllm
+
+ENV:
+  TASK_QUEUE_ENABLE: "1"
+  HCCL_OP_EXPANSION_MODE: AIV
+  VLLM_ASCEND_ENABLE_FLASHCOMM1: "0"
+
+COMMON_SERVER_ARGS:
+  trust_remote_code: true
+  distributed_executor_backend: mp
+  max_model_len: 4096
+  max_num_batched_tokens: 32768
+  gpu_memory_utilization: 0.9
+  disable_uvicorn_access_log: true
+  enforce_eager: true
+
+COMMON_BENCH_ARGS:
+  request_rate: inf
+  max_concurrency: 1
+  temperature: 0
+  ignore_eos: true
+
+model_catalog:
+  glm_47_w8a8_floatmtp:
+    path: /models/GLM-4.7-W8A8-floatmtp
+    served_model_name: glm-4.7-w8a8-floatmtp
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
+  qwen35_397b_a17b_w4a8_mtp:
+    path: /models/Qwen3.5-397B-A17B-w4a8-mtp
+    served_model_name: qwen3.5-397b-a17b-w4a8-mtp
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
+  deepseek_v31_w8a8c8_quarot:
+    path: /models/DeepSeek-V3.1-w8a8c8-QuaRot
+    served_model_name: deepseek-v3.1-w8a8c8-quarot
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+    # No native MTP marker in the model name; run model-free methods first.
+    methods:
+      - baseline
+      - ngram
+      - suffix
+
+  deepseek_v32_w8a8:
+    path: /models/DeepSeek-V3.2-w8a8
+    served_model_name: deepseek-v3.2-w8a8
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+
+method_catalog:
+  baseline: null
+
+  mtp:
+    method: mtp
+    num_speculative_tokens: 1
+
+  ngram:
+    method: ngram
+    num_speculative_tokens: 4
+    prompt_lookup_min: 2
+    prompt_lookup_max: 5
+
+  suffix:
+    method: suffix
+    num_speculative_tokens: 4
+    # The same vLLM server stays alive for both passes. The first pass measures
+    # cold suffix-cache behavior; the second pass measures warm-cache behavior.
+    bench_passes:
+      - cold
+      - warm
+
+  mtp_ngram_concat:
+    method: mtp_ngram_concat
+    num_speculative_tokens: 4
+    hybrid_mtp_tokens: 1
+    prompt_lookup_min: 2
+    prompt_lookup_max: 5
+
+  mtp_suffix_concat:
+    method: mtp_suffix_concat
+    num_speculative_tokens: 4
+    hybrid_mtp_tokens: 1
+    # The same server stays alive for both passes so the suffix tree can reuse
+    # outputs recorded by the cold pass.
+    bench_passes:
+      - cold
+      - warm
+
+dataset_catalog:
+  random3:
+    dataset_name: random
+    num_prompts: 3
+    random_input_len: 256
+    random_output_len: 32
+    random_range_ratio: 0.1
+
+  datastores384:
+    dataset_name: custom
+    dataset_path: data/datastores/datastores_mixed_custom.jsonl
+    num_prompts: 384
+    custom_output_len: 256
+    disable_shuffle: true
+    no_oversample: true
+    seed: 0
+
+  random64:
+    dataset_name: random
+    num_prompts: 64
+    random_input_len: 1024
+    random_output_len: 256
+    random_range_ratio: 0.1
+
+  prefixrep64:
+    dataset_name: prefix_repetition
+    num_prompts: 64
+    prefix_repetition_prefix_len: 512
+    prefix_repetition_suffix_len: 512
+    prefix_repetition_num_prefixes: 8
+    prefix_repetition_output_len: 256
+
+  specbench100:
+    dataset_name: spec_bench
+    dataset_path: data/spec_bench/question.jsonl
+    num_prompts: 100
+    spec_bench_output_len: 512

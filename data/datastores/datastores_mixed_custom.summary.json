@@ -1,0 +1,106 @@
+{
+  "datasets": {
+    "aime_2025": {
+      "file": "aime_2025.jsonl",
+      "available": 30,
+      "selected": 24
+    },
+    "chinese_patent_summary": {
+      "file": "Chinese-Patent-Summary.json",
+      "available": 8000,
+      "selected": 24
+    },
+    "cn_mtbench": {
+      "file": "cn_mtbench.jsonl",
+      "available": 80,
+      "selected": 24
+    },
+    "databricks_dolly": {
+      "file": "databricks-dolly-15k.jsonl",
+      "available": 15011,
+      "selected": 24
+    },
+    "event_summary": {
+      "file": "event_summary.json",
+      "available": 10728,
+      "selected": 24
+    },
+    "finna": {
+      "file": "finna_train_list.json",
+      "available": 28800,
+      "selected": 24
+    },
+    "gaokao_chinese": {
+      "file": "gaokao-chinese.jsonl",
+      "available": 246,
+      "selected": 24
+    },
+    "gpqa": {
+      "file": "gpqa.jsonl",
+      "available": 198,
+      "selected": 24
+    },
+    "gsm8k_zh": {
+      "file": "GSM8K_zh.json",
+      "available": 8792,
+      "selected": 24
+    },
+    "humaneval": {
+      "file": "humaneval.jsonl",
+      "available": 164,
+      "selected": 24
+    },
+    "legal_jrg": {
+      "file": "legal-jrg.jsonl",
+      "available": 834,
+      "selected": 24
+    },
+    "legal_js": {
+      "file": "legal-js.jsonl",
+      "available": 364,
+      "selected": 24
+    },
+    "magicoder": {
+      "file": "magicoder.json",
+      "available": 500,
+      "selected": 24
+    },
+    "multifieldqa_zh": {
+      "file": "multifieldqa_zh.jsonl",
+      "available": 200,
+      "selected": 24
+    },
+    "rjua": {
+      "file": "RJUA_train.json",
+      "available": 1705,
+      "selected": 24
+    },
+    "xiaohai": {
+      "file": "xiaohai_testset.jsonl",
+      "available": 49,
+      "selected": 24
+    }
+  },
+  "total_records": 384,
+  "source_counts": {
+    "aime_2025": 24,
+    "chinese_patent_summary": 24,
+    "cn_mtbench": 24,
+    "databricks_dolly": 24,
+    "event_summary": 24,
+    "finna": 24,
+    "gaokao_chinese": 24,
+    "gpqa": 24,
+    "gsm8k_zh": 24,
+    "humaneval": 24,
+    "legal_jrg": 24,
+    "legal_js": 24,
+    "magicoder": 24,
+    "multifieldqa_zh": 24,
+    "rjua": 24,
+    "xiaohai": 24
+  },
+  "output_tokens": 256,
+  "max_chars": 3200,
+  "seed": 20260529
+}

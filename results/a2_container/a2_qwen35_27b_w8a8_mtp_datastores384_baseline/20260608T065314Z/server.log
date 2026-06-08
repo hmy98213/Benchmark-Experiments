@@ -1,0 +1,1435 @@
+INFO 06-08 14:53:21 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:53:21 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:53:21 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:53:21 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:53:30 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:53:30 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297] 
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/Qwen3.5-27B-w8a8-mtp
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:297] 
+(APIServer pid=9960) INFO 06-08 14:53:30 [utils.py:233] non-default args: {'model_tag': '/models/Qwen3.5-27B-w8a8-mtp', 'host': '0.0.0.0', 'port': 19000, 'disable_uvicorn_access_log': True, 'model': '/models/Qwen3.5-27B-w8a8-mtp', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['qwen3.5-27b-w8a8-mtp'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768}
+(APIServer pid=9960) WARNING 06-08 14:53:30 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1
+(APIServer pid=9960) The argument `trust_remote_code` is to be used with Auto classes. It has no effect here and is ignored.
+(APIServer pid=9960) INFO 06-08 14:53:48 [model.py:533] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=9960) INFO 06-08 14:53:48 [model.py:1582] Using max model len 4096
+(APIServer pid=9960) INFO 06-08 14:53:48 [scheduler.py:231] Chunked prefill is enabled with max_num_batched_tokens=32768.
+(APIServer pid=9960) INFO 06-08 14:53:48 [patch_mamba_config.py:68] Setting attention block size to 768 tokens to ensure that attention page size is >= mamba page size.
+(APIServer pid=9960) INFO 06-08 14:53:48 [patch_mamba_config.py:83] Padding mamba page size by 0.97% to ensure that mamba page size and attention page size are exactly equal.
+(APIServer pid=9960) INFO 06-08 14:53:48 [vllm.py:754] Asynchronous scheduling is enabled.
+(APIServer pid=9960) WARNING 06-08 14:53:48 [vllm.py:788] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(APIServer pid=9960) WARNING 06-08 14:53:48 [vllm.py:799] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(APIServer pid=9960) INFO 06-08 14:53:48 [vllm.py:964] Cudagraph is disabled under eager mode
+(APIServer pid=9960) INFO 06-08 14:53:48 [utils.py:185] Auto-detected quantization method 'ascend' from model files for '/models/Qwen3.5-27B-w8a8-mtp'. To override, pass '--quantization <method>' explicitly.
+(APIServer pid=9960) WARNING 06-08 14:53:48 [platform.py:749] Parameter '--disable-cascade-attn' is a GPU-specific feature. Resetting to False for Ascend.
+(APIServer pid=9960) WARNING 06-08 14:53:48 [platform.py:838] Ignored parameter 'disable_flashinfer_prefill'. This is a GPU-specific feature not supported on Ascend. Resetting to False.
+(APIServer pid=9960) INFO 06-08 14:53:48 [ascend_config.py:425] Dynamic EPLB is False
+(APIServer pid=9960) INFO 06-08 14:53:48 [ascend_config.py:426] The number of redundant experts is 0
+(APIServer pid=9960) INFO 06-08 14:53:48 [platform.py:297] Compilation disabled, using eager mode by default
+(APIServer pid=9960) INFO 06-08 14:53:48 [platform.py:502] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+(APIServer pid=9960) INFO 06-08 14:53:48 [compilation.py:289] Enabled custom fusions: norm_quant, act_quant
+INFO 06-08 14:54:04 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:54:04 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:54:04 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:54:04 [__init__.py:239] Platform plugin ascend is activated
+(EngineCore pid=10163) INFO 06-08 14:54:13 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+(EngineCore pid=10163) INFO 06-08 14:54:13 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(EngineCore pid=10163) INFO 06-08 14:54:13 [core.py:103] Initializing a V1 LLM engine (v0.18.0) with config: model='/models/Qwen3.5-27B-w8a8-mtp', speculative_config=None, tokenizer='/models/Qwen3.5-27B-w8a8-mtp', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=True, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=8, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=True, quantization=ascend, enforce_eager=True, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=npu, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen3.5-27b-w8a8-mtp, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.NONE: 0>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'vllm_ascend.compilation.compiler_interface.AscendCompiler', 'custom_ops': ['all'], 'splitting_ops': [], 'compile_mm_encoder': False, 'compile_sizes': [], 'compile_ranges_endpoints': [32768], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.NONE: 0>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': True, 'fuse_act_quant': True, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False}, 'max_cudagraph_capture_size': 0, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': True, 'static_all_moe_layers': []}
+(EngineCore pid=10163) WARNING 06-08 14:54:13 [network_utils.py:36] The environment variable HOST_IP is deprecated and ignored, as it is often used by Docker and other software to interact with the container's network stack. Please use VLLM_HOST_IP instead to set the IP address for vLLM processes to communicate with each other.
+(EngineCore pid=10163) INFO 06-08 14:54:13 [multiproc_executor.py:134] DP group leader: node_rank=0, node_rank_within_dp=0, master_addr=127.0.0.1, mq_connect_ip=100.102.249.22 (local), world_size=8, local_world_size=8
+INFO 06-08 14:54:20 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:54:20 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:54:20 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:54:20 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:54:29 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:54:29 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:54:33 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:54:33 [ascend_config.py:426] The number of redundant experts is 0
+INFO 06-08 14:54:35 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:54:35 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:54:35 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:54:35 [__init__.py:239] Platform plugin ascend is activated
+(Worker pid=10230) INFO 06-08 14:54:35 [parallel_state.py:1395] world_size=8 rank=0 local_rank=0 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:54:44 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:54:44 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:54:48 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:54:48 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10297) INFO 06-08 14:54:50 [parallel_state.py:1395] world_size=8 rank=1 local_rank=1 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:54:51 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:54:51 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:54:51 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:54:51 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:54:58 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:54:58 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:55:02 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:55:02 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10399) INFO 06-08 14:55:05 [parallel_state.py:1395] world_size=8 rank=2 local_rank=2 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:55:05 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:55:05 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:55:05 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:55:05 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:55:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:55:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:55:18 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:55:18 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10503) INFO 06-08 14:55:20 [parallel_state.py:1395] world_size=8 rank=3 local_rank=3 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:55:22 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:55:22 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:55:22 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:55:22 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:55:31 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:55:31 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:55:36 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:55:36 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10607) INFO 06-08 14:55:38 [parallel_state.py:1395] world_size=8 rank=4 local_rank=4 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:55:38 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:55:38 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:55:38 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:55:38 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:55:47 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:55:47 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:55:51 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:55:51 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10769) INFO 06-08 14:55:53 [parallel_state.py:1395] world_size=8 rank=5 local_rank=5 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:55:54 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:55:54 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:55:54 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:55:54 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:56:02 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:56:02 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:56:06 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:56:06 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10882) INFO 06-08 14:56:09 [parallel_state.py:1395] world_size=8 rank=6 local_rank=6 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+INFO 06-08 14:56:09 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:56:09 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:56:09 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:56:09 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:56:18 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 14:56:18 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+INFO 06-08 14:56:22 [ascend_config.py:425] Dynamic EPLB is False
+INFO 06-08 14:56:22 [ascend_config.py:426] The number of redundant experts is 0
+(Worker pid=10992) INFO 06-08 14:56:24 [parallel_state.py:1395] world_size=8 rank=7 local_rank=7 distributed_init_method=tcp://127.0.0.1:34469 backend=hccl
+[Gloo] Rank 2 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 1 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 3 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 0 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 4 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 5 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 7 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 6 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 5 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 1 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 2 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 0 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 3 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 4 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 6 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 7 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(Worker pid=10769) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 5 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 5, EP rank N/A, EPLB rank N/A
+(Worker pid=10399) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 2 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 2, EP rank N/A, EPLB rank N/A
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(Worker pid=10607) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 4 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 4, EP rank N/A, EPLB rank N/A
+(Worker pid=10992) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 7 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 7, EP rank N/A, EPLB rank N/A
+(Worker pid=10503) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 3 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 3, EP rank N/A, EPLB rank N/A
+(Worker pid=10297) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 1 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 1, EP rank N/A, EPLB rank N/A
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+[Gloo] Rank 0 is connected to 0 peer ranks. Expected number of connected peer ranks is : 0
+(Worker pid=10882) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 6 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 6, EP rank N/A, EPLB rank N/A
+(Worker pid=10230) INFO 06-08 14:56:27 [parallel_state.py:1717] rank 0 in world size 8 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+[Gloo] Rank 0 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 1 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 2 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 3 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 5 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 6 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 4 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+[Gloo] Rank 7 is connected to 7 peer ranks. Expected number of connected peer ranks is : 7
+(Worker pid=10399) INFO 06-08 14:56:30 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=2 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10399) INFO 06-08 14:56:30 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10399) INFO 06-08 14:56:30 [cpu_binding.py:372] NPU2: main=[98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117]  acl=[118]  release=[[119]]
+(Worker pid=10399) INFO 06-08 14:56:30 [cpu_binding.py:394] [migrate] NPU:2 -> NUMA [4]
+(Worker pid=10882) INFO 06-08 14:56:30 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=6 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10882) INFO 06-08 14:56:30 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10882) INFO 06-08 14:56:30 [cpu_binding.py:372] NPU6: main=[50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69]  acl=[70]  release=[[71]]
+(Worker pid=10882) INFO 06-08 14:56:30 [cpu_binding.py:394] [migrate] NPU:6 -> NUMA [2]
+(Worker pid=10769) INFO 06-08 14:56:30 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=5 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10769) INFO 06-08 14:56:30 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10769) INFO 06-08 14:56:30 [cpu_binding.py:372] NPU5: main=[26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45]  acl=[46]  release=[[47]]
+(Worker pid=10769) INFO 06-08 14:56:30 [cpu_binding.py:394] [migrate] NPU:5 -> NUMA [1]
+(Worker pid=10503) INFO 06-08 14:56:30 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=3 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10503) INFO 06-08 14:56:30 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10503) INFO 06-08 14:56:30 [cpu_binding.py:372] NPU3: main=[122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141]  acl=[142]  release=[[143]]
+(Worker pid=10503) INFO 06-08 14:56:30 [cpu_binding.py:394] [migrate] NPU:3 -> NUMA [5]
+(Worker pid=10297) INFO 06-08 14:56:31 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=1 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10297) INFO 06-08 14:56:31 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10297) INFO 06-08 14:56:31 [cpu_binding.py:372] NPU1: main=[170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189]  acl=[190]  release=[[191]]
+(Worker pid=10992) INFO 06-08 14:56:31 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=7 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10992) INFO 06-08 14:56:31 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10992) INFO 06-08 14:56:31 [cpu_binding.py:372] NPU7: main=[74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93]  acl=[94]  release=[[95]]
+(Worker pid=10607) INFO 06-08 14:56:31 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=4 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10607) INFO 06-08 14:56:31 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10607) INFO 06-08 14:56:31 [cpu_binding.py:372] NPU4: main=[2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21]  acl=[22]  release=[[23]]
+(Worker pid=10230) INFO 06-08 14:56:31 [cpu_binding.py:320] [cpu_bind_mode] mode=topo_affinity rank=0 visible_npus=[0, 1, 2, 3, 4, 5, 6, 7]
+(Worker pid=10230) INFO 06-08 14:56:31 [cpu_binding.py:367] The CPU allocation plan is as follows:
+(Worker pid=10230) INFO 06-08 14:56:31 [cpu_binding.py:372] NPU0: main=[146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165]  acl=[166]  release=[[167]]
+(Worker pid=10297) INFO 06-08 14:56:31 [cpu_binding.py:394] [migrate] NPU:1 -> NUMA [7]
+(Worker pid=10992) INFO 06-08 14:56:31 [cpu_binding.py:394] [migrate] NPU:7 -> NUMA [3]
+(Worker pid=10607) INFO 06-08 14:56:31 [cpu_binding.py:394] [migrate] NPU:4 -> NUMA [0]
+(Worker pid=10230) INFO 06-08 14:56:31 [cpu_binding.py:394] [migrate] NPU:0 -> NUMA [6]
+(Worker pid=10882) INFO 06-08 14:56:35 [cpu_binding.py:488] NPU6(PCI 0000:41:00.0): sq_send_trigger_irq IRQ_ID=2106 -> CPU48, cq_update_irq IRQ_ID=2107 -> CPU49
+(Worker pid=10992) INFO 06-08 14:56:35 [cpu_binding.py:488] NPU7(PCI 0000:42:00.0): sq_send_trigger_irq IRQ_ID=2362 -> CPU72, cq_update_irq IRQ_ID=2363 -> CPU73
+(Worker pid=10607) INFO 06-08 14:56:35 [cpu_binding.py:488] NPU4(PCI 0000:01:00.0): sq_send_trigger_irq IRQ_ID=1594 -> CPU0, cq_update_irq IRQ_ID=1595 -> CPU1
+(Worker pid=10769) INFO 06-08 14:56:35 [cpu_binding.py:488] NPU5(PCI 0000:02:00.0): sq_send_trigger_irq IRQ_ID=1850 -> CPU24, cq_update_irq IRQ_ID=1851 -> CPU25
+(Worker pid=10230) INFO 06-08 14:56:36 [cpu_binding.py:488] NPU0(PCI 0000:c1:00.0): sq_send_trigger_irq IRQ_ID=3131 -> CPU144, cq_update_irq IRQ_ID=3132 -> CPU145
+(Worker pid=10399) INFO 06-08 14:56:36 [cpu_binding.py:488] NPU2(PCI 0000:81:00.0): sq_send_trigger_irq IRQ_ID=2619 -> CPU96, cq_update_irq IRQ_ID=2620 -> CPU97
+(Worker pid=10503) INFO 06-08 14:56:37 [cpu_binding.py:488] NPU3(PCI 0000:82:00.0): sq_send_trigger_irq IRQ_ID=2875 -> CPU120, cq_update_irq IRQ_ID=2876 -> CPU121
+(Worker pid=10297) INFO 06-08 14:56:39 [cpu_binding.py:488] NPU1(PCI 0000:c2:00.0): sq_send_trigger_irq IRQ_ID=3387 -> CPU168, cq_update_irq IRQ_ID=3388 -> CPU169
+(Worker_TP6 pid=10882) INFO 06-08 14:56:40 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP7 pid=10992) INFO 06-08 14:56:40 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP6 pid=10882) INFO 06-08 14:56:41 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP7 pid=10992) INFO 06-08 14:56:41 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP6 pid=10882) INFO 06-08 14:56:41 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP6 pid=10882) INFO 06-08 14:56:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP7 pid=10992) INFO 06-08 14:56:41 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP7 pid=10992) INFO 06-08 14:56:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP6 pid=10882) INFO 06-08 14:56:41 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP6 pid=10882) INFO 06-08 14:56:41 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP7 pid=10992) INFO 06-08 14:56:41 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP7 pid=10992) INFO 06-08 14:56:41 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP4 pid=10607) INFO 06-08 14:56:41 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP5 pid=10769) INFO 06-08 14:56:41 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP0 pid=10230) INFO 06-08 14:56:41 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP3 pid=10503) INFO 06-08 14:56:42 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:   0% Completed | 0/9 [00:00<?, ?it/s]
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP2 pid=10399) INFO 06-08 14:56:42 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP3 pid=10503) INFO 06-08 14:56:42 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP3 pid=10503) INFO 06-08 14:56:42 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP3 pid=10503) INFO 06-08 14:56:42 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP3 pid=10503) INFO 06-08 14:56:43 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP3 pid=10503) INFO 06-08 14:56:43 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP1 pid=10297) INFO 06-08 14:56:44 [model_runner_v1.py:2565] Starting to load model /models/Qwen3.5-27B-w8a8-mtp...
+(Worker_TP1 pid=10297) INFO 06-08 14:56:45 [modelslim_config.py:430] Applied hf_to_vllm_mapper to quant_description keys
+(Worker_TP1 pid=10297) INFO 06-08 14:56:45 [interface.py:275] Using default backend AttentionBackendEnum.TORCH_SDPA for vit attention
+(Worker_TP1 pid=10297) INFO 06-08 14:56:45 [mm_encoder_attention.py:230] Using AttentionBackendEnum.TORCH_SDPA for MMEncoderAttention.
+(Worker_TP1 pid=10297) INFO 06-08 14:56:45 [qwen3_next.py:198] Using Triton/FLA GDN prefill kernel
+(Worker_TP1 pid=10297) INFO 06-08 14:56:45 [modelslim_config.py:341] Using the vLLM Ascend modelslim Quantization now!
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  11% Completed | 1/9 [00:06<00:49,  6.22s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  22% Completed | 2/9 [00:12<00:45,  6.49s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  33% Completed | 3/9 [00:19<00:40,  6.68s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  44% Completed | 4/9 [00:26<00:34,  6.81s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  56% Completed | 5/9 [00:33<00:27,  6.92s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  67% Completed | 6/9 [00:41<00:21,  7.06s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  78% Completed | 7/9 [00:48<00:14,  7.06s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards:  89% Completed | 8/9 [00:52<00:06,  6.19s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:54<00:00,  4.94s/it]
+(Worker_TP0 pid=10230) Loading safetensors checkpoint shards: 100% Completed | 9/9 [00:54<00:00,  6.09s/it]
+(Worker_TP0 pid=10230) 
+(Worker_TP0 pid=10230) INFO 06-08 14:57:37 [default_loader.py:384] Loading weights took 54.87 seconds
+INFO 06-08 14:57:46 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:46 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:46 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:46 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:46 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:46 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:46 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:46 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:46 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:46 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:46 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:46 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:47 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:47 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:47 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:47 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 14:57:47 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 14:57:47 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 14:57:47 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 14:57:47 [__init__.py:239] Platform plugin ascend is activated
+(Worker_TP1 pid=10297) INFO 06-08 14:57:57 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP0 pid=10230) INFO 06-08 14:57:58 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP7 pid=10992) INFO 06-08 14:57:59 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP2 pid=10399) INFO 06-08 14:58:00 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP3 pid=10503) INFO 06-08 14:58:01 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP5 pid=10769) INFO 06-08 14:58:01 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP4 pid=10607) INFO 06-08 14:58:01 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP6 pid=10882) INFO 06-08 14:58:01 [model_runner_v1.py:2592] Loading model weights took 4.3428 GB
+(Worker_TP1 pid=10297) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP3 pid=10503) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP2 pid=10399) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP6 pid=10882) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP7 pid=10992) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP5 pid=10769) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP0 pid=10230) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP4 pid=10607) INFO 06-08 14:58:15 [gpu_model_runner.py:5505] Encoder cache will be initialized with a budget of 32768 tokens, and profiled with 2 image items of the maximum feature size.
+(Worker_TP0 pid=10230) INFO 06-08 14:58:55 [worker.py:357] Available KV cache memory: 46.88 GiB
+(EngineCore pid=10163) INFO 06-08 14:58:55 [kv_cache_utils.py:1316] GPU KV cache size: 760,320 tokens
+(EngineCore pid=10163) INFO 06-08 14:58:55 [kv_cache_utils.py:1321] Maximum concurrency for 4,096 tokens per request: 440.11x
+(EngineCore pid=10163) INFO 06-08 14:58:57 [core.py:281] init engine (profile, create kv cache, warmup model) took 55.12 seconds
+(EngineCore pid=10163) INFO 06-08 14:59:04 [vllm.py:754] Asynchronous scheduling is enabled.
+(EngineCore pid=10163) WARNING 06-08 14:59:04 [vllm.py:788] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=10163) WARNING 06-08 14:59:04 [vllm.py:799] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=10163) INFO 06-08 14:59:04 [vllm.py:964] Cudagraph is disabled under eager mode
+(EngineCore pid=10163) INFO 06-08 14:59:04 [ascend_config.py:425] Dynamic EPLB is False
+(EngineCore pid=10163) INFO 06-08 14:59:04 [ascend_config.py:426] The number of redundant experts is 0
+(EngineCore pid=10163) INFO 06-08 14:59:04 [platform.py:297] Compilation disabled, using eager mode by default
+(EngineCore pid=10163) INFO 06-08 14:59:04 [platform.py:502] Set PYTORCH_NPU_ALLOC_CONF=expandable_segments:True
+(EngineCore pid=10163) INFO 06-08 14:59:04 [compilation.py:289] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=9960) INFO 06-08 14:59:04 [api_server.py:576] Supported tasks: ['generate']
+(APIServer pid=9960) WARNING 06-08 14:59:04 [model.py:1376] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=9960) INFO 06-08 14:59:06 [hf.py:320] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=9960) INFO 06-08 14:59:12 [base.py:216] Multi-modal warmup completed in 6.452s
+(APIServer pid=9960) INFO 06-08 14:59:12 [api_server.py:580] Starting vLLM server on http://0.0.0.0:19000
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:37] Available routes are:
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=9960) INFO 06-08 14:59:12 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=9960) INFO:     Started server process [9960]
+(APIServer pid=9960) INFO:     Waiting for application startup.
+(APIServer pid=9960) INFO:     Application startup complete.
+(APIServer pid=9960) INFO 06-08 15:00:23 [loggers.py:259] Engine 000: Avg prompt throughput: 65.9 tokens/s, Avg generation throughput: 0.5 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:00:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:00:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 16.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:00:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:33 [loggers.py:259] Engine 000: Avg prompt throughput: 159.8 tokens/s, Avg generation throughput: 10.9 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:01:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:33 [loggers.py:259] Engine 000: Avg prompt throughput: 244.5 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:02:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:23 [loggers.py:259] Engine 000: Avg prompt throughput: 411.3 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:03:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:13 [loggers.py:259] Engine 000: Avg prompt throughput: 192.6 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:04:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:13 [loggers.py:259] Engine 000: Avg prompt throughput: 144.6 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:05:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:03 [loggers.py:259] Engine 000: Avg prompt throughput: 242.1 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:06:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:03 [loggers.py:259] Engine 000: Avg prompt throughput: 378.4 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:07:53 [loggers.py:259] Engine 000: Avg prompt throughput: 65.8 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:43 [loggers.py:259] Engine 000: Avg prompt throughput: 149.3 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:08:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:43 [loggers.py:259] Engine 000: Avg prompt throughput: 223.1 tokens/s, Avg generation throughput: 17.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:09:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:33 [loggers.py:259] Engine 000: Avg prompt throughput: 293.8 tokens/s, Avg generation throughput: 17.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:10:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 17.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:33 [loggers.py:259] Engine 000: Avg prompt throughput: 86.7 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:11:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:23 [loggers.py:259] Engine 000: Avg prompt throughput: 134.2 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:12:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:13 [loggers.py:259] Engine 000: Avg prompt throughput: 262.6 tokens/s, Avg generation throughput: 16.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:13:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:13 [loggers.py:259] Engine 000: Avg prompt throughput: 326.2 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:14:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:03 [loggers.py:259] Engine 000: Avg prompt throughput: 180.1 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:15:53 [loggers.py:259] Engine 000: Avg prompt throughput: 39.6 tokens/s, Avg generation throughput: 18.3 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:03 [loggers.py:259] Engine 000: Avg prompt throughput: 141.4 tokens/s, Avg generation throughput: 18.5 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:16:53 [loggers.py:259] Engine 000: Avg prompt throughput: 226.8 tokens/s, Avg generation throughput: 16.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:43 [loggers.py:259] Engine 000: Avg prompt throughput: 282.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:17:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:43 [loggers.py:259] Engine 000: Avg prompt throughput: 85.7 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:18:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:33 [loggers.py:259] Engine 000: Avg prompt throughput: 155.2 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:19:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:23 [loggers.py:259] Engine 000: Avg prompt throughput: 245.6 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:20:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:23 [loggers.py:259] Engine 000: Avg prompt throughput: 493.7 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:21:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:13 [loggers.py:259] Engine 000: Avg prompt throughput: 103.5 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:22:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:03 [loggers.py:259] Engine 000: Avg prompt throughput: 114.7 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:23:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:03 [loggers.py:259] Engine 000: Avg prompt throughput: 165.5 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:24:53 [loggers.py:259] Engine 000: Avg prompt throughput: 468.9 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:43 [loggers.py:259] Engine 000: Avg prompt throughput: 100.5 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:25:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:43 [loggers.py:259] Engine 000: Avg prompt throughput: 185.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:26:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:33 [loggers.py:259] Engine 000: Avg prompt throughput: 218.4 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:27:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:23 [loggers.py:259] Engine 000: Avg prompt throughput: 370.9 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:28:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:23 [loggers.py:259] Engine 000: Avg prompt throughput: 113.8 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:29:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:13 [loggers.py:259] Engine 000: Avg prompt throughput: 173.3 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:30:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 17.8 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:13 [loggers.py:259] Engine 000: Avg prompt throughput: 197.2 tokens/s, Avg generation throughput: 18.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:31:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:03 [loggers.py:259] Engine 000: Avg prompt throughput: 362.4 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:32:53 [loggers.py:259] Engine 000: Avg prompt throughput: 111.9 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:43 [loggers.py:259] Engine 000: Avg prompt throughput: 30.4 tokens/s, Avg generation throughput: 19.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:33:53 [loggers.py:259] Engine 000: Avg prompt throughput: 48.9 tokens/s, Avg generation throughput: 18.5 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:43 [loggers.py:259] Engine 000: Avg prompt throughput: 170.0 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:34:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:33 [loggers.py:259] Engine 000: Avg prompt throughput: 435.0 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:35:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.1%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:33 [loggers.py:259] Engine 000: Avg prompt throughput: 161.9 tokens/s, Avg generation throughput: 17.8 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:36:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:23 [loggers.py:259] Engine 000: Avg prompt throughput: 120.7 tokens/s, Avg generation throughput: 17.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:37:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 20.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:13 [loggers.py:259] Engine 000: Avg prompt throughput: 193.2 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:38:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 18.4 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:03 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:13 [loggers.py:259] Engine 000: Avg prompt throughput: 315.8 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 17.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:39:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:03 [loggers.py:259] Engine 000: Avg prompt throughput: 120.8 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:13 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:23 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:33 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.2 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:43 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:40:53 [loggers.py:259] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 19.6 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(APIServer pid=9960) INFO 06-08 15:41:03 [loggers.py:259] Engine 000: Avg prompt throughput: 190.8 tokens/s, Avg generation throughput: 18.0 tokens/s, Running: 4 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.4%, Prefix cache hit rate: 0.0%
+(Worker_TP0 pid=10230) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP0 pid=10230) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP1 pid=10297) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP1 pid=10297) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP5 pid=10769) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP5 pid=10769) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP6 pid=10882) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP6 pid=10882) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(APIServer pid=9960) INFO:     Shutting down
+(Worker_TP7 pid=10992) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP7 pid=10992) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP2 pid=10399) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP2 pid=10399) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP3 pid=10503) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP3 pid=10503) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(Worker_TP4 pid=10607) [WARNING] Please DO NOT tune args ['num_warps', 'num_stages']!
+(Worker_TP4 pid=10607) WARNING 06-08 15:41:11 [multiproc_executor.py:866] WorkerProc was terminated
+(APIServer pid=9960) INFO:     Waiting for application shutdown.
+(APIServer pid=9960) INFO:     Application shutdown complete.
+(APIServer pid=9960) INFO:     Finished server process [9960]
+(Worker_TP7 pid=10992) Exception in thread Thread-2:
+(Worker_TP7 pid=10992) Traceback (most recent call last):
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP7 pid=10992)     self.run()
+(Worker_TP7 pid=10992)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP7 pid=10992)     item = self.task_q.get()
+(Worker_TP7 pid=10992)            ^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "<string>", line 2, in get
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP7 pid=10992)     kind, result = conn.recv()
+(Worker_TP7 pid=10992)                    ^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP7 pid=10992)     buf = self._recv_bytes()
+(Worker_TP7 pid=10992)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP7 pid=10992)     buf = self._recv(4)
+(Worker_TP7 pid=10992)           ^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP7 pid=10992)     raise EOFError
+(Worker_TP7 pid=10992) EOFError
+(Worker_TP7 pid=10992) Traceback (most recent call last):
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP7 pid=10992)     self.run()
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP7 pid=10992)     self._target(*self._args, **self._kwargs)
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP7 pid=10992)     raise e
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP7 pid=10992)     worker.worker_busy_loop()
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP7 pid=10992)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP7 pid=10992)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP7 pid=10992)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP7 pid=10992)     return next(self.gen)
+(Worker_TP7 pid=10992)            ^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP7 pid=10992)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP7 pid=10992)     sched_yield()
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP7 pid=10992)     time.sleep(0)
+(Worker_TP7 pid=10992)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP7 pid=10992)     raise SystemExit()
+(Worker_TP7 pid=10992) SystemExit
+(Worker_TP7 pid=10992) 
+(Worker_TP7 pid=10992) During handling of the above exception, another exception occurred:
+(Worker_TP7 pid=10992) 
+(Worker_TP7 pid=10992) Traceback (most recent call last):
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP7 pid=10992)     finalizer()
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP7 pid=10992)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP7 pid=10992)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP7 pid=10992)     return func(cls, *args, **kwargs)
+(Worker_TP7 pid=10992)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP7 pid=10992)     cls.cann_kb_mgr.finalize()
+(Worker_TP7 pid=10992)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP7 pid=10992)     self.__static_mgr.close()
+(Worker_TP7 pid=10992)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP7 pid=10992)     self.lock_for_creating_lock.release()
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP7 pid=10992)     return self._callmethod('release')
+(Worker_TP7 pid=10992)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP7 pid=10992)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP7 pid=10992)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP7 pid=10992)     self._send(header + buf)
+(Worker_TP7 pid=10992)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP7 pid=10992)     n = write(self._handle, buf)
+(Worker_TP7 pid=10992)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP7 pid=10992) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP6 pid=10882) Exception in thread Thread-2:
+(Worker_TP6 pid=10882) Traceback (most recent call last):
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP6 pid=10882)     self.run()
+(Worker_TP6 pid=10882)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP6 pid=10882)     item = self.task_q.get()
+(Worker_TP6 pid=10882)            ^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "<string>", line 2, in get
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP6 pid=10882)     kind, result = conn.recv()
+(Worker_TP6 pid=10882)                    ^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP6 pid=10882)     buf = self._recv_bytes()
+(Worker_TP6 pid=10882)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP6 pid=10882)     buf = self._recv(4)
+(Worker_TP6 pid=10882)           ^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP6 pid=10882)     raise EOFError
+(Worker_TP6 pid=10882) EOFError
+(Worker_TP6 pid=10882) Traceback (most recent call last):
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP6 pid=10882)     self.run()
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP6 pid=10882)     self._target(*self._args, **self._kwargs)
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP6 pid=10882)     raise e
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP6 pid=10882)     worker.worker_busy_loop()
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP6 pid=10882)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP6 pid=10882)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP6 pid=10882)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP6 pid=10882)     return next(self.gen)
+(Worker_TP6 pid=10882)            ^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP6 pid=10882)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP6 pid=10882)     sched_yield()
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP6 pid=10882)     time.sleep(0)
+(Worker_TP6 pid=10882)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP6 pid=10882)     raise SystemExit()
+(Worker_TP6 pid=10882) SystemExit
+(Worker_TP6 pid=10882) 
+(Worker_TP6 pid=10882) During handling of the above exception, another exception occurred:
+(Worker_TP6 pid=10882) 
+(Worker_TP6 pid=10882) Traceback (most recent call last):
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP6 pid=10882)     finalizer()
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP6 pid=10882)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP6 pid=10882)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP6 pid=10882)     return func(cls, *args, **kwargs)
+(Worker_TP6 pid=10882)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP6 pid=10882)     cls.cann_kb_mgr.finalize()
+(Worker_TP6 pid=10882)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP6 pid=10882)     self.__static_mgr.close()
+(Worker_TP6 pid=10882)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP6 pid=10882)     self.lock_for_creating_lock.release()
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP6 pid=10882)     return self._callmethod('release')
+(Worker_TP6 pid=10882)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP6 pid=10882)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP6 pid=10882)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP6 pid=10882)     self._send(header + buf)
+(Worker_TP6 pid=10882)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP6 pid=10882)     n = write(self._handle, buf)
+(Worker_TP6 pid=10882)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP6 pid=10882) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP3 pid=10503) Exception in thread Thread-2:
+(Worker_TP3 pid=10503) Traceback (most recent call last):
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP3 pid=10503)     self.run()
+(Worker_TP3 pid=10503)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP3 pid=10503)     item = self.task_q.get()
+(Worker_TP3 pid=10503)            ^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "<string>", line 2, in get
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP3 pid=10503)     kind, result = conn.recv()
+(Worker_TP3 pid=10503)                    ^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP3 pid=10503)     buf = self._recv_bytes()
+(Worker_TP3 pid=10503)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP3 pid=10503)     buf = self._recv(4)
+(Worker_TP3 pid=10503)           ^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP3 pid=10503)     raise EOFError
+(Worker_TP3 pid=10503) EOFError
+(Worker_TP3 pid=10503) Traceback (most recent call last):
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP3 pid=10503)     self.run()
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP3 pid=10503)     self._target(*self._args, **self._kwargs)
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP3 pid=10503)     raise e
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP3 pid=10503)     worker.worker_busy_loop()
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP3 pid=10503)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP3 pid=10503)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP3 pid=10503)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP3 pid=10503)     return next(self.gen)
+(Worker_TP3 pid=10503)            ^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP3 pid=10503)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP3 pid=10503)     sched_yield()
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP3 pid=10503)     time.sleep(0)
+(Worker_TP3 pid=10503)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP3 pid=10503)     raise SystemExit()
+(Worker_TP3 pid=10503) SystemExit
+(Worker_TP3 pid=10503) 
+(Worker_TP3 pid=10503) During handling of the above exception, another exception occurred:
+(Worker_TP3 pid=10503) 
+(Worker_TP3 pid=10503) Traceback (most recent call last):
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP3 pid=10503)     finalizer()
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP3 pid=10503)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP3 pid=10503)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP3 pid=10503)     return func(cls, *args, **kwargs)
+(Worker_TP3 pid=10503)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP3 pid=10503)     cls.cann_kb_mgr.finalize()
+(Worker_TP3 pid=10503)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP3 pid=10503)     self.__static_mgr.close()
+(Worker_TP3 pid=10503)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP3 pid=10503)     self.lock_for_creating_lock.release()
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP3 pid=10503)     return self._callmethod('release')
+(Worker_TP3 pid=10503)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP3 pid=10503)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP3 pid=10503)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP3 pid=10503)     self._send(header + buf)
+(Worker_TP3 pid=10503)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP3 pid=10503)     n = write(self._handle, buf)
+(Worker_TP3 pid=10503)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP3 pid=10503) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP4 pid=10607) Exception in thread Thread-2:
+(Worker_TP4 pid=10607) Traceback (most recent call last):
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP4 pid=10607)     self.run()
+(Worker_TP4 pid=10607)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP4 pid=10607)     item = self.task_q.get()
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "<string>", line 2, in get
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP4 pid=10607)     kind, result = conn.recv()
+(Worker_TP4 pid=10607)                    ^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP4 pid=10607)     buf = self._recv_bytes()
+(Worker_TP4 pid=10607)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP4 pid=10607)     buf = self._recv(4)
+(Worker_TP4 pid=10607)           ^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP4 pid=10607)     raise EOFError
+(Worker_TP4 pid=10607) EOFError
+(Worker_TP4 pid=10607) Traceback (most recent call last):
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP4 pid=10607)     self.run()
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP4 pid=10607)     self._target(*self._args, **self._kwargs)
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP4 pid=10607)     raise e
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP4 pid=10607)     worker.worker_busy_loop()
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 927, in worker_busy_loop
+(Worker_TP4 pid=10607)     output = func(*args, **kwargs)
+(Worker_TP4 pid=10607)              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/v1/worker/worker_base.py", line 332, in execute_model
+(Worker_TP4 pid=10607)     return self.worker.execute_model(scheduler_output)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/worker.py", line 395, in execute_model
+(Worker_TP4 pid=10607)     output = self.model_runner.execute_model(scheduler_output, intermediate_tensors)
+(Worker_TP4 pid=10607)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+(Worker_TP4 pid=10607)     return func(*args, **kwargs)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py", line 1392, in execute_model
+(Worker_TP4 pid=10607)     hidden_states = self._model_forward(
+(Worker_TP4 pid=10607)                     ^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm-ascend/vllm_ascend/worker/model_runner_v1.py", line 1821, in _model_forward
+(Worker_TP4 pid=10607)     hidden_states = self.model(
+(Worker_TP4 pid=10607)                     ^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+(Worker_TP4 pid=10607)     return self._call_impl(*args, **kwargs)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+(Worker_TP4 pid=10607)     return forward_call(*args, **kwargs)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_5.py", line 765, in forward
+(Worker_TP4 pid=10607)     hidden_states = self.language_model.model(
+(Worker_TP4 pid=10607)                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/compilation/decorators.py", line 439, in __call__
+(Worker_TP4 pid=10607)     return self.forward(*args, **kwargs)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/model_executor/models/qwen3_next.py", line 1385, in forward
+(Worker_TP4 pid=10607)     hidden_states, residual = layer(
+(Worker_TP4 pid=10607)                               ^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1771, in _wrapped_call_impl
+(Worker_TP4 pid=10607)     def _wrapped_call_impl(self, *args, **kwargs):
+(Worker_TP4 pid=10607)     
+(Worker_TP4 pid=10607)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP4 pid=10607)     raise SystemExit()
+(Worker_TP4 pid=10607) SystemExit
+(Worker_TP4 pid=10607) 
+(Worker_TP4 pid=10607) During handling of the above exception, another exception occurred:
+(Worker_TP4 pid=10607) 
+(Worker_TP4 pid=10607) Traceback (most recent call last):
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP4 pid=10607)     finalizer()
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP4 pid=10607)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP4 pid=10607)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP4 pid=10607)     return func(cls, *args, **kwargs)
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP4 pid=10607)     cls.cann_kb_mgr.finalize()
+(Worker_TP4 pid=10607)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP4 pid=10607)     self.__static_mgr.close()
+(Worker_TP4 pid=10607)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP4 pid=10607)     self.lock_for_creating_lock.release()
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP4 pid=10607)     return self._callmethod('release')
+(Worker_TP4 pid=10607)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP4 pid=10607)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP4 pid=10607)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP4 pid=10607)     self._send(header + buf)
+(Worker_TP4 pid=10607)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP4 pid=10607)     n = write(self._handle, buf)
+(Worker_TP4 pid=10607)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP4 pid=10607) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP1 pid=10297) Exception in thread Thread-2:
+(Worker_TP1 pid=10297) Traceback (most recent call last):
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP2 pid=10399) Exception in thread Thread-2:
+(Worker_TP2 pid=10399) Traceback (most recent call last):
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP1 pid=10297)     self.run()
+(Worker_TP1 pid=10297)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP2 pid=10399)     self.run()
+(Worker_TP0 pid=10230) Exception in thread Thread-2:
+(Worker_TP0 pid=10230) Traceback (most recent call last):
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP2 pid=10399)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP1 pid=10297)     item = self.task_q.get()
+(Worker_TP1 pid=10297)            ^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "<string>", line 2, in get
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP2 pid=10399)     item = self.task_q.get()
+(Worker_TP1 pid=10297)     kind, result = conn.recv()
+(Worker_TP0 pid=10230)     self.run()
+(Worker_TP2 pid=10399)            ^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)                    ^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP2 pid=10399)   File "<string>", line 2, in get
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP1 pid=10297)     buf = self._recv_bytes()
+(Worker_TP0 pid=10230)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP1 pid=10297)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP2 pid=10399)     kind, result = conn.recv()
+(Worker_TP1 pid=10297)     buf = self._recv(4)
+(Worker_TP0 pid=10230)     item = self.task_q.get()
+(Worker_TP2 pid=10399)                    ^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP1 pid=10297)           ^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP0 pid=10230)            ^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "<string>", line 2, in get
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP2 pid=10399)     buf = self._recv_bytes()
+(Worker_TP1 pid=10297)     raise EOFError
+(Worker_TP1 pid=10297) EOFError
+(Worker_TP2 pid=10399)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP0 pid=10230)     kind, result = conn.recv()
+(Worker_TP0 pid=10230)                    ^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP2 pid=10399)     buf = self._recv(4)
+(Worker_TP2 pid=10399)           ^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP0 pid=10230)     buf = self._recv_bytes()
+(Worker_TP0 pid=10230)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP2 pid=10399)     raise EOFError
+(Worker_TP0 pid=10230)     buf = self._recv(4)
+(Worker_TP0 pid=10230)           ^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP1 pid=10297) Traceback (most recent call last):
+(Worker_TP2 pid=10399) EOFError
+(Worker_TP0 pid=10230)     raise EOFError
+(Worker_TP0 pid=10230) EOFError
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP1 pid=10297)     self.run()
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP1 pid=10297)     self._target(*self._args, **self._kwargs)
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP1 pid=10297)     raise e
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP1 pid=10297)     worker.worker_busy_loop()
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP1 pid=10297)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP1 pid=10297)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP1 pid=10297)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP1 pid=10297)     return next(self.gen)
+(Worker_TP1 pid=10297)            ^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP1 pid=10297)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP1 pid=10297)     sched_yield()
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP1 pid=10297)     time.sleep(0)
+(Worker_TP1 pid=10297)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP1 pid=10297)     raise SystemExit()
+(Worker_TP1 pid=10297) SystemExit
+(Worker_TP2 pid=10399) Traceback (most recent call last):
+(Worker_TP1 pid=10297) 
+(Worker_TP1 pid=10297) During handling of the above exception, another exception occurred:
+(Worker_TP1 pid=10297) 
+(Worker_TP1 pid=10297) Traceback (most recent call last):
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP2 pid=10399)     self.run()
+(Worker_TP1 pid=10297)     finalizer()
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP2 pid=10399)     self._target(*self._args, **self._kwargs)
+(Worker_TP1 pid=10297)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP1 pid=10297)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)     raise e
+(Worker_TP1 pid=10297)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP1 pid=10297)     return func(cls, *args, **kwargs)
+(Worker_TP2 pid=10399)     worker.worker_busy_loop()
+(Worker_TP1 pid=10297)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP1 pid=10297)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP2 pid=10399)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP1 pid=10297)     cls.cann_kb_mgr.finalize()
+(Worker_TP2 pid=10399)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230) Traceback (most recent call last):
+(Worker_TP1 pid=10297)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP1 pid=10297)     self.__static_mgr.close()
+(Worker_TP2 pid=10399)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP1 pid=10297)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP1 pid=10297)     self.lock_for_creating_lock.release()
+(Worker_TP2 pid=10399)     return next(self.gen)
+(Worker_TP2 pid=10399)            ^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP1 pid=10297)     return self._callmethod('release')
+(Worker_TP2 pid=10399)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP1 pid=10297)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP2 pid=10399)     sched_yield()
+(Worker_TP1 pid=10297)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP2 pid=10399)     time.sleep(0)
+(Worker_TP1 pid=10297)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP2 pid=10399)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP2 pid=10399)     raise SystemExit()
+(Worker_TP1 pid=10297)     self._send(header + buf)
+(Worker_TP1 pid=10297)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP1 pid=10297)     n = write(self._handle, buf)
+(Worker_TP2 pid=10399) SystemExit
+(Worker_TP1 pid=10297)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=10297) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP2 pid=10399) 
+(Worker_TP2 pid=10399) During handling of the above exception, another exception occurred:
+(Worker_TP2 pid=10399) 
+(Worker_TP2 pid=10399) Traceback (most recent call last):
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP0 pid=10230)     self.run()
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP0 pid=10230)     self._target(*self._args, **self._kwargs)
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP0 pid=10230)     raise e
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP0 pid=10230)     worker.worker_busy_loop()
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP0 pid=10230)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP0 pid=10230)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP0 pid=10230)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP0 pid=10230)     return next(self.gen)
+(Worker_TP0 pid=10230)            ^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP0 pid=10230)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP0 pid=10230)     sched_yield()
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP0 pid=10230)     time.sleep(0)
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP0 pid=10230)     raise SystemExit()
+(Worker_TP0 pid=10230) SystemExit
+(Worker_TP0 pid=10230) 
+(Worker_TP0 pid=10230) During handling of the above exception, another exception occurred:
+(Worker_TP0 pid=10230) 
+(Worker_TP0 pid=10230) Traceback (most recent call last):
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP2 pid=10399)     finalizer()
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP2 pid=10399)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP2 pid=10399)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP2 pid=10399)     return func(cls, *args, **kwargs)
+(Worker_TP2 pid=10399)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP2 pid=10399)     cls.cann_kb_mgr.finalize()
+(Worker_TP2 pid=10399)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP2 pid=10399)     self.__static_mgr.close()
+(Worker_TP2 pid=10399)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP2 pid=10399)     self.lock_for_creating_lock.release()
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP2 pid=10399)     return self._callmethod('release')
+(Worker_TP2 pid=10399)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP2 pid=10399)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP2 pid=10399)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP2 pid=10399)     self._send(header + buf)
+(Worker_TP2 pid=10399)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP2 pid=10399)     n = write(self._handle, buf)
+(Worker_TP2 pid=10399)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP2 pid=10399) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP0 pid=10230)     finalizer()
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP0 pid=10230)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP0 pid=10230)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP0 pid=10230)     return func(cls, *args, **kwargs)
+(Worker_TP0 pid=10230)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP0 pid=10230)     cls.cann_kb_mgr.finalize()
+(Worker_TP0 pid=10230)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP0 pid=10230)     self.__static_mgr.close()
+(Worker_TP0 pid=10230)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP0 pid=10230)     self.lock_for_creating_lock.release()
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP0 pid=10230)     return self._callmethod('release')
+(Worker_TP0 pid=10230)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP0 pid=10230)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP0 pid=10230)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP0 pid=10230)     self._send(header + buf)
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP0 pid=10230)     n = write(self._handle, buf)
+(Worker_TP0 pid=10230)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=10230) BrokenPipeError: [Errno 32] Broken pipe
+(Worker_TP5 pid=10769) Exception in thread Thread-2:
+(Worker_TP5 pid=10769) Traceback (most recent call last):
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP5 pid=10769)     self.run()
+(Worker_TP5 pid=10769)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/utils/multiprocess_util.py", line 68, in run
+(Worker_TP5 pid=10769)     item = self.task_q.get()
+(Worker_TP5 pid=10769)            ^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "<string>", line 2, in get
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 822, in _callmethod
+(Worker_TP5 pid=10769)     kind, result = conn.recv()
+(Worker_TP5 pid=10769)                    ^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 250, in recv
+(Worker_TP5 pid=10769)     buf = self._recv_bytes()
+(Worker_TP5 pid=10769)           ^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 430, in _recv_bytes
+(Worker_TP5 pid=10769)     buf = self._recv(4)
+(Worker_TP5 pid=10769)           ^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 399, in _recv
+(Worker_TP5 pid=10769) Traceback (most recent call last):
+(Worker_TP5 pid=10769)     raise EOFError
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 314, in _bootstrap
+(Worker_TP5 pid=10769) EOFError
+(Worker_TP5 pid=10769)     self.run()
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/process.py", line 108, in run
+(Worker_TP5 pid=10769)     self._target(*self._args, **self._kwargs)
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 868, in worker_main
+(Worker_TP5 pid=10769)     raise e
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 843, in worker_main
+(Worker_TP5 pid=10769)     worker.worker_busy_loop()
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 918, in worker_busy_loop
+(Worker_TP5 pid=10769)     method, args, kwargs, output_rank = self.rpc_broadcast_mq.dequeue(
+(Worker_TP5 pid=10769)                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 755, in dequeue
+(Worker_TP5 pid=10769)     with self.acquire_read(timeout, indefinite) as buf:
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 137, in __enter__
+(Worker_TP5 pid=10769)     return next(self.gen)
+(Worker_TP5 pid=10769)            ^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 674, in acquire_read
+(Worker_TP5 pid=10769)     self._spin_condition.wait(timeout_ms=read_timeout.timeout_ms())
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/distributed/device_communicators/shm_broadcast.py", line 184, in wait
+(Worker_TP5 pid=10769)     sched_yield()
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/distributed/utils.py", line 49, in sched_yield
+(Worker_TP5 pid=10769)     time.sleep(0)
+(Worker_TP5 pid=10769)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 792, in signal_handler
+(Worker_TP5 pid=10769)     raise SystemExit()
+(Worker_TP5 pid=10769) SystemExit
+(Worker_TP5 pid=10769) 
+(Worker_TP5 pid=10769) During handling of the above exception, another exception occurred:
+(Worker_TP5 pid=10769) 
+(Worker_TP5 pid=10769) Traceback (most recent call last):
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 303, in _run_finalizers
+(Worker_TP5 pid=10769)     finalizer()
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/util.py", line 227, in __call__
+(Worker_TP5 pid=10769)     res = self._callback(*self._args, **self._kwargs)
+(Worker_TP5 pid=10769)           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 54, in wrapper
+(Worker_TP5 pid=10769)     return func(cls, *args, **kwargs)
+(Worker_TP5 pid=10769)            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/route.py", line 208, in finalize
+(Worker_TP5 pid=10769)     cls.cann_kb_mgr.finalize()
+(Worker_TP5 pid=10769)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/knowledge_bank_manager.py", line 42, in finalize
+(Worker_TP5 pid=10769)     self.__static_mgr.close()
+(Worker_TP5 pid=10769)   File "/usr/local/Ascend/cann-8.5.1/python/site-packages/tbe/common/repository_manager/cann_kb_manager/base_manager.py", line 356, in close
+(Worker_TP5 pid=10769)     self.lock_for_creating_lock.release()
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 1054, in release
+(Worker_TP5 pid=10769)     return self._callmethod('release')
+(Worker_TP5 pid=10769)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/managers.py", line 821, in _callmethod
+(Worker_TP5 pid=10769)     conn.send((self._id, methodname, args, kwds))
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 206, in send
+(Worker_TP5 pid=10769)     self._send_bytes(_ForkingPickler.dumps(obj))
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 427, in _send_bytes
+(Worker_TP5 pid=10769)     self._send(header + buf)
+(Worker_TP5 pid=10769)   File "/usr/local/python3.11.14/lib/python3.11/multiprocessing/connection.py", line 384, in _send
+(Worker_TP5 pid=10769)     n = write(self._handle, buf)
+(Worker_TP5 pid=10769)         ^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP5 pid=10769) BrokenPipeError: [Errno 32] Broken pipe
+[W608 15:41:13.115282081 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10992] 2026-06-08-15:41:13.523.754 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:7, dieId:0), serial number is 1, there is an exception of aivec error, core id is 13, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0xb50b576693, mte error info: 0x5603000149, ifu error info: 0x3529010eb3e80, ccu error info: 0x16f551f83c041b30, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:1, tslot:7, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.117973688 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10230] 2026-06-08-15:41:13.526.827 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.119313536 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10882] 2026-06-08-15:41:13.527.636 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:6, dieId:0), serial number is 1, there is an exception of aivec error, core id is 10, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0xe313d6be87, mte error info: 0x5603000149, ifu error info: 0x7a9b0bd3bb6c0, ccu error info: 0x3f48924a041bf0ab, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:0, tslot:6, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.119356086 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10769] 2026-06-08-15:41:13.527.649 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:5, dieId:0), serial number is 1, there is an exception of aivec error, core id is 39, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0xe30b48c03a, mte error info: 0x5603000149, ifu error info: 0x46426a865d900, ccu error info: 0x4b4080041045c400, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:1, tslot:4, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.120562594 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10503] 2026-06-08-15:41:13.528.848 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:3, dieId:0), serial number is 1, there is an exception of aivec error, core id is 8, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0xe3149498d9, mte error info: 0x5603000149, ifu error info: 0x7379b31331f80, ccu error info: 0x5e7721f87884007e, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:0, tslot:3, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.146782291 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10297] 2026-06-08-15:41:13.555.221 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:1, dieId:0), serial number is 1, there is an exception of aivec error, core id is 6, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0x531297c09c, mte error info: 0x5603000149, ifu error info: 0x373f0297dfec0, ccu error info: 0x79f3d134330124e6, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:0, tslot:2, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.166015527 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10992] 2026-06-08-15:41:13.574.889 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+(Worker_TP0 pid=10230) Exception in thread WorkerAsyncOutputCopy:
+[W608 15:41:13.170572432 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10230] 2026-06-08-15:41:13.579.414 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+[W608 15:41:13.172986739 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10882] 2026-06-08-15:41:13.581.757 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+[W608 15:41:13.173559028 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10769] 2026-06-08-15:41:13.582.360 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+[W608 15:41:13.174460527 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10503] 2026-06-08-15:41:13.583.310 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+[W608 15:41:13.199434305 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10297] 2026-06-08-15:41:13.608.300 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+[W608 15:41:13.224134224 compiler_depend.ts:595] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+[PID: 10399] 2026-06-08-15:41:13.632.532 Execution_Error_SDMA(EI0012): SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        Possible Cause: 1. Network connection exception occurred during the SDMA task execution. 2. The peer process exits abnormally. 3. The input or output memory address is not allocated, the actual allocated size is smaller than the input data size, or the memory is freed before the operator execution is complete.
+        Solution: 1. Check whether the network link is abnormal during the execution. 2. Check whether a process in the cluster exits before an error is reported. If yes, locate the cause of the process exit. 3. Check whether the size of the input/output memory passed to the communication operator meets the expectation, and whether the input/output memory or communicator is freed or destroyed before the operator execution is complete.
+        TraceBack (most recent call last):
+        The error from device(chipId:2, dieId:0), serial number is 1, there is an exception of aivec error, core id is 37, error code = 0x800000, dump info: pc start: 0x12c0a3399280, current: 0x12c0a33d5818, vec error info: 0x9f1890b2e6, mte error info: 0x5603000149, ifu error info: 0x3fef662f09000, ccu error info: 0x6e3384227880d02a, cube error info: 0, biu error info: 0, aic error mask: 0x6500020bd00028c, para base: 0x12c140ddf800.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:347]
+        The extend info: errcode:(0x800000, 0, 0) errorStr: The DDR address of the MTE instruction is out of range. fixp_error0 info: 0x3000149, fixp_error1 info: 0x56, fsmId:1, tslot:0, thread:0, ctxid:0, blk:4, sublk:0, subErrType:4.[FUNC:PrintCoreInfo][FILE:device_error_core_proc.cc][LINE:360]
+        Kernel task happen error, retCode=0x31, [vector core exception].[FUNC:PreCheckTaskErr][FILE:davinci_kernel_task.cc][LINE:1582]
+        SDMA memory copy task exception occurred. Remote rank: [0]. Base information: [streamID:[43], taskID[6082430], taskType[Task AIV], tag[AllReduce_group_name_3], AlgType(level 0-1-2):[ring-ring-ring].]. Task information: [cmdType:[2], tag:[446], size:[40960], blockDim:[8], rankSize:[8], aivRdmaStep:[-1], flagMem:[0x12c0a2c00000], isOpbase:[1]]. Communicator information: [].
+        rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeUsedDevices)
+[W608 15:41:13.276309569 compiler_depend.ts:577] Warning: NPU warning, error code is 507035[Error]: 
+[Error]: The vector core execution is abnormal. 
+        Rectify the fault based on the error information in the ascend log.
+EE9999: Inner Error!
+EE9999[PID: 10399] 2026-06-08-15:41:13.685.185 (EE9999):  rtDeviceSynchronizeWithTimeout execution failed, reason=vector core exception[FUNC:FuncErrorReason][FILE:error_message_manage.cc][LINE:61]
+        TraceBack (most recent call last):
+       wait for compute device to finish failed, runtime result = 507035.[FUNC:ReportCallError][FILE:log_inner.cpp][LINE:148]
+ (function npuSynchronizeDevice)
+(Worker_TP0 pid=10230) Traceback (most recent call last):
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+(Worker_TP0 pid=10230)     self.run()
+(Worker_TP0 pid=10230)   File "/usr/local/python3.11.14/lib/python3.11/threading.py", line 982, in run
+(Worker_TP0 pid=10230)     self._target(*self._args, **self._kwargs)
+(Worker_TP0 pid=10230)   File "/vllm-workspace/vllm/vllm/v1/executor/multiproc_executor.py", line 912, in async_output_busy_loop
+(APIServer pid=9960) sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+/usr/local/python3.11.14/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 9 leaked shared_memory objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

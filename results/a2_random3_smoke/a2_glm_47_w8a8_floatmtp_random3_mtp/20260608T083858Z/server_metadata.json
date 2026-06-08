@@ -1,0 +1,48 @@
+{
+  "server_run": "a2_glm_47_w8a8_floatmtp_random3_mtp",
+  "model": "glm_47_w8a8_floatmtp",
+  "dataset": "random3",
+  "base_method": "mtp",
+  "started_at_utc": "20260608T083858Z",
+  "port": 19001,
+  "env_overrides": {
+    "ASCEND_RT_VISIBLE_DEVICES": "0,1,2,3,4,5,6,7",
+    "HCCL_OP_EXPANSION_MODE": "AIV",
+    "TASK_QUEUE_ENABLE": "1",
+    "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0"
+  },
+  "server_cmd": [
+    "/usr/local/python3.11.14/bin/vllm",
+    "serve",
+    "/models/GLM-4.7-W8A8-floatmtp",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "19001",
+    "--served-model-name",
+    "glm-4.7-w8a8-floatmtp",
+    "--trust-remote-code",
+    "--distributed-executor-backend",
+    "mp",
+    "--max-model-len",
+    "4096",
+    "--max-num-batched-tokens",
+    "32768",
+    "--gpu-memory-utilization",
+    "0.9",
+    "--disable-uvicorn-access-log",
+    "--enforce-eager",
+    "--tensor-parallel-size",
+    "8",
+    "--speculative-config",
+    "{\"method\":\"mtp\",\"num_speculative_tokens\":1}"
+  ],
+  "bench_passes": [
+    {
+      "case_name": "a2_glm_47_w8a8_floatmtp_random3_mtp",
+      "method": "mtp",
+      "phase": "",
+      "result_dir": "/root/Benchmark-Experiments/results/a2_random3_smoke/a2_glm_47_w8a8_floatmtp_random3_mtp/20260608T083858Z"
+    }
+  ]
+}

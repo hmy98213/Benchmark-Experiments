@@ -1,0 +1,42 @@
+INFO 06-08 16:38:01 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 16:38:01 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 16:38:01 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 16:38:01 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 16:38:10 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 16:38:10 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xfffefbfba7a0>, trust_remote_code=False, seed=0, num_prompts=3, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=256, random_output_len=32, random_range_ratio=0.1, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='vllm', base_url=None, host='127.0.0.1', port=19000, endpoint='/v1/completions', header=None, max_concurrency=1, model='glm-4.7-w8a8-floatmtp', input_len=None, output_len=None, tokenizer='/models/GLM-4.7-W8A8-floatmtp', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=None, result_dir='/root/Benchmark-Experiments/results/a2_random3_smoke/a2_glm_47_w8a8_floatmtp_random3_baseline/20260608T082248Z', result_filename='a2_glm_47_w8a8_floatmtp_random3_baseline.json', ignore_eos=True, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-02479f64-', top_p=None, top_k=None, min_p=None, temperature=0.0, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+INFO 06-08 16:38:14 [datasets.py:631] Sampling input_len from [230, 282] and output_len from [28, 36]
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 1
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|███▎      | 1/3 [00:19<00:38, 19.18s/it] 67%|██████▋   | 2/3 [00:30<00:14, 14.67s/it]100%|██████████| 3/3 [00:41<00:00, 12.85s/it]100%|██████████| 3/3 [00:41<00:00, 13.79s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     3         
+Failed requests:                         0         
+Maximum request concurrency:             1         
+Benchmark duration (s):                  41.37     
+Total input tokens:                      795       
+Total generated tokens:                  88        
+Request throughput (req/s):              0.07      
+Output token throughput (tok/s):         2.13      
+Peak output token throughput (tok/s):    3.00      
+Peak concurrent requests:                2.00      
+Total token throughput (tok/s):          21.34     
+---------------Time to First Token----------------
+Mean TTFT (ms):                          1236.18   
+Median TTFT (ms):                        412.90    
+P99 TTFT (ms):                           2835.37   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          441.66    
+Median TPOT (ms):                        382.97    
+P99 TPOT (ms):                           558.29    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           443.11    
+Median ITL (ms):                         378.74    
+P99 ITL (ms):                            1262.22   
+==================================================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
