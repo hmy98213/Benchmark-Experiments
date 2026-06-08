@@ -11,9 +11,9 @@
 models:
   - glm_47_w8a8_floatmtp
   - qwen35_397b_a17b_w4a8_mtp
-  # DeepSeek V3.2 is kept last because the latest A2 TP8 logs hit NPU OOM
-  # during MoE weight allocation before the server becomes ready.
-  - deepseek_v32_w8a8
+  # DeepSeek V3.2 hit NPU OOM during MoE weight allocation on A2 TP8.
+  # Use the much smaller V3.1 QuaRot build for DeepSeek model-free smoke.
+  - deepseek_v31_w8a8c8_quarot
 
 datasets:
   - random3
@@ -82,6 +82,18 @@ model_catalog:
     tp: 8
     dp: 1
     npu_devices: "0,1,2,3,4,5,6,7"
+
+  deepseek_v31_w8a8c8_quarot:
+    path: /models/DeepSeek-V3.1-w8a8c8-QuaRot
+    served_model_name: deepseek-v3.1-w8a8c8-quarot
+    tp: 8
+    dp: 1
+    npu_devices: "0,1,2,3,4,5,6,7"
+    # No native MTP marker in the model name; run model-free methods first.
+    methods:
+      - baseline
+      - ngram
+      - suffix
 
   deepseek_v32_w8a8:
     path: /models/DeepSeek-V3.2-w8a8

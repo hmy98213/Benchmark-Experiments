@@ -70,7 +70,7 @@ The three most important fields are at the top:
 models:
   - glm_47_w8a8_floatmtp
   - qwen35_397b_a17b_w4a8_mtp
-  - deepseek_v32_w8a8
+  - deepseek_v31_w8a8c8_quarot
 
 datasets:
   - random3
@@ -91,15 +91,16 @@ top-level `methods` list unless a model entry has its own `methods` list:
 each selected model x each selected dataset x that model's selected methods
 ```
 
-The current default config runs a short smoke test: 3 models, `random3`, and 6
-A2-supported methods. `suffix` and `mtp_suffix_concat` each run two bench passes
-against the same server process, so it produces 24 result rows from 18 server
-runs. `DeepSeek-V3.2-w8a8` is kept last because the latest A2 TP8 log reaches
+The current default config runs a short smoke test: 3 models and `random3`.
+GLM and Qwen run the full A2-supported method set. DeepSeek uses the smaller
+`DeepSeek-V3.1-w8a8c8-QuaRot` build and runs model-free methods only, because
+the latest A2 TP8 log for `DeepSeek-V3.2-w8a8` reaches
 `DeepseekV32ForCausalLM` but OOMs while allocating MoE weights during model
-load:
+load. `suffix` and `mtp_suffix_concat` each run two bench passes against the
+same server process:
 
 ```yaml
-models: [glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp, deepseek_v32_w8a8]
+models: [glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp, deepseek_v31_w8a8c8_quarot]
 datasets: [random3]
 methods: [baseline, mtp, ngram, suffix, mtp_ngram_concat, mtp_suffix_concat]
 ```
@@ -130,6 +131,14 @@ model_catalog:
   qwen35_397b_a17b_w4a8_mtp:
     path: /models/Qwen3.5-397B-A17B-w4a8-mtp
     served_model_name: qwen3.5-397b-a17b-w4a8-mtp
+
+  deepseek_v31_w8a8c8_quarot:
+    path: /models/DeepSeek-V3.1-w8a8c8-QuaRot
+    served_model_name: deepseek-v3.1-w8a8c8-quarot
+    methods:
+      - baseline
+      - ngram
+      - suffix
 
   deepseek_v32_w8a8:
     path: /models/DeepSeek-V3.2-w8a8
