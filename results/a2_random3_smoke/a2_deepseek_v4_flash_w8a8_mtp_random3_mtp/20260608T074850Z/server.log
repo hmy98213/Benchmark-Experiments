@@ -1,0 +1,64 @@
+INFO 06-08 15:48:57 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 15:48:57 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 15:48:57 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 15:48:57 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 15:49:06 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 15:49:06 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297] 
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/DeepSeek-V4-Flash-w8a8-mtp
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:297] 
+(APIServer pid=36388) INFO 06-08 15:49:07 [utils.py:233] non-default args: {'model_tag': '/models/DeepSeek-V4-Flash-w8a8-mtp', 'host': '0.0.0.0', 'port': 19001, 'disable_uvicorn_access_log': True, 'model': '/models/DeepSeek-V4-Flash-w8a8-mtp', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['deepseek-v4-flash-w8a8-mtp'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768, 'speculative_config': {'method': 'mtp', 'num_speculative_tokens': 1}}
+(APIServer pid=36388) WARNING 06-08 15:49:07 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1
+(APIServer pid=36388) INFO 06-08 15:49:23 [model.py:533] Resolved architecture: TransformersMoEForCausalLM
+(APIServer pid=36388) INFO 06-08 15:49:23 [model.py:1582] Using max model len 4096
+(APIServer pid=36388) INFO 06-08 15:49:23 [model.py:533] Resolved architecture: TransformersMoEForCausalLM
+(APIServer pid=36388) INFO 06-08 15:49:23 [model.py:1582] Using max model len 1048576
+(APIServer pid=36388) Traceback (most recent call last):
+(APIServer pid=36388)   File "/usr/local/python3.11.14/bin/vllm", line 6, in <module>
+(APIServer pid=36388)     sys.exit(main())
+(APIServer pid=36388)              ^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/main.py", line 75, in main
+(APIServer pid=36388)     args.dispatch_function(args)
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/serve.py", line 118, in cmd
+(APIServer pid=36388)     uvloop.run(run_server(args))
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 92, in run
+(APIServer pid=36388)     return runner.run(wrapper())
+(APIServer pid=36388)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/asyncio/runners.py", line 118, in run
+(APIServer pid=36388)     return self._loop.run_until_complete(task)
+(APIServer pid=36388)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=36388)     return await main
+(APIServer pid=36388)            ^^^^^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 656, in run_server
+(APIServer pid=36388)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 670, in run_server_worker
+(APIServer pid=36388)     async with build_async_engine_client(
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=36388)     return await anext(self.gen)
+(APIServer pid=36388)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 103, in build_async_engine_client
+(APIServer pid=36388)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=36388)     return await anext(self.gen)
+(APIServer pid=36388)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 129, in build_async_engine_client_from_engine_args
+(APIServer pid=36388)     vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+(APIServer pid=36388)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/engine/arg_utils.py", line 1762, in create_engine_config
+(APIServer pid=36388)     speculative_config = self.create_speculative_config(
+(APIServer pid=36388)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/engine/arg_utils.py", line 1474, in create_speculative_config
+(APIServer pid=36388)     return SpeculativeConfig(**self.speculative_config)
+(APIServer pid=36388)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=36388)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+(APIServer pid=36388)     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+(APIServer pid=36388)   File "/vllm-workspace/vllm/vllm/config/speculative.py", line 557, in __post_init__
+(APIServer pid=36388)     raise NotImplementedError(
+(APIServer pid=36388) NotImplementedError: Unsupported speculative method: 'mtp'
+(APIServer pid=36388) [ERROR] 2026-06-08-15:49:23 (PID:36388, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(APIServer pid=36388) sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

@@ -1,0 +1,14 @@
+INFO 06-08 15:49:37 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-08 15:49:37 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-08 15:49:37 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-08 15:49:37 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-08 15:49:46 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-08 15:49:46 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297] 
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/DeepSeek-V4-Flash-w8a8-mtp
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:297] 
+(APIServer pid=36556) INFO 06-08 15:49:46 [utils.py:233] non-default args: {'model_tag': '/models/DeepSeek-V4-Flash-w8a8-mtp', 'host': '0.0.0.0', 'port': 19002, 'disable_uvicorn_access_log': True, 'model': '/models/DeepSeek-V4-Flash-w8a8-mtp', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['deepseek-v4-flash-w8a8-mtp'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768, 'speculative_config': {'method': 'ngram', 'num_speculative_tokens': 4, 'prompt_lookup_min': 2, 'prompt_lookup_max': 5}}
+(APIServer pid=36556) WARNING 06-08 15:49:46 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1

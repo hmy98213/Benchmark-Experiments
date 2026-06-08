@@ -15,7 +15,7 @@
             }
         }
     },
-    "session_and_graph_id_1_1": {
+    "session_and_graph_id_0_0": {
         "graph_fusion": {
             "TransdataCastFusionPass": {
                 "effect_times": "0",
@@ -47,7 +47,7 @@
             }
         }
     },
-    "session_and_graph_id_1_1": {
+    "session_and_graph_id_0_0": {
         "graph_fusion": {
             "TransdataCastFusionPass": {
                 "effect_times": "0",
@@ -79,22 +79,6 @@
             }
         }
     },
-    "session_and_graph_id_1_1": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
     "session_and_graph_id_0_0": {
         "graph_fusion": {
             "TransdataCastFusionPass": {
@@ -111,135 +95,7 @@
             }
         }
     },
-    "session_and_graph_id_1_1": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
     "session_and_graph_id_0_0": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_1_1": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_0_0": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_1_1": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_0_0": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_1_1": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_0_0": {
-        "graph_fusion": {
-            "TransdataCastFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFz2FzgFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            },
-            "TransdataFzg2FzFusionPass": {
-                "effect_times": "0",
-                "match_times": "1"
-            }
-        }
-    },
-    "session_and_graph_id_1_1": {
         "graph_fusion": {
             "TransdataCastFusionPass": {
                 "effect_times": "0",

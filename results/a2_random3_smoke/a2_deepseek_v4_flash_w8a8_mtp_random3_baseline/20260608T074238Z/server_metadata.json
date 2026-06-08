@@ -1,0 +1,46 @@
+{
+  "server_run": "a2_deepseek_v4_flash_w8a8_mtp_random3_baseline",
+  "model": "deepseek_v4_flash_w8a8_mtp",
+  "dataset": "random3",
+  "base_method": "baseline",
+  "started_at_utc": "20260608T074238Z",
+  "port": 19000,
+  "env_overrides": {
+    "ASCEND_RT_VISIBLE_DEVICES": "0,1,2,3,4,5,6,7",
+    "HCCL_OP_EXPANSION_MODE": "AIV",
+    "TASK_QUEUE_ENABLE": "1",
+    "VLLM_ASCEND_ENABLE_FLASHCOMM1": "0"
+  },
+  "server_cmd": [
+    "/usr/local/python3.11.14/bin/vllm",
+    "serve",
+    "/models/DeepSeek-V4-Flash-w8a8-mtp",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "19000",
+    "--served-model-name",
+    "deepseek-v4-flash-w8a8-mtp",
+    "--trust-remote-code",
+    "--distributed-executor-backend",
+    "mp",
+    "--max-model-len",
+    "4096",
+    "--max-num-batched-tokens",
+    "32768",
+    "--gpu-memory-utilization",
+    "0.9",
+    "--disable-uvicorn-access-log",
+    "--enforce-eager",
+    "--tensor-parallel-size",
+    "8"
+  ],
+  "bench_passes": [
+    {
+      "case_name": "a2_deepseek_v4_flash_w8a8_mtp_random3_baseline",
+      "method": "baseline",
+      "phase": "",
+      "result_dir": "/root/Benchmark-Experiments/results/a2_random3_smoke/a2_deepseek_v4_flash_w8a8_mtp_random3_baseline/20260608T074238Z"
+    }
+  ]
+}
