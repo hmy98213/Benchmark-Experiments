@@ -1,4 +1,3 @@
-results/
 data/*
 !data/datastores/
 !data/spec_bench/

@@ -1,0 +1,81 @@
+INFO 06-05 17:54:19 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-05 17:54:19 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-05 17:54:19 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-05 17:54:19 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-05 17:54:29 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-05 17:54:29 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297] 
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297]        █     █     █▄   ▄█
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.18.0
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297]   █▄█▀ █     █     █     █  model   /models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:297] 
+(APIServer pid=16055) INFO 06-05 17:54:32 [utils.py:233] non-default args: {'model_tag': '/models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact', 'host': '0.0.0.0', 'port': 19000, 'disable_uvicorn_access_log': True, 'model': '/models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact', 'trust_remote_code': True, 'max_model_len': 4096, 'enforce_eager': True, 'served_model_name': ['deepseek-r1-0528-gptq-int4-int8mix-compact'], 'distributed_executor_backend': 'mp', 'tensor_parallel_size': 8, 'max_num_batched_tokens': 32768}
+(APIServer pid=16055) WARNING 06-05 17:54:32 [envs.py:1717] Unknown vLLM environment variable detected: VLLM_ASCEND_ENABLE_FLASHCOMM1
+(APIServer pid=16055) Traceback (most recent call last):
+(APIServer pid=16055)   File "/usr/local/python3.11.14/bin/vllm", line 6, in <module>
+(APIServer pid=16055)     sys.exit(main())
+(APIServer pid=16055)              ^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/main.py", line 75, in main
+(APIServer pid=16055)     args.dispatch_function(args)
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/cli/serve.py", line 118, in cmd
+(APIServer pid=16055)     uvloop.run(run_server(args))
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 92, in run
+(APIServer pid=16055)     return runner.run(wrapper())
+(APIServer pid=16055)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/asyncio/runners.py", line 118, in run
+(APIServer pid=16055)     return self._loop.run_until_complete(task)
+(APIServer pid=16055)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/uvloop/__init__.py", line 48, in wrapper
+(APIServer pid=16055)     return await main
+(APIServer pid=16055)            ^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 656, in run_server
+(APIServer pid=16055)     await run_server_worker(listen_address, sock, args, **uvicorn_kwargs)
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 670, in run_server_worker
+(APIServer pid=16055)     async with build_async_engine_client(
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=16055)     return await anext(self.gen)
+(APIServer pid=16055)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 103, in build_async_engine_client
+(APIServer pid=16055)     async with build_async_engine_client_from_engine_args(
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/contextlib.py", line 210, in __aenter__
+(APIServer pid=16055)     return await anext(self.gen)
+(APIServer pid=16055)            ^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/entrypoints/openai/api_server.py", line 129, in build_async_engine_client_from_engine_args
+(APIServer pid=16055)     vllm_config = engine_args.create_engine_config(usage_context=usage_context)
+(APIServer pid=16055)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/engine/arg_utils.py", line 1508, in create_engine_config
+(APIServer pid=16055)     model_config = self.create_model_config()
+(APIServer pid=16055)                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/engine/arg_utils.py", line 1360, in create_model_config
+(APIServer pid=16055)     return ModelConfig(
+(APIServer pid=16055)            ^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+(APIServer pid=16055)     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/config/model.py", line 476, in __post_init__
+(APIServer pid=16055)     hf_config = get_config(
+(APIServer pid=16055)                 ^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/transformers_utils/config.py", line 679, in get_config
+(APIServer pid=16055)     config_dict, config = config_parser.parse(
+(APIServer pid=16055)                           ^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/vllm-workspace/vllm/vllm/transformers_utils/config.py", line 206, in parse
+(APIServer pid=16055)     config = AutoConfig.from_pretrained(
+(APIServer pid=16055)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/transformers/models/auto/configuration_auto.py", line 1346, in from_pretrained
+(APIServer pid=16055)     config_class = get_class_from_dynamic_module(
+(APIServer pid=16055)                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/transformers/dynamic_module_utils.py", line 604, in get_class_from_dynamic_module
+(APIServer pid=16055)     final_module = get_cached_module_file(
+(APIServer pid=16055)                    ^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/transformers/dynamic_module_utils.py", line 406, in get_cached_module_file
+(APIServer pid=16055)     resolved_module_file = cached_file(
+(APIServer pid=16055)                            ^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/transformers/utils/hub.py", line 322, in cached_file
+(APIServer pid=16055)     file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+(APIServer pid=16055)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(APIServer pid=16055)   File "/usr/local/python3.11.14/lib/python3.11/site-packages/transformers/utils/hub.py", line 437, in cached_files
+(APIServer pid=16055)     raise OSError(
+(APIServer pid=16055) OSError: /models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact does not appear to have a file named configuration_deepseek.py. Checkout 'https://huggingface.co//models/DeepSeek-R1-0528-GPTQ-Int4-Int8Mix-Compact/tree/main' for available files.
+(APIServer pid=16055) [ERROR] 2026-06-05-17:54:32 (PID:16055, Device:-1, RankID:-1) ERR99999 UNKNOWN applicaiton exception
+(APIServer pid=16055) sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

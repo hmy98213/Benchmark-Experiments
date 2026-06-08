@@ -1,0 +1,42 @@
+INFO 06-05 19:05:05 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 06-05 19:05:05 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 06-05 19:05:05 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 06-05 19:05:05 [__init__.py:239] Platform plugin ascend is activated
+INFO 06-05 19:05:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.netloader.netloader.ModelNetLoaderElastic'>` with load format `netloader`
+INFO 06-05 19:05:14 [__init__.py:110] Registered model loader `<class 'vllm_ascend.model_loader.rfork.rfork_loader.RForkModelLoader'>` with load format `rfork`
+Namespace(subparser='bench', bench_type='serve', dispatch_function=<function BenchmarkServingSubcommand.cmd at 0xffff06d519e0>, trust_remote_code=False, seed=0, num_prompts=64, dataset_name='random', no_stream=False, dataset_path=None, no_oversample=False, skip_chat_template=False, enable_multimodal_chat=False, disable_shuffle=False, custom_output_len=256, spec_bench_output_len=256, spec_bench_category=None, sonnet_input_len=550, sonnet_output_len=150, sonnet_prefix_len=200, sharegpt_output_len=None, blazedit_min_distance=0.0, blazedit_max_distance=1.0, asr_max_audio_len_sec=inf, asr_min_audio_len_sec=0.0, random_input_len=1024, random_output_len=256, random_range_ratio=0.1, random_prefix_len=0, random_batch_size=1, no_reranker=False, random_mm_base_items_per_request=1, random_mm_num_mm_items_range_ratio=0.0, random_mm_limit_mm_per_prompt={'image': 255, 'video': 1}, random_mm_bucket_config={(256, 256, 1): 0.5, (720, 1280, 1): 0.5, (720, 1280, 16): 0.0}, hf_subset=None, hf_split=None, hf_name=None, hf_output_len=None, prefix_repetition_prefix_len=256, prefix_repetition_suffix_len=256, prefix_repetition_num_prefixes=10, prefix_repetition_output_len=128, label=None, backend='vllm', base_url=None, host='127.0.0.1', port=19003, endpoint='/v1/completions', header=None, max_concurrency=4, model='deepseek-r1-distill-qwen-32b', input_len=None, output_len=None, tokenizer='/models/DeepSeek-R1-Distill-Qwen-32B', tokenizer_mode='auto', use_beam_search=False, logprobs=None, request_rate=inf, burstiness=1.0, disable_tqdm=False, num_warmups=0, profile=False, save_result=True, save_detailed=True, append_result=False, metadata=None, result_dir='/root/Benchmark-Experiments/results/a2_container/a2_deepseek_r1_distill_qwen_32b_random64_baseline/20260605T105858Z', result_filename='a2_deepseek_r1_distill_qwen_32b_random64_baseline.json', ignore_eos=True, percentile_metrics=None, metric_percentiles='99', goodput=None, request_id_prefix='bench-39565976-', top_p=None, top_k=None, min_p=None, temperature=0.0, frequency_penalty=None, presence_penalty=None, repetition_penalty=None, served_model_name=None, lora_modules=None, ramp_up_strategy=None, ramp_up_start_rps=None, ramp_up_end_rps=None, ready_check_timeout_sec=0, extra_body=None, skip_tokenizer_init=False, insecure=False, plot_timeline=False, timeline_itl_thresholds=[25.0, 50.0], plot_dataset_stats=False)
+INFO 06-05 19:05:15 [datasets.py:631] Sampling input_len from [920, 1126] and output_len from [230, 282]
+Starting initial single prompt test run...
+Skipping endpoint ready check.
+Starting main benchmark run...
+Traffic request rate: inf
+Burstiness factor: 1.0 (Poisson process)
+Maximum request concurrency: 4
+  0%|          | 0/64 [00:00<?, ?it/s]  2%|▏         | 1/64 [00:36<38:03, 36.24s/it]  3%|▎         | 2/64 [00:39<17:27, 16.90s/it]  5%|▍         | 3/64 [00:40<09:56,  9.78s/it]  6%|▋         | 4/64 [00:41<06:16,  6.27s/it]  8%|▊         | 5/64 [01:16<16:08, 16.41s/it]  9%|▉         | 6/64 [01:17<10:45, 11.12s/it] 11%|█         | 7/64 [01:17<07:09,  7.53s/it] 12%|█▎        | 8/64 [01:17<04:55,  5.27s/it] 14%|█▍        | 9/64 [01:52<13:18, 14.52s/it] 16%|█▌        | 10/64 [01:53<09:22, 10.42s/it] 17%|█▋        | 11/64 [01:55<06:55,  7.84s/it] 19%|█▉        | 12/64 [01:57<05:10,  5.97s/it] 20%|██        | 13/64 [02:26<10:55, 12.85s/it] 22%|██▏       | 14/64 [02:32<09:11, 11.04s/it] 23%|██▎       | 15/64 [02:33<06:22,  7.80s/it] 25%|██▌       | 16/64 [02:33<04:32,  5.67s/it] 27%|██▋       | 17/64 [03:04<10:13, 13.05s/it] 28%|██▊       | 18/64 [03:08<07:54, 10.32s/it] 30%|██▉       | 19/64 [03:09<05:42,  7.61s/it] 31%|███▏      | 20/64 [03:10<04:05,  5.58s/it] 33%|███▎      | 21/64 [03:43<09:57, 13.88s/it] 34%|███▍      | 22/64 [03:46<07:26, 10.64s/it] 36%|███▌      | 23/64 [03:46<05:07,  7.49s/it] 38%|███▊      | 24/64 [03:47<03:34,  5.37s/it] 39%|███▉      | 25/64 [04:22<09:15, 14.24s/it] 41%|████      | 26/64 [04:22<06:20, 10.01s/it] 42%|████▏     | 27/64 [04:22<04:20,  7.05s/it] 44%|████▍     | 28/64 [04:26<03:45,  6.25s/it] 45%|████▌     | 29/64 [04:56<07:48, 13.40s/it] 48%|████▊     | 31/64 [05:00<04:26,  8.08s/it] 50%|█████     | 32/64 [05:04<03:45,  7.04s/it] 52%|█████▏    | 33/64 [05:30<06:12, 12.01s/it] 53%|█████▎    | 34/64 [05:30<04:24,  8.82s/it] 55%|█████▍    | 35/64 [05:36<03:51,  7.98s/it] 56%|█████▋    | 36/64 [05:43<03:38,  7.81s/it] 58%|█████▊    | 37/64 [06:06<05:25, 12.05s/it] 59%|█████▉    | 38/64 [06:09<04:05,  9.44s/it] 61%|██████    | 39/64 [06:11<03:03,  7.32s/it] 62%|██████▎   | 40/64 [06:19<02:56,  7.37s/it] 64%|██████▍   | 41/64 [06:45<05:00, 13.08s/it] 66%|██████▌   | 42/64 [06:46<03:22,  9.22s/it] 67%|██████▋   | 43/64 [06:49<02:38,  7.57s/it] 69%|██████▉   | 44/64 [06:52<02:03,  6.19s/it] 70%|███████   | 45/64 [07:21<04:04, 12.88s/it] 72%|███████▏  | 46/64 [07:23<02:55,  9.75s/it] 73%|███████▎  | 47/64 [07:26<02:10,  7.68s/it] 75%|███████▌  | 48/64 [07:26<01:27,  5.47s/it] 77%|███████▋  | 49/64 [08:00<03:27, 13.86s/it] 78%|███████▊  | 50/64 [08:00<02:18,  9.92s/it] 80%|███████▉  | 51/64 [08:06<01:50,  8.49s/it] 81%|████████▏ | 52/64 [08:06<01:12,  6.07s/it] 83%|████████▎ | 53/64 [08:35<02:23, 13.03s/it] 84%|████████▍ | 54/64 [08:38<01:39,  9.98s/it] 86%|████████▌ | 55/64 [08:39<01:06,  7.38s/it] 88%|████████▊ | 56/64 [08:45<00:53,  6.69s/it] 89%|████████▉ | 57/64 [09:13<01:33, 13.32s/it] 91%|█████████ | 58/64 [09:15<00:58,  9.80s/it] 92%|█████████▏| 59/64 [09:20<00:41,  8.27s/it] 94%|█████████▍| 60/64 [09:21<00:24,  6.09s/it] 95%|█████████▌| 61/64 [09:49<00:38, 12.69s/it] 97%|█████████▋| 62/64 [09:54<00:20, 10.40s/it] 98%|█████████▊| 63/64 [09:58<00:08,  8.44s/it]100%|██████████| 64/64 [10:03<00:00,  7.55s/it]100%|██████████| 64/64 [10:03<00:00,  9.43s/it]
+tip: install termplotlib and gnuplot to plot the metrics
+============ Serving Benchmark Result ============
+Successful requests:                     64        
+Failed requests:                         0         
+Maximum request concurrency:             4         
+Benchmark duration (s):                  603.63    
+Total input tokens:                      65599     
+Total generated tokens:                  16423     
+Request throughput (req/s):              0.11      
+Output token throughput (tok/s):         27.21     
+Peak output token throughput (tok/s):    32.00     
+Peak concurrent requests:                7.00      
+Total token throughput (tok/s):          135.88    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          564.18    
+Median TTFT (ms):                        427.95    
+P99 TTFT (ms):                           2621.88   
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          143.59    
+Median TPOT (ms):                        143.17    
+P99 TPOT (ms):                           152.32    
+---------------Inter-token Latency----------------
+Mean ITL (ms):                           143.60    
+Median ITL (ms):                         142.16    
+P99 ITL (ms):                            160.06    
+==================================================
+sys:1: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
