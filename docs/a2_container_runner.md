@@ -58,30 +58,26 @@ these data files.
 
 ## Step 3. Edit The Experiment Config
 
-The config file to edit is:
+For the current random3 smoke test, edit:
 
 ```bash
-vi configs/a2_container_experiments.yaml
+vi configs/a2_random3_smoke.yaml
 ```
 
-The three most important fields are at the top:
+The three most important fields are at the top. The current smoke config is:
 
 ```yaml
 models:
-  - glm_47_w8a8_floatmtp
-  - qwen35_397b_a17b_w4a8_mtp
-  - deepseek_v31_w8a8c8_quarot
+  - qwen3_235b_a22b_w8a8
+  - deepseek_r1_distill_qwen_32b
 
 datasets:
   - random3
 
 methods:
   - baseline
-  - mtp
   - ngram
   - suffix
-  - mtp_ngram_concat
-  - mtp_suffix_concat
 ```
 
 The runner executes the selected models and datasets. Methods come from the
@@ -91,25 +87,21 @@ top-level `methods` list unless a model entry has its own `methods` list:
 each selected model x each selected dataset x that model's selected methods
 ```
 
-The current default config runs a short smoke test: 3 models and `random3`.
-GLM and Qwen run the full A2-supported method set. DeepSeek uses the smaller
-`DeepSeek-V3.1-w8a8c8-QuaRot` build and runs model-free methods only, because
-the latest A2 TP8 log for `DeepSeek-V3.2-w8a8` reaches
-`DeepseekV32ForCausalLM` but OOMs while allocating MoE weights during model
-load. `suffix` and `mtp_suffix_concat` each run two bench passes against the
-same server process:
+The current smoke config runs 2 models and `random3`. Both selected models run
+model-free methods only, because these paths do not look like native MTP
+checkpoints. `suffix` runs two bench passes against the same server process:
 
 ```yaml
-models: [glm_47_w8a8_floatmtp, qwen35_397b_a17b_w4a8_mtp, deepseek_v31_w8a8c8_quarot]
+models: [qwen3_235b_a22b_w8a8, deepseek_r1_distill_qwen_32b]
 datasets: [random3]
-methods: [baseline, mtp, ngram, suffix, mtp_ngram_concat, mtp_suffix_concat]
+methods: [baseline, ngram, suffix]
 ```
 
 DFlash is not included in this A2 smoke matrix because the current vLLM Ascend
 stack does not support `method=dflash`.
 
-The suffix warm-start rows are named `suffix_cold`, `suffix_warm`,
-`mtp_suffix_concat_cold`, and `mtp_suffix_concat_warm` in `summary.csv`.
+The suffix warm-start rows are named `suffix_cold` and `suffix_warm` in
+`summary.csv`.
 
 ## Step 4. Set Model Paths And TP/DP
 
@@ -124,25 +116,21 @@ DP: 1
 NPU_DEVICES: "0,1,2,3,4,5,6,7"
 
 model_catalog:
-  glm_47_w8a8_floatmtp:
-    path: /models/GLM-4.7-W8A8-floatmtp
-    served_model_name: glm-4.7-w8a8-floatmtp
-
-  qwen35_397b_a17b_w4a8_mtp:
-    path: /models/Qwen3.5-397B-A17B-w4a8-mtp
-    served_model_name: qwen3.5-397b-a17b-w4a8-mtp
-
-  deepseek_v31_w8a8c8_quarot:
-    path: /models/DeepSeek-V3.1-w8a8c8-QuaRot
-    served_model_name: deepseek-v3.1-w8a8c8-quarot
+  qwen3_235b_a22b_w8a8:
+    path: /models/Qwen3-235B-A22B-W8A8
+    served_model_name: qwen3-235b-a22b-w8a8
     methods:
       - baseline
       - ngram
       - suffix
 
-  deepseek_v32_w8a8:
-    path: /models/DeepSeek-V3.2-w8a8
-    served_model_name: deepseek-v3.2-w8a8
+  deepseek_r1_distill_qwen_32b:
+    path: /models/DeepSeek-R1-Distill-Qwen-32B
+    served_model_name: deepseek-r1-distill-qwen-32b
+    methods:
+      - baseline
+      - ngram
+      - suffix
 ```
 
 Top-level `TP`, `DP`, and `NPU_DEVICES` are defaults. A model entry can override
@@ -196,7 +184,8 @@ methods:
 ```
 
 These are the full smoke-test methods supported by the current hybrid vLLM
-patch. For a model without native MTP support, remove `mtp`,
+patch. The current two-model smoke config selects only `baseline`, `ngram`, and
+`suffix`. For a model without native MTP support, remove `mtp`,
 `mtp_ngram_concat`, and `mtp_suffix_concat`, or add a model-level override:
 
 `dflash` is intentionally omitted for A2 because earlier attempts failed during
@@ -219,7 +208,11 @@ method_catalog:
 
   mtp:
     method: mtp
-    num_speculative_tokens: 1
+    num_speculative_tokens: 4
+
+  ngram:
+    method: ngram
+    num_speculative_tokens: 4
 
   suffix:
     method: suffix
@@ -235,7 +228,10 @@ method_catalog:
 
 To change draft length, edit `num_speculative_tokens`. For hybrid methods,
 `hybrid_mtp_tokens` controls how many draft tokens come from MTP before
-ngram/suffix continues the draft.
+ngram/suffix continues the draft. In this smoke config, all speculative methods
+have a total draft budget of `num_speculative_tokens: 4`; hybrid keeps
+`hybrid_mtp_tokens: 1` because that is the MTP segment split, not the total
+draft budget.
 
 `bench_passes: [cold, warm]` means the runner starts vLLM once, runs `vllm bench`
 once for the cold row, then runs `vllm bench` again for the warm row without
