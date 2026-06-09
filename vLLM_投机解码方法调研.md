@@ -989,11 +989,11 @@ EAGLE3、classic draft model 的问题是：drafter 自身仍然自回归。DFla
 | --- | --- | --- | --- |
 | EAGLE3 | 当前最稳定的 Qwen3-32B model-based 方案。 | Qwen3-32B Spec-Bench：H100 `1.54x`，A2 `1.85x`。 | 在真实 benchmark 上收益最清楚，优先级高于普通 draft model / PARD。 |
 | DFlash | CUDA 上很强，尤其是 Spec-Bench 和 datastores。 | Qwen3.5-9B H100：Spec-Bench `1.82x`，datastores-384 `1.58x`。 | 依赖匹配的 DFlash speculator；A2 当前 vLLM-Ascend 软件栈不可用。 |
-| MTP | 原生支持 MTP 的模型上有稳定收益，但不是所有 nextn head 都有效。 | Qwen3.5-9B：H100 datastores-384 `1.19x`，A2 datastores-384 `1.47x`；A2 Qwen3.6-35B-A3B `1.89x`；A2 GLM-4.5-Air-FP8 为 `0.90x` 且 acceptance rate 为 `0%`。 | 适合模型原生带 MTP 或有 assistant checkpoint 的场景，普通 checkpoint 不能直接开启；即使 server 能起，也要看 draft 是否真的被 target 接受。 |
+| MTP | 原生支持 MTP 的模型上有稳定收益，但收益大小取决于 nextn head 质量。 | Qwen3.5-9B：H100 datastores-384 `1.19x`，A2 datastores-384 `1.47x`；A2 Qwen3.6-35B-A3B datastores-384 `1.89x`。 | 适合模型原生带 MTP 或有 assistant checkpoint 的场景，普通 checkpoint 不能直接开启；即使 server 能起，也要看 draft 是否真的被 target 接受。 |
 | MTP -> suffix | 实验性拼接方案里最稳定的正向信号。 | H100 Qwen3.5-9B：random `1.63x`、Spec-Bench `1.28x`、prefixrep `1.62x`、datastores-384 `1.31x`；A2 Qwen3.5-9B datastores-384 `1.95x`；A2 Qwen3.6-35B-A3B datastores-384 `2.32x`。 | MTP 给高置信第一段，suffix 用临时上下文补 tail；收益来自 acceptance length 和 TPOT 改善，不是单看 acceptance rate。 |
 | MTP -> ngram | synthetic 上强，真实/混合任务上更依赖命中质量。 | H100 Qwen3.5-9B：random `1.48x`、Spec-Bench `1.12x`、prefixrep `1.50x`、datastores-384 `1.16x`；A2 Qwen3.5-9B datastores-384 `1.69x`；A2 Qwen3.6-35B-A3B datastores-384 `2.03x`。 | 比 MTP->suffix 略不稳定，ngram tail 的查找质量和调度开销更容易抵消收益；当 MTP 本身无效时不应期待 hybrid 有效。 |
-| Suffix Decoding | 重复性场景有收益，但不能只看 synthetic。 | Qwen3-32B Spec-Bench：H100 `0.98x`，A2 `1.25x`；A2 datastores-384：Qwen3.6 warm `1.11x`、DeepSeek-R1-Distill-Llama-70B warm `1.83x`、GLM-4.5-Air-FP8 warm `2.78x`。 | 高重复 synthetic 上 acceptance 很高，真实和混合 workload 上收益明显更保守；datastores-384 中不同模型输出分布会让 suffix tree 收益差异很大。 |
-| N-Gram / NgramGPU | 低门槛，但不适合作为一刀切的通用加速主方案。 | Qwen3-32B Spec-Bench：H100 ngram `0.85x`、ngram_gpu `0.80x`；A2 datastores-384：Qwen3.6 ngram `0.64x`、DeepSeek ngram `1.14x`、GLM ngram `2.66x`。 | 更适合 prompt/输出重复很强的任务；在 Spec-Bench / datastores 上既可能低于 baseline，也可能因数据分布命中而明显加速。 |
+| Suffix Decoding | 重复性场景有收益，但不能只看 synthetic。 | Qwen3-32B Spec-Bench：H100 `0.98x`，A2 `1.25x`；A2 Qwen3.6-35B-A3B datastores-384：cold `0.80x`、warm `1.11x`。 | 高重复 synthetic 上 acceptance 很高，真实和混合 workload 上收益明显更保守；warm 明显好于 cold，说明 suffix tree 的跨请求历史确实会改变结果。 |
+| N-Gram / NgramGPU | 低门槛，但不适合作为一刀切的通用加速主方案。 | Qwen3-32B Spec-Bench：H100 ngram `0.85x`、ngram_gpu `0.80x`；A2 Qwen3.6-35B-A3B datastores-384 ngram `0.64x`。 | 更适合 prompt/输出重复很强的任务；在 datastores 上如果命中质量不足，检索式 proposer 的调度开销会压过收益。 |
 | Draft Model | 本组模型组合下端到端收益较差。 | H100 Qwen3-32B Spec-Bench：acceptance rate `39.92%`，但吞吐只有 `0.33x` baseline。 | 接受率不是端到端收益；draft forward、KV cache、调度和显存占用会抵消收益。 |
 | PARD | 当前结果不适合作为有效性能结论。 | H100 Qwen3-32B Spec-Bench：`66/200` 成功；synthetic random / prefix repetition 分别约 `0.79x` / `0.72x`。 | PARD 的方向是降低 draft 串行开销，但本组权重/后端组合存在稳定性和 workspace 约束问题。 |
 
@@ -1197,11 +1197,11 @@ A2 的 Qwen3.5-9B 表同样统一使用 TP=1。random / Spec-Bench 来自早先 
 
 A2 datastores-384 上的最强信号是 `MTP -> suffix`：`90.4 tok/s`，达到 baseline 的 `1.95x`，也比 MTP-only 高约 `32%`。`MTP -> ngram` 也有明确收益，为 baseline 的 `1.69x`。这里的关键不是 acceptance rate 更高：`MTP -> suffix` 的 acceptance rate 低于 MTP-only，但 acceptance length 从 `1.91` 提高到 `2.59`，TPOT 从 `54.12ms` 降到 `40.22ms`，最终吞吐最高。
 
-### 13.8 A2 open models datastore384
+### 13.8 A2 Qwen3.6-35B-A3B datastore384
 
-这一组是在 A2 vLLM-Ascend suffix 镜像中补测更多 open models。统一使用 `datastores-384`，TP=4，NPU `0,1,2,3`，NPU 7 不参与；`custom_output_len=256`，`temperature=0`，`ignore_eos=true`，`max_concurrency=16`。为了和本轮需求对齐，`MTP` / `ngram` / `suffix` 的 draft token 数为 `2`，hybrid 额外测试 `1+1` 和 `2+2`。
+这一组是在 A2 vLLM-Ascend suffix 镜像中，用 `Eco-Tech/Qwen3.6-35B-A3B-w8a8` 补测更大的 MTP-capable 模型。统一使用 `datastores-384`，TP=4，NPU `0,1,2,3`，NPU 7 不参与；`custom_output_len=256`，`temperature=0`，`ignore_eos=true`，`max_concurrency=16`。为了和本轮需求对齐，`MTP` / `ngram` / `suffix` 的 draft token 数为 `2`，hybrid 额外测试 `1+1` 和 `2+2`。
 
-表格按北京时间 2026-06-09 09:20:00 截点填写；截点之后才落盘或尚未运行完成的项目留空。GLM 的 `MTP -> ngram 1+1` 在 09:21:22 才落盘，因此本表按截点要求不纳入。
+这张表只保留 Qwen3.6-35B-A3B-w8a8 的完整方法矩阵；其他模型不纳入本次收束后的报告口径。
 
 | Model | Method | Completed / Failed | Output tok/s | vs Baseline | TPOT ms | Acceptance Rate | Acceptance Len |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -1216,47 +1216,23 @@ A2 datastores-384 上的最强信号是 `MTP -> suffix`：`90.4 tok/s`，达到 
 | Qwen3.6-35B-A3B-w8a8 | MTP -> ngram 2+2 | 384 / 0 | 171.1 | 2.03x | 88.37 | 72.39% | 2.90 |
 | Qwen3.6-35B-A3B-w8a8 | MTP -> suffix 2+2 cold | 384 / 0 | 184.1 | 2.18x | 83.02 | 62.02% | 3.14 |
 | Qwen3.6-35B-A3B-w8a8 | MTP -> suffix 2+2 warm | 384 / 0 | 195.5 | 2.32x | 77.99 | 68.40% | 3.57 |
-| GLM-4.5-Air-FP8 | baseline | 384 / 0 | 89.0 | 1.00x | 175.94 | - | - |
-| GLM-4.5-Air-FP8 | MTP 2 | 384 / 0 | 79.9 | 0.90x | 196.15 | 0.00% | 1.00 |
-| GLM-4.5-Air-FP8 | ngram 2 | 384 / 0 | 236.9 | 2.66x | 64.15 | 97.93% | 2.94 |
-| GLM-4.5-Air-FP8 | suffix 2 cold | 384 / 0 | 249.0 | 2.80x | 62.59 | 99.39% | 2.98 |
-| GLM-4.5-Air-FP8 | suffix 2 warm | 384 / 0 | 247.2 | 2.78x | 63.22 | 99.33% | 2.98 |
-| GLM-4.5-Air-FP8 | MTP -> ngram 1+1 |  |  |  |  |  |  |
-| GLM-4.5-Air-FP8 | MTP -> suffix 1+1 cold |  |  |  |  |  |  |
-| GLM-4.5-Air-FP8 | MTP -> suffix 1+1 warm |  |  |  |  |  |  |
-| GLM-4.5-Air-FP8 | MTP -> ngram 2+2 |  |  |  |  |  |  |
-| GLM-4.5-Air-FP8 | MTP -> suffix 2+2 cold |  |  |  |  |  |  |
-| GLM-4.5-Air-FP8 | MTP -> suffix 2+2 warm |  |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | baseline | 384 / 0 | 83.1 | 1.00x | 182.66 | - | - |
-| DeepSeek-R1-Distill-Llama-70B | MTP 2 | server init failed |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | ngram 2 | 384 / 0 | 94.4 | 1.14x | 165.20 | 40.45% | 1.81 |
-| DeepSeek-R1-Distill-Llama-70B | suffix 2 cold | 384 / 0 | 115.0 | 1.38x | 131.85 | 35.02% | 1.54 |
-| DeepSeek-R1-Distill-Llama-70B | suffix 2 warm | 384 / 0 | 151.9 | 1.83x | 99.68 | 62.42% | 2.14 |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> ngram 1+1 | server init failed |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> suffix 1+1 cold | server init failed |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> suffix 1+1 warm |  |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> ngram 2+2 | server init failed |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> suffix 2+2 cold | server init failed |  |  |  |  |  |
-| DeepSeek-R1-Distill-Llama-70B | MTP -> suffix 2+2 warm |  |  |  |  |  |  |
 
-这组 open-model 结果对前面 A2 表格有三点补充：
+这组 Qwen3.6 结果对前面 A2 表格有三点补充：
 
-- Qwen3.6-35B-A3B 明确跑通了所有方法，`MTP -> suffix 2+2 warm` 达到 `2.32x` baseline，是本轮最强 hybrid 信号；`MTP -> ngram 2+2` 也达到 `2.03x`，说明在该模型和数据集上，更长的 `2+2` 拼接比 `1+1` 更有价值。
-- GLM-4.5-Air-FP8 的 MTP server 能启动，但 acceptance rate 为 `0%`，端到端低于 baseline；相反 ngram/suffix 都接近 `3` 的 acceptance length，吞吐达到 `2.66x` 到 `2.80x`。这说明 GLM 在该数据集上的输出重复性很高，但它的 nextn/MTP head 和 target verifier 在当前 vLLM-Ascend 配置下没有形成有效投机。
-- DeepSeek-R1-Distill-Llama-70B 是 Llama 架构，`method="mtp"` 和 `mtp_*_concat` 在 `SpeculativeConfig` 阶段失败，错误为 `Unsupported speculative method: 'mtp'` 或 `requires an MTP-capable target model ... model_type='llama'`。它的 suffix warm 仍有 `1.83x`，说明不依赖 learned proposer 的 suffix cache 在 datastore384 上也能给非 MTP 模型带来收益。
+- `MTP -> suffix 2+2 warm` 达到 `2.32x` baseline，是本轮最强 hybrid 信号；`MTP -> ngram 2+2` 也达到 `2.03x`，说明在该模型和数据集上，更长的 `2+2` 拼接比 `1+1` 更有价值。
+- 单独的 `MTP 2` 已经有 `1.89x`，但 hybrid 仍能把 acceptance length 从 `2.66` 提到 `3.57`，TPOT 从 `92.59 ms` 降到 `77.99 ms`。这说明拼接式 proposer 的收益不是只来自多给 draft token，而是来自 MTP 前段和 suffix tail 共同提高每次 target forward 接受的 token 数。
+- 单独的检索式 proposer 在这组数据上并不稳：`ngram 2` 只有 `0.64x`，`suffix 2 cold` 只有 `0.80x`，`suffix 2 warm` 才略高于 baseline 到 `1.11x`。所以这组实验支持的结论是：对 MTP-capable 的 Qwen3.6，`MTP -> suffix/ngram` 比单独使用检索式 proposer 更可靠；其中 `MTP -> suffix 2+2 warm` 是当前最值得继续扩展的配置。
 
 ### 13.9 跨数据集解读
 
 - `Spec-Bench` 和 `datastores-384` 比 synthetic random / prefixrep 更适合作为真实收益判断口径。synthetic 上的高 acceptance 主要说明 proposal 更容易命中重复模式，不能直接外推到真实服务。
-- `MTP -> suffix` 是本次 hybrid concat 里最稳定的正向信号：H100 Qwen3.5-9B 在四个数据集上都超过 baseline，A2 datastores-384 也达到 `1.95x` baseline。
-- `MTP -> ngram` 也有收益，但更依赖数据分布。H100 random / prefixrep 上很强，Spec-Bench 和 datastores-384 上仍超过 baseline，但相对 MTP-only 不总是更好；A2 datastores-384 上则达到 `1.69x` baseline。
+- `MTP -> suffix` 是本次 hybrid concat 里最稳定的正向信号：H100 Qwen3.5-9B 在四个数据集上都超过 baseline，A2 Qwen3.5-9B datastores-384 达到 `1.95x` baseline，A2 Qwen3.6-35B-A3B datastores-384 进一步达到 `2.32x`。
+- `MTP -> ngram` 也有收益，但更依赖数据分布。H100 random / prefixrep 上很强，Spec-Bench 和 datastores-384 上仍超过 baseline，但相对 MTP-only 不总是更好；A2 Qwen3.5-9B datastores-384 为 `1.69x`，A2 Qwen3.6-35B-A3B datastores-384 为 `2.03x`。
 - datastores-384 的正式 384 条结果和早先 64 条 smoke test 有明显差异，因此报告以 384 条为准。H100 早先 64 条里 `MTP -> suffix` 只有 `0.90x` baseline，但 384 条正式口径为 `1.31x`；A2 早先 same-NPU 64 条为 `1.52x`，384 条正式口径为 `1.95x`。
 - DFlash 在 H100 CUDA 上很强，Spec-Bench 为 `1.82x` baseline，datastores-384 为 `1.58x` baseline；A2 当前软件栈不支持有效运行 `method=dflash`，因此不能把 H100 DFlash 结论平移到 A2。
 
 ### 13.10 问题说明与无效结果
 
 - A2 DFlash 失败原因不是权重缺失，而是当前 vLLM-Ascend 0.18.0 的 `SpeculativeConfig` 方法枚举不包含 `dflash`，server init 阶段即失败。
-- DeepSeek-R1-Distill-Llama-70B 的 MTP 和 hybrid concat 失败原因是该 checkpoint 为 Llama 架构，不是 vLLM 当前识别的 MTP-capable target model；`mtp_ngram_concat` / `mtp_suffix_concat` 会在配置阶段拒绝 `model_type='llama'`。
-- GLM-4.5-Air-FP8 的 MTP 虽能启动，但 `acceptance rate=0%`，因此这条不是有效加速方案；按 09:20 截点，GLM hybrid 结果未纳入。
 - H100 Spec-Bench PARD 不是有效性能点：200 条请求中只有 66 条成功，日志显示 `Workspace validation failed: token_num (256) * hidden_dim (1024) exceeds workspace max_token_num (51) * hidden_dim (5120)`。
 - A2 Qwen3-32B draft/PARD 也不是有效性能点：random 上 draft 为 0/32 成功，PARD 为 1/32 成功，原因是 vLLM Ascend draft proposer 路径在 target hidden size 5120 与 draft hidden size 1024 之间触发 shape mismatch。

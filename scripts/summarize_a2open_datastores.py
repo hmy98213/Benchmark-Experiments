@@ -95,7 +95,7 @@ def render_markdown(summary_rows: list[dict[str, str]], expected: list[tuple[str
     lines = [
         "## A2 Datastore384 Open-Model Results",
         "",
-        "Configuration: TP=4, `ASCEND_RT_VISIBLE_DEVICES=0,1,2,3`, dataset=`datastores384`, `num_prompts=384`, `temperature=0`, `max_concurrency=1`.",
+        "Configuration: TP=4, `ASCEND_RT_VISIBLE_DEVICES=0,1,2,3`, dataset=`datastores384`, `num_prompts=384`, `temperature=0`, `max_concurrency=16`.",
         "",
         "| Model | Method | Completed / Failed | Output tok/s | vs baseline | TPOT ms | Accept rate | Accept len |",
         "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
